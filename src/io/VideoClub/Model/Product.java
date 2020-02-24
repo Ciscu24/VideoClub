@@ -7,7 +7,7 @@ package io.VideoClub.Model;
 
 import java.util.UUID;
 
-public abstract class Ejemplares extends Productos implements Cloneable{
+public abstract class Product extends Item implements Cloneable{
     public enum Status{
         AVAILABLE,
         RESERVED
@@ -17,8 +17,8 @@ public abstract class Ejemplares extends Productos implements Cloneable{
    
     
     
-    public Ejemplares(){}
-    public Ejemplares(String name, String description,double prize){
+    public Product(){}
+    public Product(String name, String description,double prize){
         super(name,description,prize);
         this.key=generateRandom16Chars();
     }
@@ -30,8 +30,8 @@ public abstract class Ejemplares extends Productos implements Cloneable{
     public boolean equals(Object o){
         boolean result=false;
         if(o!=null){
-            if(o instanceof Ejemplares){
-                Ejemplares other=(Ejemplares)o;
+            if(o instanceof Product){
+                Product other=(Product)o;
                 if(other.key.equals(other.key)){
                     result=true;
                 }
@@ -42,7 +42,7 @@ public abstract class Ejemplares extends Productos implements Cloneable{
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        Ejemplares clone=(Ejemplares)super.clone(); //To change body of generated methods, choose Tools | Templates.
+        Product clone=(Product)super.clone(); //To change body of generated methods, choose Tools | Templates.
         clone.key=generateRandom16Chars();
         return (Object)clone;
     }
