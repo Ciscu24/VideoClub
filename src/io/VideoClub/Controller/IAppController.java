@@ -3,7 +3,7 @@ package io.VideoClub.Controller;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Enums.MovieCategory;
-import io.VideoClub.Model.Product;
+import io.VideoClub.Model.Ejemplares;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Reservation;
 import java.time.LocalDate;
@@ -19,19 +19,19 @@ public interface IAppController {
     public final static String reservationsDDBB="reservations.xml";
     
     
-    Set<Product> listAllProducts();
-    Set<Product> listAllProducts(Comparator c);
-    Set<Product> listAllByType(ProductsTypes type);
-    Set<Product> listAllByName(String name);
-    Set<Product> listAllByName(String name,ProductsTypes type);
-    Set<Product> listAllByStatus(Product.Status status);
+    Set<Ejemplares> listAllProducts();
+    Set<Ejemplares> listAllProducts(Comparator c);
+    Set<Ejemplares> listAllByType(ProductsTypes type);
+    Set<Ejemplares> listAllByName(String name);
+    Set<Ejemplares> listAllByName(String name,ProductsTypes type);
+    Set<Ejemplares> listAllByStatus(Ejemplares.Status status);
     
-    List<Product> listAllDifferentProducts();
-    List<Product> listAllDifferentMovies();
-    List<Product> listAllDifferentGames();
+    List<Ejemplares> listAllDifferentProducts();
+    List<Ejemplares> listAllDifferentMovies();
+    List<Ejemplares> listAllDifferentGames();
     
-    Map<Product,Integer> listAllAmountOfProducts(String name); 
-    Map<Product,Integer> listAllAmountOfProducts(ProductsTypes type,String name);
+    Map<Ejemplares,Integer> listAllAmountOfProducts(String name); 
+    Map<Ejemplares,Integer> listAllAmountOfProducts(ProductsTypes type,String name);
     
     Set<IClient> listAllClients();
     Set<IClient> listAllClients(Comparator c);
@@ -57,10 +57,10 @@ public interface IAppController {
     boolean addProduct(String name);
     boolean removeProduct(String name);
     
-    boolean editProduct(String key, Product newP);
+    boolean editProduct(String key, Ejemplares newP);
     
-    Product isAvailableProduct(String name);  //get product if yes
-    boolean reserveProduct(Product prod,IClient client);
+    Ejemplares isAvailableProduct(String name);  //get product if yes
+    boolean reserveProduct(Ejemplares prod,IClient client);
     double closeReservation();  //-->> status finished  --> get prizetopay
     
     boolean loadCatalogFromDDBB();  //XML or JSON

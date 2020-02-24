@@ -9,7 +9,7 @@ public class Reservation {
         FINISHED, //ini on finised on == end
         PENDING  //ini on , finished off and end past
     }
-    public Product pro;
+    public Ejemplares pro;
     public IClient cli;
     public LocalDate ini;
     public LocalDate end;
@@ -19,7 +19,7 @@ public class Reservation {
    
     
     private Reservation(){};
-    public Reservation(Product pro,IClient cli){
+    public Reservation(Ejemplares pro,IClient cli){
         this.pro=pro;
         this.cli=cli;
         ini=LocalDate.now();
