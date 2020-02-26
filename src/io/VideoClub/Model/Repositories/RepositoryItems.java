@@ -4,7 +4,7 @@ import io.VideoClub.Model.Item;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class RepositoryItems {
+public class RepositoryItems implements IRepositoryItems{
     
     //???????
     // TreeSet <Item> items; (?)
