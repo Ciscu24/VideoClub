@@ -1,8 +1,7 @@
 package io.VideoClub.Model;
 
 import io.VideoClub.Model.Repositories.RepositoryItems;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
 public abstract class Item implements Comparable<Item> {
 
@@ -44,52 +43,48 @@ public abstract class Item implements Comparable<Item> {
         this.prize = prize;
     }
 
-    //HABLAR MAÑANA SOBRE ESTO
-    public boolean addItem(Item it, List<Item> its) {
-        boolean result = false;
-
-        if (it != null) {
-            its.add(it);
-            result = true;
-        }
-
-        return result;
-    }
-
-    public boolean deleteItem(Item it, List<Item> its) {
-        boolean result = false;
-
-        if (it != null && its.contains(it)) {
-            its.remove(it);
-        }
-
-        return result;
-    }
-
-    /*public boolean searchItem(String nombre, ArrayList<Item> its) {
+    /*public boolean addItem(Item it) {
     boolean result = false;
     
-    if (nombre != null) {
-    for (int i = 0; i < its.size() && !result; i++) {
-    if (nombre.equals(its)) {
-    result = true;
-    }
+    if (it != null) {
+    result = items.getItems().add(it);
+    System.out.println(result);
+    if (result) {
+    items.setItems(items.getItems());
     }
     }
     
     return result;
-    }*/
-    public boolean searchItem(Item it, List<Item> its) {
-        boolean result = false;
-
-        if (it != null) {
-            if (its.contains(it)) {
-                result = true;
-            }
-        }
-
-        return result;
     }
+    
+    public boolean deleteItem(Item it) {
+    boolean result = false;
+    
+    if (it != null && items.getItems().contains(it)) {
+    result = items.getItems().remove(it);
+    }
+    
+    return result;
+    }
+    
+    public boolean searchItem(Item it) {
+    boolean result = false;
+    
+    if (it != null) {
+    result = items.getItems().contains(it);
+    }
+    
+    return result;
+    }
+    
+    public void writeItem() {
+    Iterator<Item> i = items.getItems().iterator();
+    
+    while (i.hasNext()) {
+    System.out.println(i.next().toString());
+    }
+    
+    }*/
 
     @Override
     public boolean equals(Object obj) {
@@ -116,12 +111,17 @@ public abstract class Item implements Comparable<Item> {
                 result = 0;
             } else if (this.name.toLowerCase().compareTo(o.getName().toLowerCase()) == 1) {
                 result = 1;
-            } else {
+            } else if (this.name.toLowerCase().compareTo(o.getName().toLowerCase()) == 0) {
                 result = -1;
             }
         }
 
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" + "name=" + name + ", description=" + description + ", prize=" + prize + '}';
     }
 
 }
