@@ -5,9 +5,21 @@ import java.util.Scanner;
 
 public class GUI {
     public static void main(String[] args) {
+        logo();
         principal();
     }
        
+    public static void logo(){
+        System.out.println(" _______            _           _______            _       _______     ");
+        System.out.println("|   _   |          | |         |   _   |       ___| |___  |   _   |    ");
+        System.out.println("|  |_|  |          | |         |  |_|  |      |___   ___|_|  |_|  |    ");
+        System.out.println("|  _____|_____ ____| |___ _____|_____ /_   _ _____| |  ___|   ___/     ");
+        System.out.println("| |     |  _  |  __|  _  |  _  |  _   | | | |  ___| | |___|  /____     ");
+        System.out.println("| |     | |_| | |__| | | | |_| | |_|  | |_| | |___| |  ___|  ___  |    ");
+        System.out.println("| |     |_____|____|_| |_|_____|______|_____|___  | | |___|_|   | |    ");
+        System.out.println("|_|                            |__________________|_|_______|   |_|    ");
+    }
+    
     public static void principal(){
         int numero;
 
@@ -102,4 +114,6 @@ public class GUI {
     public static void registrarse(){
         
     }
+    
+    
 }
