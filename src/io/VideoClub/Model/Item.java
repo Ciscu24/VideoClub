@@ -8,7 +8,6 @@ public abstract class Item implements Comparable<Item> {
     protected String name;
     protected String description;
     protected double prize;
-    protected RepositoryItems items = new RepositoryItems();
 
     public Item() {
     }
