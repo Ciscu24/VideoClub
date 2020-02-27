@@ -56,13 +56,14 @@ public class GUI {
         System.out.println(" Introduce tu Contraseña");
         contraseña = teclado.next();
         if (usuario != null && contraseña != null) {
-            /*if (usuario.equals(io.VideoClub.Model.Client.getNombre)) {
-            result = true;
+            if (usuario.equals(io.VideoClub.Model.Client.getNombre)) {
+                result = true;
             }
-            
+
             if (result = true) {
-            lista_sesion();
-            }*/
+                lista_sesion();
+
+            }
 
         }
         System.out.println("0) Salir");
@@ -83,7 +84,6 @@ public class GUI {
         }
 
         return resultado;
-
     }
 
     public static void lista_sesion() {
