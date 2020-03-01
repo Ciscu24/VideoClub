@@ -1,13 +1,15 @@
 package io.VideoClub.View;
 
 import com.sun.glass.ui.SystemClipboard;
+import io.VideoClub.Controller.AppController;
 import io.VideoClub.Model.Enums.ProductsTypes;
-import java.util.Scanner;
-import io.VideoClub.Model.Repositories.RepositoryProducts;
 import io.VideoClub.Model.Product;
+import java.util.Scanner;
+import java.util.Set;
 
 public class GUI {
-
+    static AppController Controller = new AppController();
+    
     public static void main(String[] args) {
         logo();
         principal();
@@ -24,6 +26,7 @@ public class GUI {
     }
     
     public static void principal() {
+        
         int numero;
 
         do {
@@ -166,8 +169,11 @@ public class GUI {
             opcion = devolverInt("Introduce una opcion: ");
 
             switch(opcion){
-                case 1: 
-                    //Meter funcion anto xd listar xd
+                case 1:
+                    Set<Product> ListaProductos = Controller.products.listAllProducts();
+                    for(Product producto: ListaProductos){
+                        System.out.println(producto);
+                    }
                     break;
 
                 case 2: 
