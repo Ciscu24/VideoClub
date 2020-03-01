@@ -1,7 +1,10 @@
 package io.VideoClub.View;
 
 import com.sun.glass.ui.SystemClipboard;
+import io.VideoClub.Model.Enums.ProductsTypes;
 import java.util.Scanner;
+import io.VideoClub.Model.Repositories.RepositoryProducts;
+import io.VideoClub.Model.Product;
 
 public class GUI {
 
@@ -30,6 +33,7 @@ public class GUI {
             System.out.println("1) Iniciar sesion");
             System.out.println("2) Registrarse");
             System.out.println("3) Información.");
+            System.out.println("4) Empleados");
             System.out.println("0) Salir");
             System.out.println("------------------");
 
@@ -51,6 +55,10 @@ public class GUI {
 
             case 3: //Caso 3 para 
                 System.out.println("Bienvenido al nuestro videoclub xd ....");
+                break;
+            
+            case 4:
+                InicioEmpleados();
                 break;
         }
     }
@@ -75,7 +83,6 @@ public class GUI {
                 lista_sesion();
 
             }
-
         }
         System.out.println("0) Salir");
         System.out.println("----------------");
@@ -96,6 +103,32 @@ public class GUI {
 
         return resultado;
     }
+    
+    //Edu intenta usar este devolverString que es mas sencillo
+    /**
+     * Metodo que escribe y devuelve un string que introduzca un usuario
+     * @param texto Texto que quieres que se escribe, ejemplo (Introduce contraseña)
+     * @return string que introduce el usuario
+     */
+    public static String devolverString(String texto){
+        String resultado = "";
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.print(texto);
+        resultado = teclado.next();
+
+        return resultado;
+    }
+    
+    public static int devolverInt(String texto){
+        int resultado = 0;
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.print(texto);
+        resultado = teclado.nextInt();
+
+        return resultado;
+    }
 
     public static void lista_sesion() {
         System.out.println("\n------Menu Pesonal------");
@@ -110,5 +143,46 @@ public class GUI {
 
     public static void registrarse() {
 
+    }
+    
+    public static void InicioEmpelados(){
+        System.out.println("\n------Inicio Sesion Empleado------");
+        String usuario = devolverString("Introduzca su Usuario: ");
+        String contraseña = devolverString("Introduzca su Contraseña: ");
+        //Buscar por usuario y por contraseña con un if
+    }
+    
+    public static void MenuEmpleados(){
+        int opcion = 0;
+        do{
+            System.out.println("\n------Menu Empleado------");
+            System.out.println("1) Listar peliculas");
+            System.out.println("2) Añadir peliculas");
+            System.out.println("3) Quitar peliculas");
+            System.out.println("4) Reservas");
+            System.out.println("0) Salir");
+            System.out.println("------------------");
+
+            opcion = devolverInt("Introduce una opcion: ");
+
+            switch(opcion){
+                case 1: 
+                    //Meter funcion anto xd listar xd
+                    break;
+
+                case 2: 
+                    
+                    break;
+
+                case 3:
+                    
+                    break;
+
+                case 4:
+                    
+                    break;
+            }
+        
+        }while(opcion!=0);
     }
 }
