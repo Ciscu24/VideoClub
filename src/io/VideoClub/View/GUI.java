@@ -61,7 +61,7 @@ public class GUI {
                 break;
             
             case 4:
-                InicioEmpleados();
+                MenuEmpleados();
                 break;
         }
     }
@@ -148,7 +148,7 @@ public class GUI {
 
     }
     
-    public static void InicioEmpelados(){
+    public static void InicioEmpleados(){
         System.out.println("\n------Inicio Sesion Empleado------");
         String usuario = devolverString("Introduzca su Usuario: ");
         String contraseña = devolverString("Introduzca su Contraseña: ");
@@ -176,8 +176,13 @@ public class GUI {
                     }
                     break;
 
-                case 2: 
-                    
+                case 2:
+                    String name = devolverString("Introduce nombre del producto para agregar");
+                    if(Controller.products.addProduct(name)){
+                        System.out.println("Producto agregado exitosamente");
+                    }else{
+                        System.out.println("El producto no se ha podido agregar");
+                    }
                     break;
 
                 case 3:
