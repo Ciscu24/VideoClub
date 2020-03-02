@@ -48,16 +48,15 @@ public class RepositoryProducts implements IRepositoryProducts{
     public boolean editProduct(String key, Product newP) {
         boolean result = false;
         if(key != null){
-            for(Product p : products){
-                if(p.){
-                    
+            for(int i=0; i<products.size() && !result;i++){
+                if(products.get(i).getKey().equals(key)){
+                    products.set(i, newP);
+                    result = true;
                 }
-            }
-            
+            }  
         }
         return result;
     }
-
     
     @Override
     public Set<Product> listAllProducts() {
