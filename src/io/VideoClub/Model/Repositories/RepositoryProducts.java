@@ -9,11 +9,11 @@ import java.util.TreeSet;
 
 public class RepositoryProducts implements IRepositoryProducts{
 
-   TreeSet<Product> products;
+    TreeSet<Product> products;
     
-   public RepositoryProducts(){
-       products = new TreeSet<>();
-   }
+    public RepositoryProducts(){
+        products = new TreeSet<>();
+    }
 
     @Override
     public Set<Product> listAllProducts() {
