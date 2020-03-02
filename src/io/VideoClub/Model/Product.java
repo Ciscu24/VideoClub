@@ -23,6 +23,13 @@ public abstract class Product extends Item implements Cloneable{
         this.key=generateRandom16Chars();
     }
     
+    public Product(String name){
+        super(name, "Unknown", 0);
+        this.key=generateRandom16Chars();
+    }
+    
+    
+    
     private String generateRandom16Chars(){
         return(String)UUID.randomUUID().toString().subSequence(0, 16);
     }
