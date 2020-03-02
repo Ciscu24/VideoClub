@@ -1,8 +1,5 @@
 package io.VideoClub.Model;
 
-import io.VideoClub.Model.Repositories.RepositoryItems;
-import java.util.Iterator;
-
 public abstract class Item implements Comparable<Item> {
 
     protected String name;
@@ -42,49 +39,6 @@ public abstract class Item implements Comparable<Item> {
         this.prize = prize;
     }
 
-    /*public boolean addItem(Item it) {
-    boolean result = false;
-    
-    if (it != null) {
-    result = items.getItems().add(it);
-    System.out.println(result);
-    if (result) {
-    items.setItems(items.getItems());
-    }
-    }
-    
-    return result;
-    }
-    
-    public boolean deleteItem(Item it) {
-    boolean result = false;
-    
-    if (it != null && items.getItems().contains(it)) {
-    result = items.getItems().remove(it);
-    }
-    
-    return result;
-    }
-    
-    public boolean searchItem(Item it) {
-    boolean result = false;
-    
-    if (it != null) {
-    result = items.getItems().contains(it);
-    }
-    
-    return result;
-    }
-    
-    public void writeItem() {
-    Iterator<Item> i = items.getItems().iterator();
-    
-    while (i.hasNext()) {
-    System.out.println(i.next().toString());
-    }
-    
-    }*/
-
     @Override
     public boolean equals(Object obj) {
         boolean result = false;
@@ -108,9 +62,9 @@ public abstract class Item implements Comparable<Item> {
         if (o != null) {
             if (this.name.toLowerCase().equals(o.getName().toLowerCase())) {
                 result = 0;
-            } else if (this.name.toLowerCase().compareTo(o.getName().toLowerCase()) == 1) {
+            } else if (this.name.toLowerCase().compareTo(o.getName().toLowerCase()) > 0) {
                 result = 1;
-            } else if (this.name.toLowerCase().compareTo(o.getName().toLowerCase()) == 0) {
+            } else if (this.name.toLowerCase().compareTo(o.getName().toLowerCase()) < 0) {
                 result = -1;
             }
         }
@@ -120,7 +74,7 @@ public abstract class Item implements Comparable<Item> {
 
     @Override
     public String toString() {
-        return "Item{" + "name=" + name + ", description=" + description + ", prize=" + prize + '}';
+        return "\n-- "+name+" --\nDescription: "+description+"\nPrize: "+prize+"\n--------";
     }
 
 }

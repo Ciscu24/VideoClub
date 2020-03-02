@@ -62,12 +62,17 @@ public class RepositoryItems implements Comparator<Item> {
     }
 
     public void writeItem() {
+        sortItems();
         Iterator<Item> i = items.iterator();
 
         while (i.hasNext()) {
             System.out.println(i.next().toString());
         }
 
+    }
+
+    public void sortItems() {
+        items.sort(this);
     }
 
     @Override
