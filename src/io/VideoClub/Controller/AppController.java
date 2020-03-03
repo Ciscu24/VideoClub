@@ -1,5 +1,13 @@
 package io.VideoClub.Controller;
 
-public class AppController implements IAppController{
+import io.VideoClub.Model.Repositories.RepositoryClient;
+import io.VideoClub.Model.Repositories.RepositoryItems;
+import io.VideoClub.Model.Repositories.RepositoryProducts;
+
+public class AppController{
+    public RepositoryProducts products = new RepositoryProducts();
+    public RepositoryItems items = new RepositoryItems();
+    public RepositoryClient clients = new RepositoryClient();
     
+    public AppController(){}
 }
