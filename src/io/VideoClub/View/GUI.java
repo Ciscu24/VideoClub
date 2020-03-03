@@ -184,8 +184,13 @@ public class GUI {
     public static void InicioEmpleados(){
         System.out.println("\n------Inicio Sesion Empleado------");
         String usuario = devolverString("Introduzca su Usuario: ");
-        String contraseña = devolverString("Introduzca su Contraseña: ");
+        String contrasena = devolverString("Introduzca su Contraseña: ");
         //Buscar por usuario y por contraseña con un if
+        if(Controller.clients.searchUser(usuario) && Controller.clients.searchpassword(contrasena)){
+            MenuEmpleados();
+        }else{
+            System.out.println("Usuario o Contraseña incorrecto");
+        }
     }
     
     public static void MenuEmpleados(){
