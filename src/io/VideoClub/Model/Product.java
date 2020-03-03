@@ -7,13 +7,13 @@ package io.VideoClub.Model;
 
 import java.util.UUID;
 
-public abstract class Product extends Item implements Cloneable{
+public class Product extends Item implements Cloneable{
     public enum Status{
         AVAILABLE,
         RESERVED
     }
     private String key;
-    private Status status;
+    private Status status = Status.AVAILABLE;
    
     
     
@@ -31,7 +31,15 @@ public abstract class Product extends Item implements Cloneable{
     public String getKey() {
         return key;
     }
-     
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+       
     private String generateRandom16Chars(){
         return(String)UUID.randomUUID().toString().subSequence(0, 16);
     }
@@ -56,6 +64,16 @@ public abstract class Product extends Item implements Cloneable{
         return (Object)clone;
     }
     
+     @Override
+    public String toString() {
+        return "\n-- "+name+" --\nKey: "+key+"\nDescription: "+description+"\nPrize: "+prize+"\nStatus: "+status+"\n---------------";
+    }
+    
+    public static void main(String[] args) {
+        Product p1 = new Product("La vida de Ciscu24", "La vida de AntoXd", 0);
+        System.out.println(p1);
+        
+    }
     
     
 }

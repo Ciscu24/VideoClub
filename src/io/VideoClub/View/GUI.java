@@ -32,13 +32,15 @@ public class GUI {
         do {
             Scanner teclado = new Scanner(System.in);
 
-            System.out.println("\n------Menu------");
-            System.out.println("1) Iniciar sesion");
-            System.out.println("2) Registrarse");
-            System.out.println("3) Información.");
-            System.out.println("4) Empleados");
-            System.out.println("0) Salir");
-            System.out.println("------------------");
+            System.out.println("|-------------------|");
+            System.out.println("|        Menu       |");
+            System.out.println("|-------------------|");
+            System.out.println("| 1) Iniciar sesion |");
+            System.out.println("| 2) Registrarse    |");
+            System.out.println("| 3) Información.   |");
+            System.out.println("| 4) Empleados      |");
+            System.out.println("| 0) Salir          |");
+            System.out.println("--------------------|");
 
             System.out.println("Introduce una opción");
             numero = teclado.nextInt();
@@ -57,7 +59,7 @@ public class GUI {
                 break;
 
             case 3: //Caso 3 para 
-                System.out.println("Bienvenido al nuestro Videoclub 'PochoBuster' ....");
+                System.out.println("Bienvenido al  Videoclub 'PochoBuster' ....");
                 break;
             
             case 4:
@@ -72,13 +74,15 @@ public class GUI {
         String contraseña;
         Scanner teclado = new Scanner(System.in);
 
-        System.out.println("\n------Inicio de sesión------");
+        System.out.println("|-------------------|");
+        System.out.println("|   Iniciar Sesion  |");
+        System.out.println("|-------------------|");
         System.out.println(" Introduce tu usuario");
         usuario = teclado.next();
         System.out.println(" Introduce tu Contraseña");
         contraseña = teclado.next();
         if (usuario != null && contraseña != null) {
-            if (usuario.equals(io.VideoClub.Model.Client.getNombre)) {
+            if (usuario.equals(Controller.clients.getNombre())) {
                 result = true;
             }
 
@@ -135,13 +139,15 @@ public class GUI {
     public static void lista_sesion() {
         int opcion =0;
         do{
-        System.out.println("\n------Menu Pesonal------");
-        System.out.println("1) Listar peliculas");
-        System.out.println("2) Cuenta");
-        System.out.println("3) Reservar.");
-        System.out.println("4) Cancelar reserva");
-        System.out.println("0) Salir");
-        System.out.println("------------------");
+        System.out.println("|---------------------|");
+        System.out.println("|    Menu principal   |");
+        System.out.println("|---------------------|");
+        System.out.println("| 1) Listar peliculas |");
+        System.out.println("| 2) Cuenta           |");
+        System.out.println("| 3) Reservar.        |");
+        System.out.println("| 4) Cancelar reserva |");
+        System.out.println("| 0) Salir            |");
+        System.out.println("|---------------------|");
         
         opcion = devolverInt("Introduce una opcion: ");
         
@@ -170,7 +176,9 @@ public class GUI {
     }
 
     public static void registrarse() {
-        System.out.println("\n------Registrarse------");
+        System.out.println("|-------------------|");
+        System.out.println("|    Registrarse    |");
+        System.out.println("|-------------------|");
         String correo =devolverString("Introduzca un usuario");
         String contraseña=devolverString("Introdce una contraseña");
         if(correo!=null && contraseña!=null){
@@ -182,7 +190,9 @@ public class GUI {
     }
     
     public static void InicioEmpleados(){
-        System.out.println("\n------Inicio Sesion Empleado------");
+        System.out.println("|-------------------------------|");
+        System.out.println("|    Inicio sesion empleados    |");
+        System.out.println("|-------------------------------|");
         String usuario = devolverString("Introduzca su Usuario: ");
         String contrasena = devolverString("Introduzca su Contraseña: ");
         //Buscar por usuario y por contraseña con un if
@@ -196,13 +206,15 @@ public class GUI {
     public static void MenuEmpleados(){
         int opcion = 0;
         do{
-            System.out.println("\n------Menu Empleado------");
-            System.out.println("1) Listar peliculas");
-            System.out.println("2) Añadir peliculas");
-            System.out.println("3) Quitar peliculas");
-            System.out.println("4) Reservas");
-            System.out.println("0) Salir");
-            System.out.println("------------------");
+            System.out.println("|---------------------|");
+            System.out.println("|     Menu empleado   |");
+            System.out.println("|---------------------|");
+            System.out.println("| 1) Listar peliculas |");
+            System.out.println("| 2) Añadir peliculas |");
+            System.out.println("| 3) Quitar peliculas |");
+            System.out.println("| 4) Reservas         |");
+            System.out.println("| 0) Salir            |");
+            System.out.println("|---------------------|");
 
             opcion = devolverInt("Introduce una opcion: ");
 
