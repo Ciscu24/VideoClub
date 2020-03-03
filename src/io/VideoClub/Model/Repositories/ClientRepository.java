@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.VideoClub.Model;
+package io.VideoClub.Model.Repositories;
+import io.VideoClub.Model.Client;
+import io.VideoClub.Model.Client;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Iterator ;
+import io.VideoClub.Model.Client;
 /**
  *
  * @author migue
