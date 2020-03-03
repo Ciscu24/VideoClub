@@ -3,6 +3,8 @@ package io.VideoClub.Model.Repositories;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
+import io.VideoClub.Model.Film;
+import io.VideoClub.Model.Game;
 import io.VideoClub.Model.Product;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -59,7 +61,27 @@ public class RepositoryProducts implements IRepositoryProducts{
         result = true;
         return result;
     }
+    
+    
+    @Override
+    public boolean createMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge) {
+        boolean result = false;
+            if(type.equals(ProductsTypes.Peliculas)){
+                Film newFilm = new Film(cat, minAge, name, description, 0);
+                result = true;
+            } 
+        return result;
+    }
 
+    @Override
+    public boolean createGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge) {
+        boolean result = false;
+            if(type.equals(ProductsTypes.Peliculas)){
+                Game newGame = new Game(cat, minAge, name, description, 0);
+                result = true;
+            } 
+        return result;    
+    }
     
     @Override
     public boolean editProduct(String key, Product newP) {
@@ -84,17 +106,25 @@ public class RepositoryProducts implements IRepositoryProducts{
         return newList;
     }
 
+    
+    //-------------------------------------------------------
+    
+    
     @Override
     public Set<Product> listAllProducts(Comparator c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
+    //-------------------------------------------------------
+    
+    
     @Override
     public Set<Product> listAllByType(ProductsTypes type) {
         Set<Product> newList = new TreeSet<>();
         for(int i = 0; i < products.size(); i++){
-            if(){
-                
+            if(products.get(i).getType().equals(type)){
+                newList.add(products.get(i));
             }
         }
         return newList;
@@ -113,7 +143,13 @@ public class RepositoryProducts implements IRepositoryProducts{
 
     @Override
     public Set<Product> listAllByName(String name, ProductsTypes type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> newList = new TreeSet<>();
+         for(int i = 0; i < products.size(); i++){
+            if(products.get(i).getName().equals(name) && products.get(i).getType().equals(type)){
+                newList.add(products.get(i));
+            }
+        }
+         return newList;
     }
 
     @Override
@@ -149,16 +185,6 @@ public class RepositoryProducts implements IRepositoryProducts{
 
     @Override
     public List<Product> listAllDifferentGames() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean createMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean createGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

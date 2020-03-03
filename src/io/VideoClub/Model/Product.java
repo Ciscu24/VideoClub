@@ -5,6 +5,7 @@
  */
 package io.VideoClub.Model;
 
+import io.VideoClub.Model.Enums.ProductsTypes;
 import java.util.UUID;
 
 public class Product extends Item implements Cloneable{
@@ -13,19 +14,22 @@ public class Product extends Item implements Cloneable{
         RESERVED
     }
     private String key;
-    private Status status = Status.AVAILABLE;
-   
+    private Status status; 
+    private ProductsTypes type;
     
     
     public Product(){}
     public Product(String name, String description,double prize){
         super(name,description,prize);
         this.key=generateRandom16Chars();
+        this.status = Status.AVAILABLE;
+        this.type = type;
     }
     
     public Product(String name){
         super(name, "Unknown", 0);
         this.key=generateRandom16Chars();
+        this.type = type;
     }
 
     public String getKey() {
@@ -38,6 +42,14 @@ public class Product extends Item implements Cloneable{
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public ProductsTypes getType() {
+        return type;
+    }
+
+    public void setType(ProductsTypes type) {
+        this.type = type;
     }
        
     private String generateRandom16Chars(){
@@ -68,12 +80,4 @@ public class Product extends Item implements Cloneable{
     public String toString() {
         return "\n-- "+name+" --\nKey: "+key+"\nDescription: "+description+"\nPrize: "+prize+"\nStatus: "+status+"\n---------------";
     }
-    
-    public static void main(String[] args) {
-        Product p1 = new Product("La vida de Ciscu24", "La vida de AntoXd", 0);
-        System.out.println(p1);
-        
-    }
-    
-    
 }
