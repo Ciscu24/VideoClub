@@ -78,7 +78,6 @@ public class RepositoryProducts implements IRepositoryProducts{
     @Override
     public Set<Product> listAllProducts() {
         Set<Product> newList = new TreeSet<>();
-        
         for(Product p : products){
             newList.add(p);
         }
@@ -92,16 +91,22 @@ public class RepositoryProducts implements IRepositoryProducts{
 
     @Override
     public Set<Product> listAllByType(ProductsTypes type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> newList = new TreeSet<>();
+        for(int i = 0; i < products.size(); i++){
+            if(){
+                
+            }
+        }
+        return newList;
     }
 
     @Override
     public Set<Product> listAllByName(String name) {
         Set<Product> newList = new TreeSet<>();
-        Iterator<Product> it = products.iterator();
-        
-        while(it.hasNext()){
-            
+        for(int i = 0; i < products.size(); i++){
+            if(products.get(i).getName().equals(name)){
+                newList.add(products.get(i));
+            }
         }
         return newList;
     }
@@ -113,7 +118,13 @@ public class RepositoryProducts implements IRepositoryProducts{
 
     @Override
     public Set<Product> listAllByStatus(Product.Status status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> newList = new TreeSet<>();
+        for(int i = 0; i < products.size(); i++){
+            if(products.get(i).getStatus().equals(status)){
+                newList.add(products.get(i));
+            }
+        }
+        return newList;
     }
 
     @Override
