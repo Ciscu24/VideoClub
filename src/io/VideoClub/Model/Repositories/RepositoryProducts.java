@@ -1,5 +1,7 @@
 package io.VideoClub.Model.Repositories;
 
+import io.VideoClub.Model.Enums.GameCategory;
+import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Product;
 import java.util.ArrayList;
@@ -100,6 +102,31 @@ public class RepositoryProducts implements IRepositoryProducts{
 
     @Override
     public boolean createProduct(String name, String description, double prize) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Product> listAllDifferentProducts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Product> listAllDifferentMovies() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Product> listAllDifferentGames() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean createMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean createGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
