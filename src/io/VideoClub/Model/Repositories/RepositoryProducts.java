@@ -8,23 +8,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
-public class RepositoryProducts implements IRepositoryProducts{
+public class RepositoryProducts implements IRepositoryProducts {
 
     List<Product> products;
-    
-    public RepositoryProducts(){
+
+    public RepositoryProducts() {
         products = new ArrayList<>();
     }
 
-      
-     @Override
+    @Override
     public boolean addProduct(String name) {
         boolean result = false;
-        if(name != null){
-        Product p = new Product(name);
-        products.add(p);
-        result = true;
+        if (name != null) {
+            Product p = new Product(name) {
+            };
+            products.add(p);
+            result = true;
         }
         return result;
     }
@@ -47,20 +48,27 @@ public class RepositoryProducts implements IRepositoryProducts{
     @Override
     public boolean editProduct(String key, Product newP) {
         boolean result = false;
-        if(key != null){
-            for(int i=0; i<products.size() && !result;i++){
-                if(products.get(i).getKey().equals(key)){
+        if (key != null) {
+            for (int i = 0; i < products.size() && !result; i++) {
+                if (products.get(i).getKey().equals(key)) {
                     products.set(i, newP);
                     result = true;
                 }
-            }  
+            }
         }
         return result;
     }
-    
+
     @Override
     public Set<Product> listAllProducts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> result = new TreeSet<>();
+        Iterator<Product> i = products.iterator();
+
+        while (i.hasNext()) {
+            result = (Set<Product>) i.next();
+        }
+
+        return result;
     }
 
     @Override
