@@ -26,9 +26,9 @@ public interface IAppController {
     Set<Product> listAllByName(String name,ProductsTypes type);
     Set<Product> listAllByStatus(Product.Status status);*/
     
-    List<Product> listAllDifferentProducts();
+    /*List<Product> listAllDifferentProducts();
     List<Product> listAllDifferentMovies();
-    List<Product> listAllDifferentGames();
+    List<Product> listAllDifferentGames();*/
     
     /*Map<Product,Integer> listAllAmountOfProducts(String name); 
     Map<Product,Integer> listAllAmountOfProducts(ProductsTypes type,String name);*/
@@ -46,9 +46,9 @@ public interface IAppController {
     double getIncommings(LocalDate from, LocalDate to);
     Map<IClient,Double> resumeAllIncomingsByClient();
     
-    /*boolean createProduct(String name, String description,double prize);*/
+    /*boolean createProduct(String name, String description,double prize);
     boolean createMovie(ProductsTypes type,String name, String description, MovieCategory cat,int minAge);
-    boolean createGame(ProductsTypes type, String name, String description, GameCategory cat,int minAge);
+    boolean createGame(ProductsTypes type, String name, String description, GameCategory cat,int minAge);*/
     
     /*boolean createClient(String id,String name,String phone,LocalDateTime time);
     boolean removeClient(String id);  //if has reservations cant be deleted

@@ -107,7 +107,6 @@ public class GUI {
         return resultado;
     }
     
-    //Edu intenta usar este devolverString que es mas sencillo
     /**
      * Metodo que escribe y devuelve un string que introduzca un usuario
      * @param texto Texto que quieres que se escribe, ejemplo (Introduce contraseña)
