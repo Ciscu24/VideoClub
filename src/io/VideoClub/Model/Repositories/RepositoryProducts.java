@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class RepositoryProducts implements IRepositoryProducts{
 
@@ -45,6 +46,20 @@ public class RepositoryProducts implements IRepositoryProducts{
     }
 
     @Override
+    public boolean createProduct(String name, String description, double prize) {
+        boolean result = false;
+        if (name == null){
+            name = "No named product";
+        }else if(description == null){
+            description = "No description provided";
+        }
+        Product p = new Product (name, description, prize);
+        result = true;
+        return result;
+    }
+
+    
+    @Override
     public boolean editProduct(String key, Product newP) {
         boolean result = false;
         if(key != null){
@@ -60,7 +75,12 @@ public class RepositoryProducts implements IRepositoryProducts{
     
     @Override
     public Set<Product> listAllProducts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> newList = new TreeSet<>();
+        
+        for(Product p : products){
+            newList.add(p);
+        }
+        return newList;
     }
 
     @Override
@@ -75,7 +95,13 @@ public class RepositoryProducts implements IRepositoryProducts{
 
     @Override
     public Set<Product> listAllByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> newList = new TreeSet<>();
+        Iterator<Product> it = products.iterator();
+        
+        while(it.hasNext()){
+            
+        }
+        return newList;
     }
 
     @Override
@@ -95,11 +121,6 @@ public class RepositoryProducts implements IRepositoryProducts{
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean createProduct(String name, String description, double prize) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
