@@ -10,11 +10,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Iterator ;
 import io.VideoClub.Model.Client;
+import io.VideoClub.Model.IClient;
+import java.time.LocalDateTime;
+import java.util.Set;
 /**
  *
  * @author migue
  */
-public class ClientRepository implements Comparator<Client> {
+public class RepositoryClients implements Comparator<Client>, IRepositoryClient{
     private List<Client> clientL;
    
     
@@ -73,6 +76,31 @@ public class ClientRepository implements Comparator<Client> {
             result = o1.compareTo(o2);
         }
         return result;
+    }
+
+    @Override
+    public Set<IClient> listAllClients() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Set<IClient> listAllClients(Comparator c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Set<IClient> listAllClientsWithReservationsNotFinished() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean createClient(String id, String name, String phone, LocalDateTime time) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean editClient(IClient e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
