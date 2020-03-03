@@ -57,7 +57,7 @@ public class GUI {
                 break;
 
             case 3: //Caso 3 para 
-                System.out.println("Bienvenido al nuestro videoclub xd ....");
+                System.out.println("Bienvenido al nuestro Videoclub 'PochoBuster' ....");
                 break;
             
             case 4:
@@ -134,6 +134,8 @@ public class GUI {
     }
 
     public static void lista_sesion() {
+        int opcion =0;
+        do{
         System.out.println("\n------Menu Pesonal------");
         System.out.println("1) Listar peliculas");
         System.out.println("2) Cuenta");
@@ -141,10 +143,42 @@ public class GUI {
         System.out.println("4) Cancelar reserva");
         System.out.println("0) Salir");
         System.out.println("------------------");
+        
+        opcion = devolverInt("Introduce una opcion: ");
+        
+        switch(opcion){
+                case 1:
+                    Set<Product> ListaProductos = Controller.products.listAllProducts();
+                    for(Product producto: ListaProductos){
+                        System.out.println(producto);
+                    }
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+                    
+                    break;
+
+                case 4:
+                    
+                    break;
+            }
+        }while(opcion!=0);
 
     }
 
     public static void registrarse() {
+        System.out.println("\n------Registrarse------");
+        String correo =devolverString("Introduzca un usuario");
+        String contraseña=devolverString("Introdce una contraseña");
+        if(correo!=null && contraseña!=null){
+            String nombre=devolverString("Introduce tu nombre");
+            String usuario=devolverString("Introduce tu usuario");
+            String telefono=devolverString("Introduce tu teléfono");
+        }
 
     }
     
@@ -186,6 +220,12 @@ public class GUI {
                     break;
 
                 case 3:
+                    name =devolverString("Introduce el nombre del producto para borrar");
+                    if(Controller.products.removeProduct(name)){
+                        System.out.println("Producto eliminado exitosamente");
+                    }else{
+                        System.out.println("El producto no ha podido ser borrado");
+                    }
                     
                     break;
 
