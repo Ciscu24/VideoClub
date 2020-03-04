@@ -76,8 +76,8 @@ public class Product extends Item implements Cloneable{
         return (Object)clone;
     }
     
-     @Override
+    @Override
     public String toString() {
-        return "\n-- "+name+" --\nKey: "+key+"\nDescription: "+description+"\nPrize: "+prize+"\nStatus: "+status+"\n---------------";
+        return "\n-- "+name+" --\nKey: "+key+"\nDescription: "+description+"\nPrize: "+prize+"\nStatus: "+status+"\n-----------------------";
     }
 }

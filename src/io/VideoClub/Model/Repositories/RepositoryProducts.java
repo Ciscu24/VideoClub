@@ -52,12 +52,14 @@ public class RepositoryProducts implements IRepositoryProducts{
     @Override
     public boolean createProduct(String name, String description, double prize) {
         boolean result = false;
-        if (name == null){
+        if (name.equals("")){
             name = "No named product";
-        }else if(description == null){
+        }
+        if(description.equals("")){
             description = "No description provided";
         }
         Product p = new Product (name, description, prize);
+        products.add(p);
         result = true;
         return result;
     }
@@ -161,6 +163,18 @@ public class RepositoryProducts implements IRepositoryProducts{
             }
         }
         return newList;
+    }
+    
+    public Product searchByKey(String key) {
+        Product result = null; 
+        boolean aux = false;
+        for(int i = 0; i < products.size() && !aux; i++){
+            if(products.get(i).getKey().equals(key)){
+                result = products.get(i);
+                aux = true;
+            }
+        }
+        return result;
     }
 
     @Override
