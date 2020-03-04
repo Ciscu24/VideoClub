@@ -85,8 +85,18 @@ public class Client implements IClient{
         this.Phone=p;
     }
 
-    int compareTo(Client o2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int compareTo(Client o2) {
+       int result = 0;
+       if(o2!=null){
+           if (this.Name.toLowerCase().equals(o2.getName().toLowerCase())) {
+                result = 0;
+            } else if (this.Name.toLowerCase().compareTo(o2.getName().toLowerCase()) > 0) {
+                result = 1;
+            } else if (this.Name.toLowerCase().compareTo(o2.getName().toLowerCase()) < 0) {
+                result = -1;
+            }
+       }
+       return result;
     }
     
 }

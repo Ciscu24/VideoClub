@@ -5,33 +5,53 @@
  */
 package io.VideoClub.Model;
 
+import io.VideoClub.Model.Enums.ProductsTypes;
 import java.util.UUID;
 
-public abstract class Product extends Item implements Cloneable{
+public class Product extends Item implements Cloneable{
     public enum Status{
         AVAILABLE,
         RESERVED
     }
     private String key;
-    private Status status;
-   
+    private Status status; 
+    private ProductsTypes type;
     
     
     public Product(){}
     public Product(String name, String description,double prize){
         super(name,description,prize);
         this.key=generateRandom16Chars();
+        this.status = Status.AVAILABLE;
+        this.type = type;
     }
     
     public Product(String name){
         super(name, "Unknown", 0);
         this.key=generateRandom16Chars();
+        this.type = type;
     }
 
     public String getKey() {
         return key;
     }
-     
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public ProductsTypes getType() {
+        return type;
+    }
+
+    public void setType(ProductsTypes type) {
+        this.type = type;
+    }
+       
     private String generateRandom16Chars(){
         return(String)UUID.randomUUID().toString().subSequence(0, 16);
     }
@@ -56,6 +76,8 @@ public abstract class Product extends Item implements Cloneable{
         return (Object)clone;
     }
     
-    
-    
+    @Override
+    public String toString() {
+        return "\n-- "+name+" --\nKey: "+key+"\nDescription: "+description+"\nPrize: "+prize+"\nStatus: "+status+"\n-----------------------";
+    }
 }

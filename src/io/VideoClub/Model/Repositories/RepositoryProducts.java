@@ -3,6 +3,8 @@ package io.VideoClub.Model.Repositories;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
+import io.VideoClub.Model.Film;
+import io.VideoClub.Model.Game;
 import io.VideoClub.Model.Product;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -48,6 +50,41 @@ public class RepositoryProducts implements IRepositoryProducts {
     }
 
     @Override
+    public boolean createProduct(String name, String description, double prize) {
+        boolean result = false;
+        if (name.equals("")) {
+            name = "No named product";
+        }
+        if (description.equals("")) {
+            description = "No description provided";
+        }
+        Product p = new Product(name, description, prize);
+        products.add(p);
+        result = true;
+        return result;
+    }
+
+    @Override
+    public boolean createMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge) {
+        boolean result = false;
+        if (type.equals(ProductsTypes.Peliculas)) {
+            Film newFilm = new Film(cat, minAge, name, description, 0);
+            result = true;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean createGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge) {
+        boolean result = false;
+        if (type.equals(ProductsTypes.Peliculas)) {
+            Game newGame = new Game(cat, minAge, name, description, 0);
+            result = true;
+        }
+        return result;
+    }
+
+    @Override
     public boolean editProduct(String key, Product newP) {
         boolean result = false;
         if (key != null) {
@@ -63,14 +100,11 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     @Override
     public Set<Product> listAllProducts() {
-        Set<Product> result = new TreeSet<>();
-        Iterator<Product> i = products.iterator();
-
-        while (i.hasNext()) {
-            result = (Set<Product>) i.next();
+        Set<Product> newList = new TreeSet<>();
+        for (Product p : products) {
+            newList.add(p);
         }
-
-        return result;
+        return newList;
     }
 
     @Override
@@ -80,22 +114,58 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     @Override
     public Set<Product> listAllByType(ProductsTypes type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> newList = new TreeSet<>();
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getType().equals(type)) {
+                newList.add(products.get(i));
+            }
+        }
+        return newList;
     }
 
     @Override
     public Set<Product> listAllByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> newList = new TreeSet<>();
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getName().equals(name)) {
+                newList.add(products.get(i));
+            }
+        }
+        return newList;
     }
 
     @Override
     public Set<Product> listAllByName(String name, ProductsTypes type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> newList = new TreeSet<>();
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getName().equals(name) && products.get(i).getType().equals(type)) {
+                newList.add(products.get(i));
+            }
+        }
+        return newList;
     }
 
     @Override
     public Set<Product> listAllByStatus(Product.Status status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> newList = new TreeSet<>();
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getStatus().equals(status)) {
+                newList.add(products.get(i));
+            }
+        }
+        return newList;
+    }
+
+    public Product searchByKey(String key) {
+        Product result = null;
+        boolean aux = false;
+        for (int i = 0; i < products.size() && !aux; i++) {
+            if (products.get(i).getKey().equals(key)) {
+                result = products.get(i);
+                aux = true;
+            }
+        }
+        return result;
     }
 
     @Override
@@ -105,11 +175,6 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean createProduct(String name, String description, double prize) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -125,16 +190,6 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     @Override
     public List<Product> listAllDifferentGames() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean createMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean createGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
