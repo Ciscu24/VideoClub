@@ -171,10 +171,10 @@ public class GUI {
             System.out.println("\n|---------------------|");
             System.out.println("|     Menu empleado   |");
             System.out.println("|---------------------|");
-            System.out.println("| 1) Listar peliculas |");
-            System.out.println("| 2) Añadir peliculas |");
-            System.out.println("| 3) Quitar peliculas |");
-            System.out.println("| 4) Editar peliculas |");
+            System.out.println("| 1) Listar Productos |");
+            System.out.println("| 2) Añadir Producto  |");
+            System.out.println("| 3) Quitar Producto  |");
+            System.out.println("| 4) Editar Productos |");
             System.out.println("| 5) Disponibilidad   |");
             System.out.println("| 6) Reservas         |");
             System.out.println("| 0) Salir            |");
@@ -214,6 +214,7 @@ public class GUI {
                     break;
 
                 case 4:
+                    
                     break;
                     
                 case 5:
