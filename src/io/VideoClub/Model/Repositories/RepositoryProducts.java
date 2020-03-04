@@ -209,16 +209,22 @@ public class RepositoryProducts implements IRepositoryProducts {
     @Override
     public List<Product> listAllDifferentMovies() {
         List<Product> newList = new ArrayList<>();
-        Film aux = new Film();
-
+            for(Product p : products){
+                if(p.getType().equals(ProductsTypes.Peliculas)){
+                    newList.add(p);
+                }
+            }
         return newList;
     }
 
     @Override
     public List<Product> listAllDifferentGames() {
         List<Product> newList = new ArrayList<>();
-        Game aux = new Game();
-
+            for(Product p : products){
+                if(p.getType().equals(ProductsTypes.Juegos)){
+                    newList.add(p);
+                }
+            }
         return newList;
     }
 
