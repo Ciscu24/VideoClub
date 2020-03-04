@@ -12,6 +12,7 @@ import java.util.Set;
 public interface IRepositoryProducts {
     Set<Product> listAllProducts();
     Set<Product> listAllProducts(Comparator c);
+    List<Product> listAllProductsNoDuplicates();
     Set<Product> listAllByType(ProductsTypes type);
     Set<Product> listAllByName(String name);
     Set<Product> listAllByName(String name,ProductsTypes type);

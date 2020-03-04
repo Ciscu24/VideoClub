@@ -98,6 +98,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         return result;
     }
 
+    //Este metodo devuelve el array de los productos pero sin duplicados, es decir listar Items.
     @Override
     public Set<Product> listAllProducts() {
         Set<Product> newList = new TreeSet<>();
@@ -107,6 +108,18 @@ public class RepositoryProducts implements IRepositoryProducts {
         return newList;
     }
 
+    
+    //Este metodo devuelve el array con TODOS los elementos inclusive los duplicados.
+    @Override
+    public List<Product> listAllProductsNoDuplicates() {
+        List<Product> newList = new ArrayList<>();
+        for(Product p : products){
+            newList.add(p);
+        }
+        return newList;
+    }
+
+    
     @Override
     public Set<Product> listAllProducts(Comparator c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

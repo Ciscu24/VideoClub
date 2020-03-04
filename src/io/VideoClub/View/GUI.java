@@ -4,6 +4,7 @@ import com.sun.glass.ui.SystemClipboard;
 import io.VideoClub.Controller.AppController;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Product;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -183,7 +184,7 @@ public class GUI {
 
             switch(opcion){
                 case 1:
-                    Set<Product> ListaProductos = Controller.products.listAllProducts();
+                    List<Product> ListaProductos = Controller.products.listAllProductsNoDuplicates();
                     for(Product producto: ListaProductos){
                         System.out.println(producto);
                     }
