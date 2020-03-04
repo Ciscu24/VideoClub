@@ -180,17 +180,33 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     @Override
     public List<Product> listAllDifferentProducts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Product> newList = new ArrayList<>();
+        Product aux = new Product();
+
+        for (int i = 0; i < products.size(); i++) {
+            if (aux.equals(products.get(i)) != true) {
+                newList.add(products.get(i));
+                aux = products.get(i);
+            }
+        }
+
+        return newList;
     }
 
     @Override
     public List<Product> listAllDifferentMovies() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Product> newList = new ArrayList<>();
+        Film aux = new Film();
+
+        return newList;
     }
 
     @Override
     public List<Product> listAllDifferentGames() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Product> newList = new ArrayList<>();
+        Game aux = new Game();
+
+        return newList;
     }
 
 }
