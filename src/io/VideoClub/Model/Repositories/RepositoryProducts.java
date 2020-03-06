@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class RepositoryProducts implements IRepositoryProducts {
@@ -183,12 +184,25 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<Product, Integer> newList = new TreeMap<>();
+        for(int i = 0; i < products.size(); i++){
+            if(products.get(i).getName().equals(name)){
+                newList.put(products.get(i), i);
+            }
+        }
+        return newList;
     }
-
+   
+      
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<Product, Integer> newList = new TreeMap<>();
+        for(int i = 0; i < products.size(); i++){
+            if(products.get(i).getType().equals(type) && products.get(i).getName().equals(name)){
+                newList.put(products.get(i), i);
+            }
+        }
+        return newList;
     }
 
     @Override

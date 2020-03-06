@@ -5,8 +5,10 @@ import io.VideoClub.Controller.AppController;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Product;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class GUI {
     static AppController Controller = new AppController();
@@ -190,7 +192,7 @@ public class GUI {
                     }
                     pulsarEnter();
                     break;
-
+                    
                 case 2:
                     String name = devolverString("Introduce nombre del producto: ");
                     String description = devolverString("Introduce la descripcion del producto: ");
