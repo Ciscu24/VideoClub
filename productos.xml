@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ListaProductos>
+<Producto>
+<Nombre>El Joker</Nombre>
+<Descripcion>Un hombre muy loco</Descripcion>
+<Precio>20.0</Precio>
+<Key>df429f87-2045-4f</Key>
+<Status>AVAILABLE</Status>
+<Tipo>null</Tipo>
+</Producto>
+<Producto>
+<Nombre>Antoxd La Pelicula</Nombre>
+<Descripcion>La vida de antoxd</Descripcion>
+<Precio>50.0</Precio>
+<Key>35fa1aba-8888-42</Key>
+<Status>AVAILABLE</Status>
+<Tipo>null</Tipo>
+</Producto>
+</ListaProductos>

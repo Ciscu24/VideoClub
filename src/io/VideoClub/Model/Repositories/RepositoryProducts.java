@@ -5,6 +5,7 @@ import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Film;
 import io.VideoClub.Model.Game;
+import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -242,4 +243,14 @@ public class RepositoryProducts implements IRepositoryProducts {
         return newList;
     }
 
+    @Override
+    public Product isAvailableProduct(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean reserveProduct(Product prod, IClient client) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

@@ -15,6 +15,7 @@ public class GUI {
 
     public static void main(String[] args) {
         logo();
+        Controller.cargaBBDD();
         MenuEmpleados();
     }
 
@@ -186,6 +187,11 @@ public class GUI {
             opcion = devolverInt("Introduce una opcion: ");
 
             switch (opcion) {
+                case 0:
+                    System.out.println("Guardando base de datos");
+                    Controller.toXML("productos.xml");
+                    System.out.println("Base de datos guardada con exito");
+                    break;
                 case 1:
                     List<Product> ListaProductos = Controller.products.listAllProductsNoDuplicates();
                     for (Product producto : ListaProductos) {

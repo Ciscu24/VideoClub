@@ -16,6 +16,13 @@ public class Game extends Product {
         this.minAge = minAge;
     }
     
+    //Editar
+    public Game(GameCategory type, int minAge, String name, String description, double prize, String key) {
+        super(name, description, prize, key);
+        this.type = type;
+        this.minAge = minAge;
+    }
+    
     public int getMinAge() {
         return minAge;
     }

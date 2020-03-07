@@ -1,10 +1,12 @@
 package io.VideoClub.Controller;
 
+import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Repositories.RepositoryClient;
 import io.VideoClub.Model.Repositories.RepositoryItems;
 import io.VideoClub.Model.Repositories.RepositoryProducts;
 
 import java.io.File;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,6 +19,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class AppController{
     public RepositoryProducts products = new RepositoryProducts();
@@ -33,24 +38,41 @@ public class AppController{
             DocumentBuilder build = dFact.newDocumentBuilder();
             Document doc = build.newDocument();
             //Tenemos el contenedor del documento, hay que crear nodos.
-            Element raiz = doc.createElement("Productos");
+            Element raiz = doc.createElement("ListaProductos");
             // <--- Insertar todos los contactos
             doc.appendChild(raiz);
             //Ya está creado el XML
-            for(Contacto c:contactos){
-                Element e = doc.createElement("Contacto");
-            //e.setAttribute("Nombre", c.getNombre());
-                Element n = doc.createElement("Nombre");
-                n.appendChild(doc.createTextNode(c.getNombre()));
+            List<Product> ListaProductos = products.listAllProductsNoDuplicates();
+            for(Product producto : ListaProductos){
+                Element p = doc.createElement("Producto");
                 
-                Element em = doc.createElement("Email");
-                em.appendChild(doc.createTextNode(c.getEmail()));
-                // Nombre ---> Contacto
-                e.appendChild(n);
-                // Email ----> Contacto
-                e.appendChild(em);
-                // Contacto -> Raiz
-                raiz.appendChild(e);
+                Element nombre = doc.createElement("Nombre");
+                nombre.appendChild(doc.createTextNode(producto.getName()));
+                
+                Element descripcion = doc.createElement("Descripcion");
+                descripcion.appendChild(doc.createTextNode(producto.getDescription()));
+                
+                Element precio = doc.createElement("Precio");
+                precio.appendChild(doc.createTextNode(""+producto.getPrize()));
+                
+                Element key = doc.createElement("Key");
+                key.appendChild(doc.createTextNode(producto.getKey()));
+                
+                Element status = doc.createElement("Status");
+                status.appendChild(doc.createTextNode(""+producto.getStatus()));
+                
+                Element tipo = doc.createElement("Tipo");
+                tipo.appendChild(doc.createTextNode(""+producto.getType()));
+                
+                p.appendChild(nombre);
+                p.appendChild(descripcion);
+                p.appendChild(precio);
+                p.appendChild(key);
+                p.appendChild(status);
+                p.appendChild(tipo);
+                
+                // Productos -> Raiz
+                raiz.appendChild(p);
             }
             
             //Guardar XML en disco duro.
@@ -67,8 +89,6 @@ public class AppController{
             StreamResult result = new StreamResult(new File(file));
             trans.transform(source, result);
             
-            
-            
         } catch (ParserConfigurationException ex) {
             System.out.println(ex);
         } catch (TransformerConfigurationException ex) {
@@ -77,5 +97,47 @@ public class AppController{
             System.out.println(ex);
         }
         
+    }
+    
+    public void cargaBBDD(){
+        File file = new File("productos.xml");
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+            
+            doc.getDocumentElement().normalize();
+            
+            NodeList nList = doc.getElementsByTagName("Producto");
+            System.out.println("Número de Peliculas: " + nList.getLength());
+            for(int temp = 0; temp < nList.getLength(); temp++) {
+            Node nNode = nList.item(temp);
+
+            if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+              Element eElement = (Element) nNode;
+              String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+              String descripcion = eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
+              //float precio = 
+              //float precio = Integer.parseInt(eElement.getElementsByTagName("Precio").item(0).getTextContent().replace(".", ","));
+                System.out.println("");
+              System.out.println("Nombre Pelicula: "
+                          + eElement.getElementsByTagName("Nombre").item(0).getTextContent());
+              System.out.println("Descripcion: "
+                          + eElement.getElementsByTagName("Descripcion").item(0).getTextContent());
+              System.out.println("Precio: "
+                          + eElement.getElementsByTagName("Precio").item(0).getTextContent());
+              System.out.println("Key: "
+                          + eElement.getElementsByTagName("Key").item(0).getTextContent());
+              System.out.println("Status: "
+                          + eElement.getElementsByTagName("Status").item(0).getTextContent());
+              System.out.println("Tipo: "
+                          + eElement.getElementsByTagName("Tipo").item(0).getTextContent());
+              
+              products.createProduct(nombre, descripcion, precio);
+            }
+          }
+        }catch(Exception e) {
+            System.out.println("Error");
+        }
     }
 }

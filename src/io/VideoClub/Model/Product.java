@@ -26,6 +26,14 @@ public class Product extends Item implements Cloneable{
         this.type = type;
     }
     
+    //Editar
+    public Product(String name, String description,double prize, String key){
+        super(name,description,prize);
+        this.key=generateRandom16Chars();
+        this.status = Status.AVAILABLE;
+        this.type = type;
+    }
+    
     public Product(String name){
         super(name, "Unknown", 0);
         this.key=generateRandom16Chars();
