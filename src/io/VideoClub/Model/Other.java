@@ -8,8 +8,8 @@ public class Other extends Product{
         super(name, description, prize);
     }
   
-    public Other(String name, String description, double prize, String key, Status status, ProductsTypes ptype){
-        super(name, description, prize, key, status, ptype);
+    public Other(String name, String description, double prize, String key, Status status){
+        super(name, description, prize, key, status, ProductsTypes.Otros);
     }
  
     

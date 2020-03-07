@@ -2,25 +2,17 @@
 <ListaProductos>
 <Producto>
 <Nombre>El Joker</Nombre>
-<Descripcion>Un hombre muy loco</Descripcion>
-<Precio>20.0</Precio>
-<Key>d62ac004-44a7-44</Key>
+<Descripcion>La vida de un tio muy loco</Descripcion>
+<Precio>10.6</Precio>
+<Key>9691f072-49ec-48</Key>
 <Status>AVAILABLE</Status>
 <Tipo>null</Tipo>
 </Producto>
 <Producto>
-<Nombre>Antoxd La Pelicula</Nombre>
-<Descripcion>La vida de antoxd</Descripcion>
+<Nombre>God of war</Nombre>
+<Descripcion>hola</Descripcion>
 <Precio>50.0</Precio>
-<Key>2dacfc66-b742-42</Key>
-<Status>AVAILABLE</Status>
-<Tipo>null</Tipo>
-</Producto>
-<Producto>
-<Nombre>Sonic</Nombre>
-<Descripcion>Un erizo que corre</Descripcion>
-<Precio>10.0</Precio>
-<Key>d97eb7ab-5380-4f</Key>
+<Key>da9a1083-514f-49</Key>
 <Status>AVAILABLE</Status>
 <Tipo>null</Tipo>
 </Producto>

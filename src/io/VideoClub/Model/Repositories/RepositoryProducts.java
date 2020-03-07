@@ -6,6 +6,7 @@ import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Film;
 import io.VideoClub.Model.Game;
 import io.VideoClub.Model.IClient;
+import io.VideoClub.Model.Other;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Product.Status;
 import java.util.ArrayList;
@@ -82,6 +83,38 @@ public class RepositoryProducts implements IRepositoryProducts {
         boolean result = false;
         if (type.equals(ProductsTypes.Peliculas)) {
             Game newGame = new Game(cat, minAge, name, description, 0);
+            result = true;
+        }
+        return result;
+    }
+    
+    //CREADO ADDMOVIE, ADDGAME Y ADDOTHER A PARTE PORQUE LOS DOS DE ARRIBA NO SIRVEN, preguntar en clase la duda
+    
+    public boolean addMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge, double prize) {
+        boolean result = false;
+        if (type.equals(ProductsTypes.Peliculas)) {
+            Film newFilm = new Film(cat, minAge, name, description, prize);
+            products.add(newFilm);
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean addGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge, double prize) {
+        boolean result = false;
+        if (type.equals(ProductsTypes.Juegos)) {
+            Game newGame = new Game(cat, minAge, name, description, prize);
+            products.add(newGame);
+            result = true;
+        }
+        return result;
+    }
+    
+    public boolean addOther(ProductsTypes type, String name, String description, double prize) {
+        boolean result = false;
+        if (type.equals(ProductsTypes.Otros)) {
+            Other newOther = new Other(name, description, prize);
+            products.add(newOther);
             result = true;
         }
         return result;
@@ -266,23 +299,34 @@ public class RepositoryProducts implements IRepositoryProducts {
         return result;
     }
     
-    public boolean absoluteAddFilm(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status, ProductsTypes ptype){
+    public boolean absoluteAddFilm(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status){
         boolean result = false;
         if(name == ""){
             name = "No Named Film";
-            Film f = new Film(type, minAge, name, description, prize, key, status, ptype);
+            Film f = new Film(type, minAge, name, description, prize, key, status);
             products.add(f);
             result = true;
         }
         return result;
     }
     
-    public boolean absoluteAddGame(GameCategory type, int minAge, String name, String description, double prize, String key, Status status, ProductsTypes ptype){
+    public boolean absoluteAddGame(GameCategory type, int minAge, String name, String description, double prize, String key, Status status){
         boolean result = false;
         if(name ==""){
             name = "No Named Game";
-            Game g = new Game(type, minAge, name, description, prize, key, status, ptype);
+            Game g = new Game(type, minAge, name, description, prize, key, status);
             products.add(g);
+            result = true;
+        }
+        return result;
+    }
+    
+    public boolean absoluteAddOther(GameCategory type, int minAge, String name, String description, double prize, String key, Status status){
+        boolean result = false;
+        if(name ==""){
+            name = "No Named Game";
+            Other o = new Other(name, description, prize, key, status);
+            products.add(o);
             result = true;
         }
         return result;

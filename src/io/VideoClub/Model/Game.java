@@ -17,9 +17,8 @@ public class Game extends Product {
         this.minAge = minAge;
     }
     
-    //Editar
-    public Game(GameCategory type, int minAge, String name, String description, double prize, String key, Status status, ProductsTypes ptype) {
-        super(name, description, prize, key, status, ptype);
+    public Game(GameCategory type, int minAge, String name, String description, double prize, String key, Status status) {
+        super(name, description, prize, key, status, ProductsTypes.Juegos);
         this.type = type;
         this.minAge = minAge;
     }

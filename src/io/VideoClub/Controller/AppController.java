@@ -1,5 +1,7 @@
 package io.VideoClub.Controller;
 
+import io.VideoClub.Model.Enums.ProductsTypes;
+import io.VideoClub.Model.Film;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Repositories.RepositoryClient;
 import io.VideoClub.Model.Repositories.RepositoryItems;
@@ -44,6 +46,39 @@ public class AppController{
             //Ya está creado el XML
             List<Product> ListaProductos = products.listAllProductsNoDuplicates();
             for(Product producto : ListaProductos){
+                if(producto.getType() == ProductsTypes.Peliculas){
+                    Film pelicula = (Film)producto;
+                    //MovieCategory type, int minAge, String name, String description, double prize, String key, Status status, ProductsTypes ptype;
+                    Element p = doc.createElement("Pelicula");
+                
+                    Element nombre = doc.createElement("Nombre");
+                    nombre.appendChild(doc.createTextNode(pelicula.getName()));
+
+                    Element descripcion = doc.createElement("Descripcion");
+                    descripcion.appendChild(doc.createTextNode(pelicula.getDescription()));
+
+                    Element precio = doc.createElement("Precio");
+                    precio.appendChild(doc.createTextNode(""+pelicula.getPrize()));
+                    
+                    Element minAge = doc.createElement("minAge");
+                    minAge.appendChild(doc.createTextNode(""+pelicula.getMinAge()));
+
+                    Element key = doc.createElement("Key");
+                    key.appendChild(doc.createTextNode(pelicula.getKey()));
+
+                    Element status = doc.createElement("Status");
+                    status.appendChild(doc.createTextNode(""+pelicula.getStatus()));
+
+                    Element tipo = doc.createElement("Tipo");
+                    tipo.appendChild(doc.createTextNode(""+pelicula.getType()));
+
+                    p.appendChild(nombre);
+                    p.appendChild(descripcion);
+                    p.appendChild(precio);
+                    p.appendChild(key);
+                    p.appendChild(status);
+                    p.appendChild(tipo);
+                }
                 Element p = doc.createElement("Producto");
                 
                 Element nombre = doc.createElement("Nombre");
@@ -73,6 +108,8 @@ public class AppController{
                 
                 // Productos -> Raiz
                 raiz.appendChild(p);
+                raiz.appendChild(j);
+                raiz.appendChild(o);
             }
             
             //Guardar XML en disco duro.
@@ -117,7 +154,7 @@ public class AppController{
                 Element eElement = (Element) nNode;
                 String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
                 String descripcion = eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
-                float precio = Float.parseFloat(eElement.getElementsByTagName("Precio").item(0).getTextContent());
+                double precio = Double.parseDouble(eElement.getElementsByTagName("Precio").item(0).getTextContent());
 
                 products.createProduct(nombre, descripcion, precio);
             }

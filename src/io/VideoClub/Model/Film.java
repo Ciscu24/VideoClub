@@ -17,8 +17,8 @@ public class Film extends Product {
         this.minAge = minAge;
     }
     
-    public Film(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status, ProductsTypes ptype){
-        super(name, description, prize, key, status, ptype);
+    public Film(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status){
+        super(name, description, prize, key, status, ProductsTypes.Peliculas);
         this.type = type;
         this.minAge = minAge;
     }

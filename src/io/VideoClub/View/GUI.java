@@ -2,6 +2,8 @@ package io.VideoClub.View;
 
 import com.sun.glass.ui.SystemClipboard;
 import io.VideoClub.Controller.AppController;
+import io.VideoClub.Model.Enums.GameCategory;
+import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Product;
 import java.util.List;
@@ -197,37 +199,22 @@ public class GUI {
                     for (Product producto : ListaProductos) {
                         System.out.println(producto);
                     }
+                    
+                    System.out.println("--------------------------------------------------");
+
+                    List<Product> ListaJuegos = Controller.products.listAllDifferentGames();
+                    for (Product producto : ListaJuegos) {
+                        System.out.println(producto);
+                    }
                     pulsarEnter();
                     break;
                     
                 case 2:
-                    String name = devolverString("Introduce nombre del producto: ");
-                    String description = devolverString("Introduce la descripcion del producto: ");
-                    float prize = devolverFloat("Introduce el precio del producto: ");
-                    if (Controller.products.createProduct(name, description, prize)) {
-                        System.out.println("Producto agregado exitosamente");
-                    } else {
-                        System.out.println("El producto no se ha podido agregar");
-                    }
-                    pulsarEnter();
+                    MenuAddProductos();
                     break;
 
                 case 3:
-                    name = devolverString("Introduce el nombre del producto para borrar: ");
-                    if (Controller.products.removeProduct(name)) {
-                        System.out.println("Producto eliminado exitosamente");
-                    } else {
-                        System.out.println("El producto no ha podido ser borrado");
-                    }
-                    pulsarEnter();
-                    break;
-
-                case 4:
-
-                    break;
-
-                case 5:
-                    String nombre = devolverString("Introduce el nombre del producto que quieras observar: ");
+                    String nombre = devolverString("Introduce el nombre del producto para buscar: ");
                     Set<Product> ListaNombre = Controller.products.listAllByName(nombre);
                     if (ListaNombre.isEmpty()) {
                         System.out.println("No hay coincidencias");
@@ -236,7 +223,32 @@ public class GUI {
                         for (Product producto : ListaNombre) {
                             System.out.println(producto);
                         }
+                        String key = devolverString("Introduce la key del producto que quieras borrar: ");
+                        Product productoBorrar = Controller.products.searchByKey(key);
+                        if (Controller.products.removeProduct(productoBorrar.getName())) {
+                            System.out.println("Producto eliminado exitosamente");
+                        } else {
+                            System.out.println("El producto no ha podido ser borrado");
+                        }
+                        pulsarEnter();
+                    }
+                    break;
 
+                case 4:
+
+                    break;
+
+                case 5:
+                    nombre = devolverString("Introduce el nombre del producto que quieras observar: "); //Buscarlo bien y no tener que tener que poner todo el nombre
+                    ListaNombre = Controller.products.listAllByName(nombre);
+                    if (ListaNombre.isEmpty()) {
+                        System.out.println("No hay coincidencias");
+                        pulsarEnter();
+                    } else {
+                        for (Product producto : ListaNombre) {
+                            System.out.println(producto);
+                        }
+                      
                         String key = devolverString("Introduce la key del producto que quieras cambiar: ");
                         Product productoCambio = Controller.products.searchByKey(key);
                         if (productoCambio != null) {
@@ -259,8 +271,139 @@ public class GUI {
                     break;
             }
 
-        } while (opcion != 0);
+        } while(opcion != 0);
     }
+    
+    public static void MenuAddProductos(){
+        boolean resultado = false;
+        do {
+            System.out.println("\n|----------------------|");
+            System.out.println("|   Añadir Productos   |");
+            System.out.println("|----------------------|");
+            System.out.println("| 1) Añadir Peliculas  |");
+            System.out.println("| 2) Añadir Juegos     |");
+            System.out.println("| 3) Añadir Otro Tipo  |");
+            System.out.println("|----------------------|");
+
+            int opcion = devolverInt("Introduce una opcion: ");
+
+            switch (opcion) {
+                case 0:
+                    break;
+                case 1:
+                    MovieCategory movie = MenuMovieCategory();
+                    String name = devolverString("Introduce el nombre de la pelicula: ");
+                    String description = devolverString("Introduce la descripcion de la pelicula: ");
+                    double prize = devolverDouble("Introduce el precio de la pelicula: ");
+                    int minAge = devolverInt("Introduce la edad minima recomendada: ");
+                    if (Controller.products.addMovie(ProductsTypes.Peliculas, name, description, movie, minAge, prize)) {
+                        System.out.println("Producto agregado exitosamente");
+                    } else {
+                        System.out.println("El producto no se ha podido agregar");
+                    }
+                    pulsarEnter();
+                    break;
+                    
+                case 2:
+                    GameCategory game = MenuGameCategory();
+                    name = devolverString("Introduce el nombre del juego: ");
+                    description = devolverString("Introduce la descripcion del juego: ");
+                    prize = devolverDouble("Introduce el precio del juego: ");
+                    minAge = devolverInt("Introduce la edad minima recomendada: ");
+                    if (Controller.products.addGame(ProductsTypes.Juegos, name, description, game, minAge, prize)) {
+                        System.out.println("Producto agregado exitosamente");
+                    } else {
+                        System.out.println("El producto no se ha podido agregar");
+                    }
+                    pulsarEnter();
+                    break;
+                    
+                case 3:
+                    name = devolverString("Introduce el nombre del producto: ");
+                    description = devolverString("Introduce la descripcion del producto: ");
+                    prize = devolverDouble("Introduce el precio del producto: ");
+                    if (Controller.products.addOther(ProductsTypes.Otros, name, description, prize)) {
+                        System.out.println("Producto agregado exitosamente");
+                    } else {
+                        System.out.println("El producto no se ha podido agregar");
+                    }
+                    pulsarEnter();
+                    break;
+            }
+            
+            if(!devolverString("¿Quieres seguir añadiendo productos? (y/n): ").equals("y")){
+                resultado = true;
+            }
+        }while(!resultado);
+    }
+    
+    public static MovieCategory MenuMovieCategory(){
+        MovieCategory resultado = MovieCategory.Horror;
+        System.out.println("\n|-----------------------|");
+        System.out.println("| Categoria de Pelicula |");
+        System.out.println("|-----------------------|");
+        System.out.println("| 1) Horror             |");
+        System.out.println("| 2) Love               |");
+        System.out.println("| 3) Action             |");
+        System.out.println("| 4) SciFi              |");
+        System.out.println("|-----------------------|");
+
+        int opcion = devolverInt("Introduce una opcion: ");
+
+        switch (opcion) {
+            case 1:
+                resultado = MovieCategory.Horror;
+                break;
+            case 2:
+                resultado = MovieCategory.Love;
+                break;
+            case 3:
+                resultado = MovieCategory.Action;
+                break;
+            case 4:
+                resultado = MovieCategory.SciFi;
+                break;
+        }
+        
+        return resultado;
+    }
+    
+    public static GameCategory MenuGameCategory(){
+        GameCategory resultado = GameCategory.Shooter;
+        System.out.println("\n|-----------------------|");
+        System.out.println("| Categoria de Juegos   |");
+        System.out.println("|-----------------------|");
+        System.out.println("| 1) Adventure          |");
+        System.out.println("| 2) Cars               |");
+        System.out.println("| 3) Shooter            |");
+        System.out.println("|-----------------------|");
+
+        int opcion = devolverInt("Introduce una opcion: ");
+
+        switch (opcion) {
+            case 1:
+                resultado = GameCategory.Adventures;
+                break;
+            case 2:
+                resultado = GameCategory.Cars;
+                break;
+            case 3:
+                resultado = GameCategory.Shooter;
+                break;
+        }
+        
+        return resultado;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * Metodo que escribe y devuelve un string que introduzca un usuario
@@ -302,14 +445,14 @@ public class GUI {
         return resultado;
     }
 
-    public static float devolverFloat(String texto) {
-        float resultado = 0;
+    public static double devolverDouble(String texto) {
+        double resultado = 0;
         boolean valid = false;
         Scanner teclado = new Scanner(System.in);
         do {
             try {
                 System.out.print(texto);
-                resultado = teclado.nextFloat();
+                resultado = teclado.nextDouble();
                 valid = true;
             } catch (Exception e) {
                 valid = false;
