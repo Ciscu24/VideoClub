@@ -26,11 +26,11 @@ public class Product extends Item implements Cloneable{
         this.type = type;
     }
     
-    //Editar
-    public Product(String name, String description,double prize, String key){
+    //Constructor full para el XML
+    public Product(String name, String description,double prize, String key, Status status, ProductsTypes type){
         super(name,description,prize);
-        this.key=generateRandom16Chars();
-        this.status = Status.AVAILABLE;
+        this.key=key;
+        this.status = status;
         this.type = type;
     }
     

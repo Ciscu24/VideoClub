@@ -7,6 +7,7 @@ import io.VideoClub.Model.Film;
 import io.VideoClub.Model.Game;
 import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
+import io.VideoClub.Model.Product.Status;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -251,6 +252,40 @@ public class RepositoryProducts implements IRepositoryProducts {
     @Override
     public boolean reserveProduct(Product prod, IClient client) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    public boolean absoluteAddProduct(String name, String description,double prize, String key, Status status, ProductsTypes type){
+        boolean result = false;
+        if(name == ""){
+            name = "No Named Product";
+            Product p = new Product(name, description, prize, key, status, type);
+            products.add(p);
+            result = true;
+        }
+        return result;
+    }
+    
+    public boolean absoluteAddFilm(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status, ProductsTypes ptype){
+        boolean result = false;
+        if(name == ""){
+            name = "No Named Film";
+            Film f = new Film(type, minAge, name, description, prize, key, status, ptype);
+            products.add(f);
+            result = true;
+        }
+        return result;
+    }
+    
+    public boolean absoluteAddGame(GameCategory type, int minAge, String name, String description, double prize, String key, Status status, ProductsTypes ptype){
+        boolean result = false;
+        if(name ==""){
+            name = "No Named Game";
+            Game g = new Game(type, minAge, name, description, prize, key, status, ptype);
+            products.add(g);
+            result = true;
+        }
+        return result;
     }
     
 }
