@@ -114,30 +114,16 @@ public class AppController{
             Node nNode = nList.item(temp);
 
             if(nNode.getNodeType() == Node.ELEMENT_NODE) {
-              Element eElement = (Element) nNode;
-              String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
-              String descripcion = eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
-              //float precio = 
-              //float precio = Integer.parseInt(eElement.getElementsByTagName("Precio").item(0).getTextContent().replace(".", ","));
-                System.out.println("");
-              System.out.println("Nombre Pelicula: "
-                          + eElement.getElementsByTagName("Nombre").item(0).getTextContent());
-              System.out.println("Descripcion: "
-                          + eElement.getElementsByTagName("Descripcion").item(0).getTextContent());
-              System.out.println("Precio: "
-                          + eElement.getElementsByTagName("Precio").item(0).getTextContent());
-              System.out.println("Key: "
-                          + eElement.getElementsByTagName("Key").item(0).getTextContent());
-              System.out.println("Status: "
-                          + eElement.getElementsByTagName("Status").item(0).getTextContent());
-              System.out.println("Tipo: "
-                          + eElement.getElementsByTagName("Tipo").item(0).getTextContent());
-              
-              products.createProduct(nombre, descripcion, precio);
+                Element eElement = (Element) nNode;
+                String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                String descripcion = eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
+                float precio = Float.parseFloat(eElement.getElementsByTagName("Precio").item(0).getTextContent());
+
+                products.createProduct(nombre, descripcion, precio);
             }
           }
         }catch(Exception e) {
-            System.out.println("Error");
+            System.out.println(e);
         }
     }
 }

@@ -4,7 +4,7 @@
 <Nombre>El Joker</Nombre>
 <Descripcion>Un hombre muy loco</Descripcion>
 <Precio>20.0</Precio>
-<Key>df429f87-2045-4f</Key>
+<Key>d62ac004-44a7-44</Key>
 <Status>AVAILABLE</Status>
 <Tipo>null</Tipo>
 </Producto>
@@ -12,7 +12,15 @@
 <Nombre>Antoxd La Pelicula</Nombre>
 <Descripcion>La vida de antoxd</Descripcion>
 <Precio>50.0</Precio>
-<Key>35fa1aba-8888-42</Key>
+<Key>2dacfc66-b742-42</Key>
+<Status>AVAILABLE</Status>
+<Tipo>null</Tipo>
+</Producto>
+<Producto>
+<Nombre>Sonic</Nombre>
+<Descripcion>Un erizo que corre</Descripcion>
+<Precio>10.0</Precio>
+<Key>d97eb7ab-5380-4f</Key>
 <Status>AVAILABLE</Status>
 <Tipo>null</Tipo>
 </Producto>
