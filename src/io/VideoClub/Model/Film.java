@@ -1,6 +1,7 @@
 package io.VideoClub.Model;
 
 import io.VideoClub.Model.Enums.MovieCategory;
+import io.VideoClub.Model.Enums.ProductsTypes;
 
 public class Film extends Product {
 
@@ -15,7 +16,13 @@ public class Film extends Product {
         this.type = type;
         this.minAge = minAge;
     }
-
+    
+    public Film(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status, ProductsTypes ptype){
+        super(name, description, prize, key, status, ptype);
+        this.type = type;
+        this.minAge = minAge;
+    }
+    
     public int getMinAge() {
         return minAge;
     }
