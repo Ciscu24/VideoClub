@@ -12,7 +12,7 @@ public class Game extends Product {
     }
     
     public Game(GameCategory type, int minAge, String name, String description, double prize) {
-        super(name, description, prize);
+        super(name, description, prize, ProductsTypes.Juegos);
         this.type = type;
         this.minAge = minAge;
     }
@@ -29,6 +29,14 @@ public class Game extends Product {
     
     public void setMinAge(int minAge) {
         this.minAge = minAge;
+    }
+
+    public GameCategory getTypeGame() {
+        return type;
+    }
+
+    public void setTypeGame(GameCategory type) {
+        this.type = type;
     }
     
     @Override

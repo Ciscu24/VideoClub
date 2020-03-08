@@ -12,7 +12,7 @@ public class Film extends Product {
     }
 
     public Film(MovieCategory type, int minAge, String name, String description, double prize) {
-        super(name, description, prize);
+        super(name, description, prize, ProductsTypes.Peliculas);
         this.type = type;
         this.minAge = minAge;
     }
@@ -31,6 +31,14 @@ public class Film extends Product {
         this.minAge = minAge;
     }
 
+    public MovieCategory getTypeMovie(){
+        return type;
+    }
+
+    public void setTypeMovie(MovieCategory type) {
+        this.type = type;
+    }
+    
     @Override
     public boolean equals(Object o) {
         boolean result = false;

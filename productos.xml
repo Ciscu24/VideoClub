@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ListaProductos>
-<Producto>
+<Pelicula>
 <Nombre>El Joker</Nombre>
-<Descripcion>La vida de un tio muy loco</Descripcion>
-<Precio>10.6</Precio>
-<Key>9691f072-49ec-48</Key>
+<Descripcion>La vida del Joker</Descripcion>
+<Precio>20.0</Precio>
+<Edad>16</Edad>
+<Key>075b610a-1316-46</Key>
 <Status>AVAILABLE</Status>
-<Tipo>null</Tipo>
-</Producto>
-<Producto>
-<Nombre>God of war</Nombre>
-<Descripcion>hola</Descripcion>
+<Tipo>Action</Tipo>
+</Pelicula>
+<Juego>
+<Nombre>God Of War</Nombre>
+<Descripcion>Juego de Kratos</Descripcion>
 <Precio>50.0</Precio>
-<Key>da9a1083-514f-49</Key>
+<Edad>16</Edad>
+<Key>d2291c39-2b8a-44</Key>
 <Status>AVAILABLE</Status>
-<Tipo>null</Tipo>
-</Producto>
+<Tipo>Adventures</Tipo>
+</Juego>
+<Otro>
+<Nombre>Musica para Dormir</Nombre>
+<Descripcion>Musiquita para poder dormir</Descripcion>
+<Precio>10.0</Precio>
+<Key>8471aa43-390d-41</Key>
+<Status>AVAILABLE</Status>
+</Otro>
 </ListaProductos>

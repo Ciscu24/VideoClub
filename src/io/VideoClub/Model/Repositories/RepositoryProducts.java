@@ -62,7 +62,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         if (description.equals("")) {
             description = "No description provided";
         }
-        Product p = new Product(name, description, prize);
+        Product p = new Product(name, description, prize, ProductsTypes.Otros);
         products.add(p);
         result = true;
         return result;
@@ -301,34 +301,28 @@ public class RepositoryProducts implements IRepositoryProducts {
     
     public boolean absoluteAddFilm(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status){
         boolean result = false;
-        if(name == ""){
-            name = "No Named Film";
-            Film f = new Film(type, minAge, name, description, prize, key, status);
-            products.add(f);
-            result = true;
-        }
+        
+        Film f = new Film(type, minAge, name, description, prize, key, status);
+        products.add(f);
+        
         return result;
     }
     
     public boolean absoluteAddGame(GameCategory type, int minAge, String name, String description, double prize, String key, Status status){
         boolean result = false;
-        if(name ==""){
-            name = "No Named Game";
-            Game g = new Game(type, minAge, name, description, prize, key, status);
-            products.add(g);
-            result = true;
-        }
+        
+        Game g = new Game(type, minAge, name, description, prize, key, status);
+        products.add(g);
+        
         return result;
     }
     
-    public boolean absoluteAddOther(GameCategory type, int minAge, String name, String description, double prize, String key, Status status){
+    public boolean absoluteAddOther(String name, String description, double prize, String key, Status status){
         boolean result = false;
-        if(name ==""){
-            name = "No Named Game";
-            Other o = new Other(name, description, prize, key, status);
-            products.add(o);
-            result = true;
-        }
+        
+        Other o = new Other(name, description, prize, key, status);
+        products.add(o);
+        
         return result;
     }
     

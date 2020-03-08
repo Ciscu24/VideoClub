@@ -5,6 +5,7 @@ import io.VideoClub.Controller.AppController;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
+import io.VideoClub.Model.Film; //NNoo
 import io.VideoClub.Model.Product;
 import java.util.List;
 import java.util.Map;
@@ -200,12 +201,12 @@ public class GUI {
                         System.out.println(producto);
                     }
                     
-                    System.out.println("--------------------------------------------------");
+                    /*System.out.println("--------------------------------------------------");
 
                     List<Product> ListaJuegos = Controller.products.listAllDifferentGames();
                     for (Product producto : ListaJuegos) {
                         System.out.println(producto);
-                    }
+                    }*/
                     pulsarEnter();
                     break;
                     
@@ -280,8 +281,8 @@ public class GUI {
             System.out.println("\n|----------------------|");
             System.out.println("|   Añadir Productos   |");
             System.out.println("|----------------------|");
-            System.out.println("| 1) Añadir Peliculas  |");
-            System.out.println("| 2) Añadir Juegos     |");
+            System.out.println("| 1) Añadir Pelicula   |");
+            System.out.println("| 2) Añadir Juego      |");
             System.out.println("| 3) Añadir Otro Tipo  |");
             System.out.println("|----------------------|");
 
@@ -301,7 +302,6 @@ public class GUI {
                     } else {
                         System.out.println("El producto no se ha podido agregar");
                     }
-                    pulsarEnter();
                     break;
                     
                 case 2:
@@ -315,7 +315,6 @@ public class GUI {
                     } else {
                         System.out.println("El producto no se ha podido agregar");
                     }
-                    pulsarEnter();
                     break;
                     
                 case 3:
@@ -327,11 +326,10 @@ public class GUI {
                     } else {
                         System.out.println("El producto no se ha podido agregar");
                     }
-                    pulsarEnter();
                     break;
             }
             
-            if(!devolverString("¿Quieres seguir añadiendo productos? (y/n): ").equals("y")){
+            if(!devolverString("\n¿Quieres seguir añadiendo productos? (y/n): ").equals("y")){
                 resultado = true;
             }
         }while(!resultado);

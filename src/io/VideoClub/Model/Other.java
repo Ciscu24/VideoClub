@@ -5,7 +5,7 @@ import io.VideoClub.Model.Enums.ProductsTypes;
 public class Other extends Product{
     
     public Other(String name, String description, double prize) {
-        super(name, description, prize);
+        super(name, description, prize, ProductsTypes.Otros);
     }
   
     public Other(String name, String description, double prize, String key, Status status){

@@ -19,7 +19,7 @@ public class Product extends Item implements Cloneable{
     
     
     public Product(){}
-    public Product(String name, String description,double prize){
+    public Product(String name, String description,double prize, ProductsTypes type){
         super(name,description,prize);
         this.key=generateRandom16Chars();
         this.status = Status.AVAILABLE;
