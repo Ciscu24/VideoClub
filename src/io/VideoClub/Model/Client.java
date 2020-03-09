@@ -6,6 +6,7 @@
 package io.VideoClub.Model;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 
 /**
  *
@@ -14,25 +15,24 @@ import java.time.LocalDateTime;
 public class Client implements IClient{
     private String ID;
     private String Name;
-    private LocalDateTime Time;
+    private java.time.LocalDateTime Time;
     private String Phone;
-    private Client User;
+    private String User;
     private String password;
 
-    public Client(String ID, String Name, LocalDateTime Time, String Phone, Client User, String password) {
+    public Client(String ID, String Name,String Phone, LocalDateTime Time) {
         this.ID = ID;
         this.Name = Name;
         this.Time = Time;
         this.Phone = Phone;
-        this.User = User;
-        this.password = password;
+        this.Time = LocalDateTime.now();
     }
 
-    public Client getUser() {
+    public String getUser() {
         return User;
     }
 
-    public void setUser(Client User) {
+    public void setUser(String User) {
         this.User = User;
     }
 
@@ -42,6 +42,10 @@ public class Client implements IClient{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
     
     
@@ -85,14 +89,14 @@ public class Client implements IClient{
         this.Phone=p;
     }
 
-    public int compareTo(Client o2) {
+    public int compareTo(Client c) {
        int result = 0;
-       if(o2!=null){
-           if (this.Name.toLowerCase().equals(o2.getName().toLowerCase())) {
+       if(c!=null){
+           if (this.Name.toLowerCase().equals(c.getName().toLowerCase())) {
                 result = 0;
-            } else if (this.Name.toLowerCase().compareTo(o2.getName().toLowerCase()) > 0) {
+            } else if (this.Name.toLowerCase().compareTo(c.getName().toLowerCase()) > 0) {
                 result = 1;
-            } else if (this.Name.toLowerCase().compareTo(o2.getName().toLowerCase()) < 0) {
+            } else if (this.Name.toLowerCase().compareTo(c.getName().toLowerCase()) < 0) {
                 result = -1;
             }
        }

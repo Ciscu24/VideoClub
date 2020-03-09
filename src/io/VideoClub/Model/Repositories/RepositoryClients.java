@@ -13,6 +13,7 @@ import io.VideoClub.Model.Client;
 import io.VideoClub.Model.IClient;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.TreeSet;
 /**
  *
  * @author migue
@@ -25,6 +26,8 @@ public class RepositoryClients implements Comparator<Client>, IRepositoryClient{
         return this.clientL.add(c);
     }
     
+    
+    
     public boolean removeClient(String ID){
         boolean result=false;
         for(int i=0;i<clientL.size();i++){
@@ -35,7 +38,7 @@ public class RepositoryClients implements Comparator<Client>, IRepositoryClient{
         }
      return result;
     }
-    public boolean searchClient(Client c){
+    public boolean removeClient(Client c){
         return this.clientL.contains(c);
     }
     public boolean searchpassword(String psw){
@@ -80,27 +83,47 @@ public class RepositoryClients implements Comparator<Client>, IRepositoryClient{
 
     @Override
     public Set<IClient> listAllClients() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<IClient> list = new TreeSet<>();
+        for (Client C : clientL) {
+            list.add(C);
+        }
+        return list;
     }
 
     @Override
     public Set<IClient> listAllClients(Comparator c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      Set<IClient> aux = new TreeSet<>();
+      aux.addAll(clientL);
+      return aux;
     }
 
     @Override
-    public Set<IClient> listAllClientsWithReservationsNotFinished() {
+    public Set<IClient> listAllClientsWithReservations() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean createClient(String id, String name, String phone, LocalDateTime time) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean result=false;
+        if (id!=null) {
+            Client NewClient = new Client(id, name, phone, time);
+            result = true;
+        }
+        return result;
     }
 
     @Override
     public boolean editClient(IClient e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                boolean result = false;
+        if (e != null) {
+            for (int i = 0; i < clientL.size() && !result; i++) {
+                if (clientL.get(i).equals(e)) {
+                    clientL.set(i, (Client) e);
+                    result = true;
+                }
+            }
+        }
+        return result;
     }
     
 }
