@@ -29,4 +29,8 @@ public class Other extends Product{
         return result;
     }
     
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
