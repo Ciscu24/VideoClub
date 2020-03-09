@@ -2,6 +2,7 @@ package io.VideoClub.View;
 
 import com.sun.glass.ui.SystemClipboard;
 import io.VideoClub.Controller.AppController;
+import io.VideoClub.Model.Client;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
@@ -19,7 +20,8 @@ public class GUI {
     public static void main(String[] args) {
         logo();
         Controller.cargaBBDD();
-        MenuEmpleados();
+        //MenuEmpleados();
+        principal();
     }
 
     public static void logo() {
@@ -71,7 +73,7 @@ public class GUI {
                 break;
 
             case 4:
-                MenuEmpleados();
+                InicioEmpleados();
                 break;
         }
     }
@@ -79,7 +81,7 @@ public class GUI {
     public static boolean Iniciar_sesion() {
         boolean result = false;
         String usuario;
-        String contraseña;
+        String contrasena;
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("\n|-------------------|");
@@ -88,16 +90,13 @@ public class GUI {
         System.out.println(" Introduce tu usuario");
         usuario = teclado.next();
         System.out.println(" Introduce tu Contraseña");
-        contraseña = teclado.next();
-        if (usuario != null && contraseña != null) {
-            /*if (usuario.equals(Controller.clients.getNombre())) {
-                result = true;
-            }
-
-            if (result = true) {
+        contrasena = teclado.next();
+        if (usuario != null && contrasena != null) {
+            if (Controller.clients.searchUser(usuario) && Controller.clients.searchpassword(contrasena)) {
                 lista_sesion();
-                
-            }*/
+            }else{
+                System.out.println("Usuario o contraseña incorrecta");
+            }
         }
         System.out.println("0) Salir");
         System.out.println("----------------");
@@ -128,7 +127,8 @@ public class GUI {
 
                 case 2:
                     String Usuario=devolverString("Nombre de usuario: ");
-                    //Controller.clients.searchUser(Usuario);
+                    Client user = Controller.clients.devolverCliente(Usuario);
+                    user.toString();
 
                     break;
 
@@ -148,14 +148,18 @@ public class GUI {
         System.out.println("\n|-------------------|");
         System.out.println("|    Registrarse    |");
         System.out.println("|-------------------|");
-        String correo = devolverString("Introduzca un usuario: ");
-        String contraseña = devolverString("Introdce una contraseña: ");
-        if (correo != null && contraseña != null) {
+        String correo = devolverString("Introduzca un correo: ");
+        String contrasena = devolverString("Introdce una contraseña: ");
+        if (correo != null && contrasena != null) {
             String nombre = devolverString("Introduce tu nombre: ");
             String usuario = devolverString("Introduce tu usuario: ");
             String telefono = devolverString("Introduce tu teléfono: ");
+            
+            Controller.clients.addClient(nombre, telefono, usuario, contrasena);
+            System.out.println("Usuario creado");
+        }else{
+            System.out.println("No se ha podido realizar el registro");
         }
-
     }
 
     public static void InicioEmpleados() {
@@ -165,11 +169,12 @@ public class GUI {
         String usuario = devolverString("Introduzca su Usuario: ");
         String contrasena = devolverString("Introduzca su Contraseña: ");
         //Buscar por usuario y por contraseña con un if
-        /*if(Controller.clients.searchUser(usuario) && Controller.clients.searchpassword(contrasena)){
+        if(Controller.clients.searchUser(usuario) && Controller.clients.searchpassword(contrasena)){
+            System.out.println("Usuario logeado correctamente");
             MenuEmpleados();
         }else{
             System.out.println("Usuario o Contraseña incorrecto");
-        }*/
+        }
     }
 
     public static void MenuEmpleados() {
@@ -199,13 +204,6 @@ public class GUI {
                 case 1:
                     List<Product> ListaProductos = Controller.products.listAllProductsNoDuplicates();
                     for (Product producto : ListaProductos) {
-                        System.out.println(producto);
-                    }
-                    
-                    System.out.println("--------------------------------------------------");
-
-                    List<Product> ListaJuegos = Controller.products.listAllDifferentGames();
-                    for (Product producto : ListaJuegos) {
                         System.out.println(producto);
                     }
                     pulsarEnter();

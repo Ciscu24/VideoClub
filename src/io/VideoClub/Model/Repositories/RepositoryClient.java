@@ -12,6 +12,7 @@ import java.util.Iterator ;
 import io.VideoClub.Model.Client;
 import io.VideoClub.Model.IClient;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 /**
@@ -20,9 +21,18 @@ import java.util.TreeSet;
  */
 public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
     private List<Client> clientL;
-   
     
+    public RepositoryClient(){
+        clientL=new ArrayList<>();
+    }
+
     public boolean addClient(Client c){
+        return this.clientL.add(c);
+    }
+    
+    public boolean addClient(String Name,String Phone, String user, String password){
+        String ID = "Falta id";
+        Client c = new Client(ID, Name, Phone, LocalDateTime.now(), user, password);        
         return this.clientL.add(c);
     }
     
@@ -52,17 +62,28 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
         return result;
         
     }
-    public boolean searchUser(Client c){
-        boolean result=false;
-         Iterator<Client> i = clientL.iterator();
-                if (c != null) {
-            while (i.hasNext() && !result) {
-                result = i.next().getPassword().equals(c);
-            }
-        }
-        return result;
+    public boolean searchUser(String c){
+    boolean result=false;
+    Iterator<Client> i = clientL.iterator();
+    if (c != null) {
+    while (i.hasNext() && !result) {
+    result = i.next().getUser().equals(c);
     }
+    }
+    return result;
+    } 
     
+    public Client devolverCliente(String usuario){
+    Client result=null;
+    boolean valid = false;
+    for(int i=0; i<clientL.size() && !valid; i++){
+        if(clientL.get(i).getUser().equals(usuario)){
+            result = clientL.get(i);
+            valid = true;
+        }
+    }
+    return result;
+    } 
     
     public String showClient(){
         String result="";

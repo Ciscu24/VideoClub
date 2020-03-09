@@ -27,6 +27,16 @@ public class Client implements IClient{
         this.Phone = Phone;
         this.Time = LocalDateTime.now();
     }
+    
+    public Client(String ID, String Name,String Phone, LocalDateTime Time, String User, String password) {
+        this.ID = ID;
+        this.Name = Name;
+        this.Time = Time;
+        this.Phone = Phone;
+        this.Time = LocalDateTime.now();
+        this.User = User;
+        this.password = password;
+    }
 
     public String getUser() {
         return User;
@@ -102,5 +112,12 @@ public class Client implements IClient{
        }
        return result;
     }
+
+    @Override
+    public String toString() {
+        return "Client{" + "ID=" + ID + ", Name=" + Name + ", Time=" + Time + ", Phone=" + Phone + ", User=" + User + ", password=" + password + '}';
+    }
+    
+    
     
 }
