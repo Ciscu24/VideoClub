@@ -97,6 +97,7 @@ public class RepositoryProducts implements IRepositoryProducts {
             Film newFilm = new Film(cat, minAge, name, description, prize);
             products.add(newFilm);
             result = true;
+            items.addItem(newFilm);
         }
         return result;
     }
@@ -107,6 +108,7 @@ public class RepositoryProducts implements IRepositoryProducts {
             Game newGame = new Game(cat, minAge, name, description, prize);
             products.add(newGame);
             result = true;
+            items.addItem(newGame);
         }
         return result;
     }
@@ -117,6 +119,7 @@ public class RepositoryProducts implements IRepositoryProducts {
             Other newOther = new Other(name, description, prize);
             products.add(newOther);
             result = true;
+            items.addItem(newOther);
         }
         return result;
     }
