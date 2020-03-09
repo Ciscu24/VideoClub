@@ -18,7 +18,7 @@ import java.util.TreeSet;
  *
  * @author migue
  */
-public class RepositoryClients implements Comparator<Client>, IRepositoryClient{
+public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
     private List<Client> clientL;
    
     

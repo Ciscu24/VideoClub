@@ -59,8 +59,8 @@ public interface IAppController {
     
     boolean editProduct(String key, Product newP);*/
     
-    Product isAvailableProduct(String name);  //get product if yes
-    boolean reserveProduct(Product prod,IClient client);
+    /*Product isAvailableProduct(String name);  //get product if yes
+    boolean reserveProduct(Product prod,IClient client);*/
     double closeReservation();  //-->> status finished  --> get prizetopay
     
     boolean loadCatalogFromDDBB();  //XML or JSON
