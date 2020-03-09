@@ -23,14 +23,14 @@ public class GUI {
     }
 
     public static void logo() {
-        System.out.println(" _______            _           _______            _       _______                     ");
-        System.out.println("|   _   |          | |         |   _   |       ___| |___  |   _   |                   ");
-        System.out.println("|  |_|  |          | |         |  |_|  |      |___   ___|_|  |_|  |                     ");
-        System.out.println("|  _____|_____ ____| |___ _____|_____ /_   _ _____| |  ___|   ___/                    ");
-        System.out.println("| |     |  _  |  __|  _  |  _  |  _   | | | |  ___| | |___|  /____                        ");
-        System.out.println("| |     | |_| | |__| | | | |_| | |_|  | |_| | |___| |  ___|  ___  |                    ");
-        System.out.println("| |     |_____|____|_| |_|_____|______|_____|___  | | |___|_|   | |                     ");
-        System.out.println("|_|                            |__________________|_|_______|   |_|                     ");
+        System.out.println(" _______            _           _______            _       _______ ");
+        System.out.println("|   _   |          | |         |   _   |       ___| |___  |   _   |");
+        System.out.println("|  |_|  |          | |         |  |_|  |      |___   ___|_|  |_|  |");
+        System.out.println("|  _____|_____ ____| |___ _____|_____ /_   _ _____| |  ___|   ___/ ");
+        System.out.println("| |     |  _  |  __|  _  |  _  |  _   | | | |  ___| | |___|  /____ ");
+        System.out.println("| |     | |_| | |__| | | | |_| | |_|  | |_| | |___| |  ___|  ___  |");
+        System.out.println("| |     |_____|____|_| |_|_____|______|_____|___  | | |___|_|   | |");
+        System.out.println("|_|                            |__________________|_|_______|   |_|");
         System.out.println("");
     }
 
@@ -184,6 +184,7 @@ public class GUI {
             System.out.println("| 4) Editar Productos |");
             System.out.println("| 5) Disponibilidad   |");
             System.out.println("| 6) Reservas         |");
+            System.out.println("| 7) Reservas         |");
             System.out.println("| 0) Salir            |");
             System.out.println("|---------------------|");
 
@@ -201,12 +202,12 @@ public class GUI {
                         System.out.println(producto);
                     }
                     
-                    /*System.out.println("--------------------------------------------------");
+                    System.out.println("--------------------------------------------------");
 
                     List<Product> ListaJuegos = Controller.products.listAllDifferentGames();
                     for (Product producto : ListaJuegos) {
                         System.out.println(producto);
-                    }*/
+                    }
                     pulsarEnter();
                     break;
                     
@@ -289,8 +290,6 @@ public class GUI {
             int opcion = devolverInt("Introduce una opcion: ");
 
             switch (opcion) {
-                case 0:
-                    break;
                 case 1:
                     MovieCategory movie = MenuMovieCategory();
                     String name = devolverString("Introduce el nombre de la pelicula: ");
