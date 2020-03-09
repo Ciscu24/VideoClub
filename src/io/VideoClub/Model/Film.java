@@ -55,4 +55,8 @@ public class Film extends Product {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"\nGénero de la película: "+type+"\nEdad mínima: "+minAge;
+    }
 }

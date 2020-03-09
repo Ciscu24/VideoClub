@@ -1,6 +1,7 @@
 package io.VideoClub.Model.Repositories;
 
 import io.VideoClub.Model.Item;
+import io.VideoClub.Model.Product;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -24,9 +25,13 @@ public class RepositoryItems implements Comparator<Item> {
 
     public boolean addItem(Item it) {
         boolean result = false;
+        boolean exists = false;
 
         if (it != null) {
-            result = items.add(it);
+            exists = searchItem(it.getName());
+            if (exists == false) {
+                result = items.add(it);
+            }
         }
 
         return result;
