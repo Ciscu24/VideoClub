@@ -40,15 +40,15 @@ public class GUI {
 
         do {
             Scanner teclado = new Scanner(System.in);
-            System.out.println("\n|-------------------|");
+            System.out.println("\n+-------------------+");
             System.out.println("|        Menu       |");
-            System.out.println("|-------------------|");
+            System.out.println("+-------------------+");
             System.out.println("| 1) Iniciar sesion |");
             System.out.println("| 2) Registrarse    |");
             System.out.println("| 3) Información.   |");
             System.out.println("| 4) Empleados      |");
             System.out.println("| 0) Salir          |");
-            System.out.println("--------------------|");
+            System.out.println("+-------------------+");
 
             System.out.println("Introduce una opción");
             numero = teclado.nextInt();
@@ -175,9 +175,9 @@ public class GUI {
     public static void MenuEmpleados() {
         int opcion = 0;
         do {
-            System.out.println("\n|---------------------|");
+            System.out.println("\n+---------------------+");
             System.out.println("|     Menu empleado   |");
-            System.out.println("|---------------------|");
+            System.out.println("+---------------------+");
             System.out.println("| 1) Listar Productos |");
             System.out.println("| 2) Añadir Producto  |");
             System.out.println("| 3) Quitar Producto  |");
@@ -185,7 +185,7 @@ public class GUI {
             System.out.println("| 5) Disponibilidad   |");
             System.out.println("| 6) Reservas         |");
             System.out.println("| 0) Salir            |");
-            System.out.println("|---------------------|");
+            System.out.println("+---------------------+");
 
             opcion = devolverInt("Introduce una opcion: ");
 
