@@ -93,17 +93,31 @@ public class RepositoryProducts implements IRepositoryProducts {
     //CREADO ADDMOVIE, ADDGAME Y ADDOTHER A PARTE PORQUE LOS DOS DE ARRIBA NO SIRVEN, preguntar en clase la duda
     public boolean addMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge, double prize) {
         boolean result = false;
+        if(name == ""){
+            name = "No name provided";
+        }
+        if(description == ""){
+            description = "No description provided";
+        }
         if (type.equals(ProductsTypes.Peliculas)) {
             Film newFilm = new Film(cat, minAge, name, description, prize);
             products.add(newFilm);
             result = true;
             items.addItem(newFilm);
         }
+        
+            
         return result;
     }
 
     public boolean addGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge, double prize) {
         boolean result = false;
+        if(name == ""){
+            name = "No name provided";
+        }
+        if(description == ""){
+            description = "No description provided";
+        }
         if (type.equals(ProductsTypes.Juegos)) {
             Game newGame = new Game(cat, minAge, name, description, prize);
             products.add(newGame);
@@ -115,6 +129,12 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     public boolean addOther(ProductsTypes type, String name, String description, double prize) {
         boolean result = false;
+        if(name == ""){
+            name = "No name provided";
+        }
+        if(description == ""){
+            description = "No description provided";
+        }
         if (type.equals(ProductsTypes.Otros)) {
             Other newOther = new Other(name, description, prize);
             products.add(newOther);
