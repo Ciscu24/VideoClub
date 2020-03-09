@@ -84,9 +84,9 @@ public class GUI {
         String contrasena;
         Scanner teclado = new Scanner(System.in);
 
-        System.out.println("\n|-------------------|");
+        System.out.println("\n+-------------------+");
         System.out.println("|   Iniciar Sesion  |");
-        System.out.println("|-------------------|");
+        System.out.println("+-------------------+");
         System.out.println(" Introduce tu usuario");
         usuario = teclado.next();
         System.out.println(" Introduce tu Contraseña");
@@ -107,15 +107,15 @@ public class GUI {
     public static void lista_sesion() {
         int opcion = 0;
         do {
-            System.out.println("\n|---------------------|");
+            System.out.println("\n+---------------------+");
             System.out.println("|    Menu principal   |");
-            System.out.println("|---------------------|");
+            System.out.println("+---------------------+");
             System.out.println("| 1) Listar           |");
             System.out.println("| 2) Cuenta           |");
             System.out.println("| 3) Reservar.        |");
             System.out.println("| 4) Cancelar reserva |");
             System.out.println("| 0) Salir            |");
-            System.out.println("|---------------------|");
+            System.out.println("+---------------------+");
 
             opcion = devolverInt("Introduce una opcion: ");
 
@@ -145,9 +145,9 @@ public class GUI {
     }
 
     public static void registrarse() {
-        System.out.println("\n|-------------------|");
+        System.out.println("\n+-------------------+");
         System.out.println("|    Registrarse    |");
-        System.out.println("|-------------------|");
+        System.out.println("+-------------------+");
         String correo = devolverString("Introduzca un correo: ");
         String contrasena = devolverString("Introdce una contraseña: ");
         if (correo != null && contrasena != null) {
@@ -163,9 +163,9 @@ public class GUI {
     }
 
     public static void InicioEmpleados() {
-        System.out.println("\n|-------------------------------|");
+        System.out.println("\n+-------------------------------+");
         System.out.println("|    Inicio sesion empleados    |");
-        System.out.println("|-------------------------------|");
+        System.out.println("+-------------------------------+");
         String usuario = devolverString("Introduzca su Usuario: ");
         String contrasena = devolverString("Introduzca su Contraseña: ");
         //Buscar por usuario y por contraseña con un if
@@ -277,13 +277,13 @@ public class GUI {
     public static void MenuAddProductos(){
         boolean resultado = false;
         do {
-            System.out.println("\n|----------------------|");
+            System.out.println("\n+----------------------+");
             System.out.println("|   Añadir Productos   |");
-            System.out.println("|----------------------|");
+            System.out.println("+----------------------+");
             System.out.println("| 1) Añadir Pelicula   |");
             System.out.println("| 2) Añadir Juego      |");
             System.out.println("| 3) Añadir Otro Tipo  |");
-            System.out.println("|----------------------|");
+            System.out.println("+----------------------+");
 
             int opcion = devolverInt("Introduce una opcion: ");
 
@@ -334,14 +334,14 @@ public class GUI {
     
     public static MovieCategory MenuMovieCategory(){
         MovieCategory resultado = MovieCategory.Horror;
-        System.out.println("\n|-----------------------|");
+        System.out.println("\n+-----------------------+");
         System.out.println("| Categoria de Pelicula |");
-        System.out.println("|-----------------------|");
+        System.out.println("+-----------------------+");
         System.out.println("| 1) Horror             |");
         System.out.println("| 2) Love               |");
         System.out.println("| 3) Action             |");
         System.out.println("| 4) SciFi              |");
-        System.out.println("|-----------------------|");
+        System.out.println("+-----------------------+");
 
         int opcion = devolverInt("Introduce una opcion: ");
 
@@ -365,13 +365,13 @@ public class GUI {
     
     public static GameCategory MenuGameCategory(){
         GameCategory resultado = GameCategory.Shooter;
-        System.out.println("\n|-----------------------|");
+        System.out.println("\n+-----------------------+");
         System.out.println("| Categoria de Juegos   |");
-        System.out.println("|-----------------------|");
+        System.out.println("+-----------------------+");
         System.out.println("| 1) Adventure          |");
         System.out.println("| 2) Cars               |");
         System.out.println("| 3) Shooter            |");
-        System.out.println("|-----------------------|");
+        System.out.println("+-----------------------+");
 
         int opcion = devolverInt("Introduce una opcion: ");
 
@@ -470,14 +470,14 @@ public class GUI {
     public static void menu_lista() {
         int opcion = 0;
         do {
-            System.out.println("\n|---------------------|");
+            System.out.println("\n+---------------------+");
             System.out.println("|    Menu Listar   |");
-            System.out.println("|---------------------|");
+            System.out.println("+---------------------+");
             System.out.println("| 1) Listar productos |");
             System.out.println("| 2) Listar peliculas |");
             System.out.println("| 3) Listar juegos    |");
             System.out.println("| 0) Salir            |");
-            System.out.println("|---------------------|");
+            System.out.println("+---------------------+");
 
             opcion = devolverInt("Introduce una opcion: ");
 
