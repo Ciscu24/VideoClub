@@ -31,7 +31,17 @@ public class Client implements IClient{
         this.password=generateRandom16Chars();
     }
     
-        private String generateRandom16Chars(){
+ 
+    public Client(String ID, String Name,String Phone, LocalDateTime Time, String User, String password) {
+        this.ID = ID;
+        this.Name = Name;
+        this.Time = Time;
+        this.Phone = Phone;
+        this.Time = LocalDateTime.now();
+        this.User = User;
+        this.password = generateRandom16Chars();
+    }
+    private String generateRandom16Chars(){
         return(String)UUID.randomUUID().toString().subSequence(0, 16);
     }
     public String getUser() {
@@ -120,5 +130,12 @@ public class Client implements IClient{
        }
        return result;
     }
+
+    @Override
+    public String toString() {
+        return "Client{" + "ID=" + ID + ", Name=" + Name + ", Time=" + Time + ", Phone=" + Phone + ", User=" + User + ", password=" + password + '}';
+    }
+    
+    
     
 }

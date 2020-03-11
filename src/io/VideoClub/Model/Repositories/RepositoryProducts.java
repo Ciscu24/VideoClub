@@ -21,9 +21,11 @@ import java.util.TreeSet;
 public class RepositoryProducts implements IRepositoryProducts {
 
     List<Product> products;
+    RepositoryItems items;
 
     public RepositoryProducts() {
         products = new ArrayList<>();
+        items = new RepositoryItems();
     }
 
     @Override
@@ -87,35 +89,57 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return result;
     }
-    
+
     //CREADO ADDMOVIE, ADDGAME Y ADDOTHER A PARTE PORQUE LOS DOS DE ARRIBA NO SIRVEN, preguntar en clase la duda
-    
     public boolean addMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge, double prize) {
         boolean result = false;
+        if(name == ""){
+            name = "No name provided";
+        }
+        if(description == ""){
+            description = "No description provided";
+        }
         if (type.equals(ProductsTypes.Peliculas)) {
             Film newFilm = new Film(cat, minAge, name, description, prize);
             products.add(newFilm);
             result = true;
+            items.addItem(newFilm);
         }
+        
+            
         return result;
     }
 
     public boolean addGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge, double prize) {
         boolean result = false;
+        if(name == ""){
+            name = "No name provided";
+        }
+        if(description == ""){
+            description = "No description provided";
+        }
         if (type.equals(ProductsTypes.Juegos)) {
             Game newGame = new Game(cat, minAge, name, description, prize);
             products.add(newGame);
             result = true;
+            items.addItem(newGame);
         }
         return result;
     }
-    
+
     public boolean addOther(ProductsTypes type, String name, String description, double prize) {
         boolean result = false;
+        if(name == ""){
+            name = "No name provided";
+        }
+        if(description == ""){
+            description = "No description provided";
+        }
         if (type.equals(ProductsTypes.Otros)) {
             Other newOther = new Other(name, description, prize);
             products.add(newOther);
             result = true;
+            items.addItem(newOther);
         }
         return result;
     }
@@ -144,18 +168,16 @@ public class RepositoryProducts implements IRepositoryProducts {
         return newList;
     }
 
-    
     //Este metodo devuelve el array con TODOS los elementos inclusive los duplicados.
     @Override
     public List<Product> listAllProductsNoDuplicates() {
         List<Product> newList = new ArrayList<>();
-        for(Product p : products){
+        for (Product p : products) {
             newList.add(p);
         }
         return newList;
     }
 
-    
     @Override
     public Set<Product> listAllProducts(Comparator c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -220,20 +242,19 @@ public class RepositoryProducts implements IRepositoryProducts {
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(String name) {
         Map<Product, Integer> newList = new TreeMap<>();
-        for(int i = 0; i < products.size(); i++){
-            if(products.get(i).getName().equals(name)){
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getName().equals(name)) {
                 newList.put(products.get(i), i);
             }
         }
         return newList;
     }
-   
-      
+
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
         Map<Product, Integer> newList = new TreeMap<>();
-        for(int i = 0; i < products.size(); i++){
-            if(products.get(i).getType().equals(type) && products.get(i).getName().equals(name)){
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getType().equals(type) && products.get(i).getName().equals(name)) {
                 newList.put(products.get(i), i);
             }
         }
@@ -258,22 +279,22 @@ public class RepositoryProducts implements IRepositoryProducts {
     @Override
     public List<Product> listAllDifferentMovies() {
         List<Product> newList = new ArrayList<>();
-            for(Product p : products){
-                if(p.getType().equals(ProductsTypes.Peliculas)){
-                    newList.add(p);
-                }
+        for (Product p : products) {
+            if (p.getType().equals(ProductsTypes.Peliculas)) {
+                newList.add(p);
             }
+        }
         return newList;
     }
 
     @Override
     public List<Product> listAllDifferentGames() {
         List<Product> newList = new ArrayList<>();
-            for(Product p : products){
-                if(p.getType().equals(ProductsTypes.Juegos)){
-                    newList.add(p);
-                }
+        for (Product p : products) {
+            if (p.getType().equals(ProductsTypes.Juegos)) {
+                newList.add(p);
             }
+        }
         return newList;
     }
 
@@ -286,11 +307,10 @@ public class RepositoryProducts implements IRepositoryProducts {
     public boolean reserveProduct(Product prod, IClient client) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    public boolean absoluteAddProduct(String name, String description,double prize, String key, Status status, ProductsTypes type){
+
+    public boolean absoluteAddProduct(String name, String description, double prize, String key, Status status, ProductsTypes type) {
         boolean result = false;
-        if(name == ""){
+        if (name == "") {
             name = "No Named Product";
             Product p = new Product(name, description, prize, key, status, type);
             products.add(p);
@@ -298,32 +318,32 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return result;
     }
-    
-    public boolean absoluteAddFilm(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status){
+
+    public boolean absoluteAddFilm(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status) {
         boolean result = false;
-        
+
         Film f = new Film(type, minAge, name, description, prize, key, status);
         products.add(f);
-        
+
         return result;
     }
-    
-    public boolean absoluteAddGame(GameCategory type, int minAge, String name, String description, double prize, String key, Status status){
+
+    public boolean absoluteAddGame(GameCategory type, int minAge, String name, String description, double prize, String key, Status status) {
         boolean result = false;
-        
+
         Game g = new Game(type, minAge, name, description, prize, key, status);
         products.add(g);
-        
+
         return result;
     }
-    
-    public boolean absoluteAddOther(String name, String description, double prize, String key, Status status){
+
+    public boolean absoluteAddOther(String name, String description, double prize, String key, Status status) {
         boolean result = false;
-        
+
         Other o = new Other(name, description, prize, key, status);
         products.add(o);
-        
+
         return result;
     }
-    
+
 }

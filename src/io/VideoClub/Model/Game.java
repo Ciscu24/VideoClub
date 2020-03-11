@@ -55,4 +55,8 @@ public class Game extends Product {
         return result;
     }
     
+    @Override
+    public String toString() {
+        return super.toString()+"\nGénero del juego: "+type+"\nPEGI: "+minAge+"\n----------------------";
+    }
 }

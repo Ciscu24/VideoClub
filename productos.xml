@@ -9,6 +9,15 @@
 <Status>AVAILABLE</Status>
 <Tipo>Action</Tipo>
 </Pelicula>
+<Pelicula>
+<Nombre>Ciscu y sus aventuras</Nombre>
+<Descripcion/>
+<Precio>20.0</Precio>
+<Edad>16</Edad>
+<Key>abb6e246-5a08-46</Key>
+<Status>RESERVED</Status>
+<Tipo>Horror</Tipo>
+</Pelicula>
 <Juego>
 <Nombre>God Of War</Nombre>
 <Descripcion>Juego de Kratos</Descripcion>
