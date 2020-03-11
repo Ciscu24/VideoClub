@@ -22,16 +22,16 @@ public class Client implements IClient{
     private String User;
     private String password;
 
-    public Client(String ID, String Name, LocalDateTime Time, String Phone, String User, String password) {
+    public Client(String ID, String Name,String Phone, LocalDateTime Time) {
         this.ID = ID;
         this.Name = Name;
         this.Time = Time;
         this.Phone = Phone;
-        this.User = User;
-        this.password = generateRandom16Chars();
-    }    
+        this.Time = LocalDateTime.now();
+        this.password=generateRandom16Chars();
+    }
     
-    private String generateRandom16Chars(){
+        private String generateRandom16Chars(){
         return(String)UUID.randomUUID().toString().subSequence(0, 16);
     }
     public String getUser() {
