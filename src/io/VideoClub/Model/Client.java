@@ -7,6 +7,8 @@ package io.VideoClub.Model;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -20,14 +22,18 @@ public class Client implements IClient{
     private String User;
     private String password;
 
-    public Client(String ID, String Name,String Phone, LocalDateTime Time) {
+    public Client(String ID, String Name, LocalDateTime Time, String Phone, String User, String password) {
         this.ID = ID;
         this.Name = Name;
         this.Time = Time;
         this.Phone = Phone;
-        this.Time = LocalDateTime.now();
+        this.User = User;
+        this.password = generateRandom16Chars();
+    }    
+    
+    private String generateRandom16Chars(){
+        return(String)UUID.randomUUID().toString().subSequence(0, 16);
     }
-
     public String getUser() {
         return User;
     }
@@ -87,6 +93,18 @@ public class Client implements IClient{
     @Override
     public void setPhone(String p) {
         this.Phone=p;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean result=false;
+        if(obj!=null){
+            result=true;
+        }else if(obj instanceof Client){
+            Client aux=(Client)obj;
+            return this.ID==aux.getID();
+        }
+        return result;
     }
 
     public int compareTo(Client c) {

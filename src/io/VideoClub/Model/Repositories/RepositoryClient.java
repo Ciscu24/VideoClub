@@ -92,9 +92,9 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
 
     @Override
     public Set<IClient> listAllClients(Comparator c) {
-      Set<IClient> aux = new TreeSet<>();
-      aux.addAll(clientL);
-      return aux;
+      Set<IClient> list = new TreeSet<>();
+      list.addAll(clientL);
+      return list;
     }
 
     @Override
@@ -113,12 +113,12 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
     }
 
     @Override
-    public boolean editClient(IClient e) {
+    public boolean editClient(IClient c) {
                 boolean result = false;
-        if (e != null) {
-            for (int i = 0; i < clientL.size() && !result; i++) {
-                if (clientL.get(i).equals(e)) {
-                    clientL.set(i, (Client) e);
+        if (c !=null) {
+            for (int i=0;i<clientL.size()&&!result;i++) {
+                if (clientL.get(i).equals(c)) {
+                    clientL.set(i, (Client) c);
                     result = true;
                 }
             }
