@@ -93,10 +93,10 @@ public class RepositoryProducts implements IRepositoryProducts {
     //CREADO ADDMOVIE, ADDGAME Y ADDOTHER A PARTE PORQUE LOS DOS DE ARRIBA NO SIRVEN, preguntar en clase la duda
     public boolean addMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge, double prize) {
         boolean result = false;
-        if(name == ""){
+        if (name == "") {
             name = "No name provided";
         }
-        if(description == ""){
+        if (description == "") {
             description = "No description provided";
         }
         if (type.equals(ProductsTypes.Peliculas)) {
@@ -105,17 +105,16 @@ public class RepositoryProducts implements IRepositoryProducts {
             result = true;
             items.addItem(newFilm);
         }
-        
-            
+
         return result;
     }
 
     public boolean addGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge, double prize) {
         boolean result = false;
-        if(name == ""){
+        if (name == "") {
             name = "No name provided";
         }
-        if(description == ""){
+        if (description == "") {
             description = "No description provided";
         }
         if (type.equals(ProductsTypes.Juegos)) {
@@ -129,10 +128,10 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     public boolean addOther(ProductsTypes type, String name, String description, double prize) {
         boolean result = false;
-        if(name == ""){
+        if (name == "") {
             name = "No name provided";
         }
-        if(description == ""){
+        if (description == "") {
             description = "No description provided";
         }
         if (type.equals(ProductsTypes.Otros)) {
@@ -300,7 +299,21 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     @Override
     public Product isAvailableProduct(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Product result = null;
+        Product aux = null;
+        Iterator<Product> i = products.iterator();
+
+        if (name != null) {
+            while (i.hasNext()) {
+                aux = i.next();
+                if (aux.getName().toLowerCase().equals(name.toLowerCase())
+                        && aux.getStatus().equals(Status.AVAILABLE)) {
+                    result = aux;
+                }
+            }
+        }
+
+        return result;
     }
 
     @Override
