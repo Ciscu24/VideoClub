@@ -20,15 +20,17 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class RepositoryProducts implements IRepositoryProducts {
-    
+
     List<Product> products;
     RepositoryItems items;
-    
+    List<Reservation> reservations;
+
     public RepositoryProducts() {
         products = new ArrayList<>();
         items = new RepositoryItems();
+        reservations = new ArrayList<>();
     }
-    
+
     @Override
     public boolean addProduct(String name) {
         boolean result = false;
@@ -40,7 +42,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return result;
     }
-    
+
     @Override
     public boolean removeProduct(String name) {
         boolean result = false;
@@ -55,7 +57,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return result;
     }
-    
+
     @Override
     public boolean createProduct(String name, String description, double prize) {
         boolean result = false;
@@ -70,7 +72,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         result = true;
         return result;
     }
-    
+
     @Override
     public boolean createMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge) {
         boolean result = false;
@@ -80,7 +82,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return result;
     }
-    
+
     @Override
     public boolean createGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge) {
         boolean result = false;
@@ -106,10 +108,10 @@ public class RepositoryProducts implements IRepositoryProducts {
             result = true;
             items.addItem(newFilm);
         }
-        
+
         return result;
     }
-    
+
     public boolean addGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge, double prize) {
         boolean result = false;
         if (name == "") {
@@ -126,7 +128,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return result;
     }
-    
+
     public boolean addOther(ProductsTypes type, String name, String description, double prize) {
         boolean result = false;
         if (name == "") {
@@ -143,7 +145,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return result;
     }
-    
+
     @Override
     public boolean editProduct(String key, Product newP) {
         boolean result = false;
@@ -177,12 +179,12 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return newList;
     }
-    
+
     @Override
     public Set<Product> listAllProducts(Comparator c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public Set<Product> listAllByType(ProductsTypes type) {
         Set<Product> newList = new TreeSet<>();
@@ -193,7 +195,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return newList;
     }
-    
+
     @Override
     public Set<Product> listAllByName(String name) {
         Set<Product> newList = new TreeSet<>();
@@ -204,7 +206,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return newList;
     }
-    
+
     @Override
     public Set<Product> listAllByName(String name, ProductsTypes type) {
         Set<Product> newList = new TreeSet<>();
@@ -215,7 +217,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return newList;
     }
-    
+
     @Override
     public Set<Product> listAllByStatus(Product.Status status) {
         Set<Product> newList = new TreeSet<>();
@@ -226,7 +228,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return newList;
     }
-    
+
     public Product searchByKey(String key) {
         Product result = null;
         boolean aux = false;
@@ -238,7 +240,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return result;
     }
-    
+
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(String name) {
         Map<Product, Integer> newList = new TreeMap<>();
@@ -249,7 +251,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return newList;
     }
-    
+
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
         Map<Product, Integer> newList = new TreeMap<>();
@@ -260,22 +262,22 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return newList;
     }
-    
+
     @Override
     public List<Product> listAllDifferentProducts() {
         List<Product> newList = new ArrayList<>();
         Product aux = new Product();
-        
+
         for (int i = 0; i < products.size(); i++) {
             if (aux.equals(products.get(i)) != true) {
                 newList.add(products.get(i));
                 aux = products.get(i);
             }
         }
-        
+
         return newList;
     }
-    
+
     @Override
     public List<Product> listAllDifferentMovies() {
         List<Product> newList = new ArrayList<>();
@@ -286,7 +288,7 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return newList;
     }
-    
+
     @Override
     public List<Product> listAllDifferentGames() {
         List<Product> newList = new ArrayList<>();
@@ -297,13 +299,13 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return newList;
     }
-    
+
     @Override
     public Product isAvailableProduct(String name) {
         Product result = null;
         Product aux = null;
         Iterator<Product> i = products.iterator();
-        
+
         if (name != null) {
             while (i.hasNext()) {
                 aux = i.next();
@@ -313,22 +315,21 @@ public class RepositoryProducts implements IRepositoryProducts {
                 }
             }
         }
-        
+
         return result;
     }
-    
+
     @Override
     public boolean reserveProduct(Product prod, IClient client) {
         boolean result = false;
-        Reservation reserva = null;
-        
+
         if (prod != null && client != null && isAvailableProduct(prod.getName()) != null) {
-            reserva = new Reservation(prod, client);
+            reservations.add(new Reservation(prod, client));
         }
-        
+
         return result;
     }
-    
+
     public boolean absoluteAddProduct(String name, String description, double prize, String key, Status status, ProductsTypes type) {
         boolean result = false;
         if (name == "") {
@@ -339,32 +340,55 @@ public class RepositoryProducts implements IRepositoryProducts {
         }
         return result;
     }
-    
+
     public boolean absoluteAddFilm(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status) {
         boolean result = false;
-        
+
         Film f = new Film(type, minAge, name, description, prize, key, status);
         products.add(f);
-        
+
         return result;
     }
-    
+
     public boolean absoluteAddGame(GameCategory type, int minAge, String name, String description, double prize, String key, Status status) {
         boolean result = false;
-        
+
         Game g = new Game(type, minAge, name, description, prize, key, status);
         products.add(g);
-        
+
         return result;
     }
-    
+
     public boolean absoluteAddOther(String name, String description, double prize, String key, Status status) {
         boolean result = false;
-        
+
         Other o = new Other(name, description, prize, key, status);
         products.add(o);
-        
+
         return result;
     }
-    
+
+    @Override
+    public boolean returnedProduct(Product prod, IClient client) {
+        boolean result = false;
+        Iterator<Product> iP = products.iterator();
+        Iterator<Reservation> iR = reservations.iterator();
+        Product auxP = null;
+        Reservation auxR = null;
+
+        if (prod != null && client != null) {
+            while (iP.hasNext()) {
+                auxP = iP.next();
+                while (iR.hasNext()) {
+                    auxR = iR.next();
+                    if (auxR.pro.equals(prod) && auxR.cli.equals(client)) {
+                        result = true;
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
 }

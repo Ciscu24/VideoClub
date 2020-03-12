@@ -37,4 +37,5 @@ public interface IRepositoryProducts {
     
     Product isAvailableProduct(String name);  //get product if yes
     boolean reserveProduct(Product prod,IClient client);
+    boolean returnedProduct(Product prod, IClient client);
 }
