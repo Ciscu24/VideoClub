@@ -10,6 +10,7 @@ import io.VideoClub.Model.Other;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Product.Status;
 import io.VideoClub.Model.Reservation;
+import io.VideoClub.Model.Reservation.StatusReserve;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -368,20 +369,20 @@ public class RepositoryProducts implements IRepositoryProducts {
         return result;
     }
 
+    //NO TERMINADO, PREGUNTAR CARLOS SOBRE LO DEL TIEMPO
     @Override
     public boolean returnedProduct(Product prod, IClient client) {
         boolean result = false;
         Iterator<Product> iP = products.iterator();
-        Iterator<Reservation> iR = reservations.iterator();
         Product auxP = null;
-        Reservation auxR = null;
 
         if (prod != null && client != null) {
             while (iP.hasNext()) {
                 auxP = iP.next();
-                while (iR.hasNext()) {
-                    auxR = iR.next();
-                    if (auxR.pro.equals(prod) && auxR.cli.equals(client)) {
+                for (int i = 0; i < reservations.size(); i++) {
+                    if (reservations.get(i).pro.equals(prod)
+                            && reservations.get(i).equals(client)) {
+                        reservations.get(i).status = StatusReserve.FINISHED;
                         result = true;
                     }
                 }

@@ -15,8 +15,6 @@ public class Reservation {
     public LocalDate end;
     public LocalDate finished;
     public StatusReserve status;
-
-   
     
     private Reservation(){};
     public Reservation(Product pro,IClient cli){
