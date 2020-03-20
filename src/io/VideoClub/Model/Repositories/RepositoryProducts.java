@@ -183,7 +183,9 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     @Override
     public Set<Product> listAllProducts(Comparator c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> newList = new TreeSet<>();
+
+        return newList;
     }
 
     @Override
