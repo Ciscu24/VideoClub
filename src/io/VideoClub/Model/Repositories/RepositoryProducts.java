@@ -308,37 +308,46 @@ public class RepositoryProducts implements IRepositoryProducts {
     public boolean absoluteAddProduct(String name, String description, double prize, String key, Status status, ProductsTypes type) {
         boolean result = false;
         if (name == "") {
-            name = "No Named Product";
+            name = "No Named Product";    
+        }
             Product p = new Product(name, description, prize, key, status, type);
             products.add(p);
             result = true;
-        }
         return result;
     }
 
     public boolean absoluteAddFilm(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status) {
         boolean result = false;
-
+        if (name == "") {
+            name = "No Named Product";    
+        }
         Film f = new Film(type, minAge, name, description, prize, key, status);
         products.add(f);
-
+        items.addItem(f);
+        
         return result;
     }
 
     public boolean absoluteAddGame(GameCategory type, int minAge, String name, String description, double prize, String key, Status status) {
         boolean result = false;
-
+        if (name == "") {
+            name = "No Named Product";    
+        }
         Game g = new Game(type, minAge, name, description, prize, key, status);
         products.add(g);
+        items.addItem(g);
 
         return result;
     }
 
     public boolean absoluteAddOther(String name, String description, double prize, String key, Status status) {
         boolean result = false;
-
+        if (name == "") {
+            name = "No Named Product";    
+        }
         Other o = new Other(name, description, prize, key, status);
         products.add(o);
+        items.addItem(o);
 
         return result;
     }
