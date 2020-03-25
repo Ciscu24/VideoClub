@@ -12,6 +12,7 @@ import io.VideoClub.Model.Product.Status;
 import io.VideoClub.Model.Reservation;
 import io.VideoClub.Model.Reservation.StatusReserve;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -24,12 +25,10 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     List<Product> products;
     RepositoryItems items;
-    List<Reservation> reservations;
 
     public RepositoryProducts() {
         products = new ArrayList<>();
         items = new RepositoryItems();
-        reservations = new ArrayList<>();
     }
 
     @Override
@@ -183,8 +182,11 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     @Override
     public Set<Product> listAllProducts(Comparator c) {
-        Set<Product> newList = new TreeSet<>();
-
+        Set<Product> newList = null;
+        
+        Collections.sort(products, c);
+        newList = (Set<Product>) products;
+        
         return newList;
     }
 
@@ -303,36 +305,6 @@ public class RepositoryProducts implements IRepositoryProducts {
         return newList;
     }
 
-    @Override
-    public Product isAvailableProduct(String name) {
-        Product result = null;
-        Product aux = null;
-        Iterator<Product> i = products.iterator();
-
-        if (name != null) {
-            while (i.hasNext()) {
-                aux = i.next();
-                if (aux.getName().toLowerCase().equals(name.toLowerCase())
-                        && aux.getStatus().equals(Status.AVAILABLE)) {
-                    result = aux;
-                }
-            }
-        }
-
-        return result;
-    }
-
-    @Override
-    public boolean reserveProduct(Product prod, IClient client) {
-        boolean result = false;
-
-        if (prod != null && client != null && isAvailableProduct(prod.getName()) != null) {
-            reservations.add(new Reservation(prod, client));
-        }
-
-        return result;
-    }
-
     public boolean absoluteAddProduct(String name, String description, double prize, String key, Status status, ProductsTypes type) {
         boolean result = false;
         if (name == "") {
@@ -370,28 +342,4 @@ public class RepositoryProducts implements IRepositoryProducts {
 
         return result;
     }
-
-    //NO TERMINADO, PREGUNTAR CARLOS SOBRE LO DEL TIEMPO
-    @Override
-    public boolean returnedProduct(Product prod, IClient client) {
-        boolean result = false;
-        Iterator<Product> iP = products.iterator();
-        Product auxP = null;
-
-        if (prod != null && client != null) {
-            while (iP.hasNext()) {
-                auxP = iP.next();
-                for (int i = 0; i < reservations.size(); i++) {
-                    if (reservations.get(i).pro.equals(prod)
-                            && reservations.get(i).equals(client)) {
-                        reservations.get(i).status = StatusReserve.FINISHED;
-                        result = true;
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-
 }

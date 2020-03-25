@@ -191,7 +191,6 @@ public class GUI {
             System.out.println("| 4) Editar Productos |");
             System.out.println("| 5) Disponibilidad   |");
             System.out.println("| 6) Reservas         |");
-            System.out.println("| 7) Reservas         |");
             System.out.println("| 0) Salir            |");
             System.out.println("+---------------------+");
 

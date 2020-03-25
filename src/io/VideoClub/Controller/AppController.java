@@ -36,8 +36,7 @@ public class AppController {
     public RepositoryItems items = new RepositoryItems();
     public RepositoryClient clients = new RepositoryClient();
 
-    public AppController() {
-    }
+    public AppController() {}
 
     public void toXML(String file) {
         //validar si el archivo es .xml
