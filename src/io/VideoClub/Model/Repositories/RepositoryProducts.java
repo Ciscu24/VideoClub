@@ -349,7 +349,8 @@ public class RepositoryProducts implements IRepositoryProducts {
 
         Film f = new Film(type, minAge, name, description, prize, key, status);
         products.add(f);
-
+        items.addItem(f);
+        
         return result;
     }
 
@@ -358,6 +359,7 @@ public class RepositoryProducts implements IRepositoryProducts {
 
         Game g = new Game(type, minAge, name, description, prize, key, status);
         products.add(g);
+        items.addItem(g);
 
         return result;
     }
@@ -367,6 +369,7 @@ public class RepositoryProducts implements IRepositoryProducts {
 
         Other o = new Other(name, description, prize, key, status);
         products.add(o);
+        items.addItem(o);
 
         return result;
     }
