@@ -9,6 +9,7 @@ public class Reservation {
         FINISHED, //ini on finised on == end
         PENDING  //ini on , finished off and end past
     }
+
     public Product pro;
     public IClient cli;
     public LocalDate ini;

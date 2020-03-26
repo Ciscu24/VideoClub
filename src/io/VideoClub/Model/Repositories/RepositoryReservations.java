@@ -19,7 +19,11 @@ public class RepositoryReservations implements IRepositoryReservations{
 
     @Override
     public Set<Reservation> listAllReservations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Reservations> newList = new TreeSet<>();
+        for (Reservation r : reservations) {
+            newList.add(r);
+        }
+        return newList;
     }
 
     @Override
@@ -108,9 +112,5 @@ public class RepositoryReservations implements IRepositoryReservations{
         }
 
         return result;
-    }
-    
-    
-    
-    
+    }    
 }
