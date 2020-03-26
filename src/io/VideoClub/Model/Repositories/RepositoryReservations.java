@@ -74,7 +74,9 @@ public class RepositoryReservations implements IRepositoryReservations {
         double result = 0;
 
         for (Reservation r : reservations) {
-
+            if (r.ini.isAfter(from) && r.end.isBefore(to)) {
+                result += r.pro.getPrize();
+            }
         }
 
         return result;
