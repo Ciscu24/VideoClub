@@ -1,4 +1,5 @@
 package io.VideoClub.Model.Repositories;
+
 import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
@@ -9,8 +10,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
-public class RepositoryReservations implements IRepositoryReservations{
+public class RepositoryReservations implements IRepositoryReservations {
+
     public List<Reservation> reservations;
 
     public RepositoryReservations() {
@@ -19,7 +22,7 @@ public class RepositoryReservations implements IRepositoryReservations{
 
     @Override
     public Set<Reservation> listAllReservations() {
-        Set<Reservations> newList = new TreeSet<>();
+        Set<Reservation> newList = new TreeSet<>();
         for (Reservation r : reservations) {
             newList.add(r);
         }
@@ -33,7 +36,15 @@ public class RepositoryReservations implements IRepositoryReservations{
 
     @Override
     public Set<Reservation> listAllReservations(Reservation.StatusReserve status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Reservation> newList = new TreeSet<>();
+
+        for (Reservation r : reservations) {
+            if (r.status.equals(Reservation.StatusReserve.ACTIVE)) {
+                newList.add(r);
+            }
+        }
+
+        return newList;
     }
 
     @Override
@@ -60,7 +71,7 @@ public class RepositoryReservations implements IRepositoryReservations{
     public double closeReservation() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public Product isAvailableProduct(String name) {
         Product result = null;
@@ -112,5 +123,5 @@ public class RepositoryReservations implements IRepositoryReservations{
         }
 
         return result;
-    }    
+    }
 }
