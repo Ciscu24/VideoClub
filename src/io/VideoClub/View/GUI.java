@@ -9,6 +9,7 @@ import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Film; //NNoo
 import io.VideoClub.Model.Game;
 import io.VideoClub.Model.Product;
+import io.VideoClub.Model.Reservation;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -60,7 +61,7 @@ public class GUI {
 
     static void opciones_principal(int numero) {
         switch (numero) {
-            case 1: 
+            case 1:
                 Iniciar_sesion();
                 break;
 
@@ -122,16 +123,18 @@ public class GUI {
                 case 2:
                     Client user = Controller.clients.devolverCliente(usuario);
                     Client NuevoCliente = MenuEditarCliente(user);
-                    if(Controller.clients.editClient(NuevoCliente)){
+                    if (Controller.clients.editClient(NuevoCliente)) {
                         System.out.println("El cliente a sido modificado con exito");
                         pulsarEnter();
-                    }else{
+                    } else {
                         System.out.println("El cliente no se ha podido modificar");
                         pulsarEnter();
                     }
                     break;
-                    
+
                 case 3:
+                    user = Controller.clients.devolverCliente(usuario);
+                    menu_reservas(user);
 
                     break;
 
@@ -159,7 +162,7 @@ public class GUI {
         } else {
             System.out.println("No se ha podido realizar el registro");
         }
-        
+
         pulsarEnter();
     }
 
@@ -249,9 +252,9 @@ public class GUI {
                         String key = devolverString("Introduce la key del producto que quieras cambiar: ");
                         Product productoCambio = Controller.products.searchByKey(key);
                         Product otro = MenuEditar(productoCambio);
-                        if(Controller.products.editProduct(key, otro)){
+                        if (Controller.products.editProduct(key, otro)) {
                             System.out.println("Producto editado con exito");
-                        }else{
+                        } else {
                             System.out.println("El producto no se ha podido editar");
                         }
                     }
@@ -288,6 +291,13 @@ public class GUI {
 
                     }
                     break;
+                case 6:
+                    Set<Reservation> reservas = Controller.reservations.listAllReservations();
+                    for(Reservation reserva : reservas){
+                        System.out.println(reserva);
+                    }
+                    break;
+                    
             }
 
         } while (opcion != 0);
@@ -408,7 +418,7 @@ public class GUI {
 
         return resultado;
     }
-    
+
     public static Client MenuEditarCliente(Client cliente) {
         int opcion = 0;
         do {
@@ -436,7 +446,7 @@ public class GUI {
                     cliente.setPassword(contrasena);
                     break;
             }
-        } while (opcion != 0); 
+        } while (opcion != 0);
 
         return cliente;
     }
@@ -460,7 +470,7 @@ public class GUI {
                 System.out.println(" 4) Editar categoria:" + juego.getTypeGame());
                 System.out.println(" 5) Editar Edad minima" + juego.getMinAge());
             }
-            
+
             System.out.println(" 0) Guardar producto");
 
             opcion = devolverInt("Introduce una opcion: ");
@@ -475,7 +485,7 @@ public class GUI {
                     producto.setDescription(descripcion);
                     break;
                 case 3:
-                    double precio=devolverDouble("Introduce el nuevo precio: ");
+                    double precio = devolverDouble("Introduce el nuevo precio: ");
                     producto.setPrize(precio);
                     break;
 
@@ -536,6 +546,79 @@ public class GUI {
                     List<Product> ListaPeliculas = Controller.products.listAllDifferentMovies();
                     for (Product peliculas : ListaPeliculas) {
                         System.out.println(peliculas);
+                    }
+
+                    break;
+
+                case 3:
+                    List<Product> ListaJuegos = Controller.products.listAllDifferentGames();
+                    for (Product juegos : ListaJuegos) {
+                        System.out.println(juegos);
+                    }
+                    break;
+
+                case 4:
+
+                    break;
+            }
+        } while (opcion != 0);
+
+    }
+
+    public static void menu_reservas(Client cliente) {
+        int opcion = 0;
+        do {
+            System.out.println("\n+---------------------+");
+            System.out.println("|     Menu Reservas     |");
+            System.out.println("+-----------------------+");
+            System.out.println("| 1) Listar productos   |");
+            System.out.println("| 2) Reservar producto  |");
+            System.out.println("| 0) Salir              |");
+            System.out.println("+-----------------------+");
+
+            opcion = devolverInt("Introduce una opcion: ");
+
+            switch (opcion) {
+                case 1:
+                    Set<Product> ListaProductos = Controller.products.listAllByStatus(Product.Status.AVAILABLE);
+                    for (Product producto : ListaProductos) {
+                        System.out.println(producto);
+                    }
+                    pulsarEnter();
+                    break;
+
+                case 2:
+                    int contador = 0;
+                    Product prod = null;
+                    String nombre = devolverString("Introduce el nombre de la pelicula a reservar: ");
+                    //Ciscu y los Cisquitos
+                    Set<Product> ListaPeliculas = Controller.products.listAllByName(nombre);
+                    
+                    if (ListaPeliculas != null) {
+                        for (Product peliculas : ListaPeliculas) {
+                            if(peliculas.getStatus()== Product.Status.AVAILABLE){
+                                System.out.println(peliculas);
+                                prod = peliculas;
+                                contador++;
+                            }
+                        }
+                        if(contador == 0){
+                            System.out.println("Producto/s no disponibles");
+                            pulsarEnter();
+                        }else{
+                            String resultado = devolverString("¿Desea reservar?(y/n): ");
+                            if(resultado.equals("y")){
+                                Controller.reservations.reserveProduct(prod, cliente);
+                                prod.setStatus(Product.Status.RESERVED);
+                                Controller.products.editProduct(prod.getKey(), prod);
+                                
+                                System.out.println("Reserva realizada correctamente");
+                                pulsarEnter();
+                            }
+                        }
+                    }else {
+                        System.out.println("No hay coincidencias");
+                        pulsarEnter();
                     }
 
                     break;

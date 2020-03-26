@@ -1,5 +1,6 @@
 package io.VideoClub.Model.Repositories;
 
+import io.VideoClub.Model.Client;
 import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
@@ -149,5 +150,9 @@ public class RepositoryReservations implements IRepositoryReservations {
         }
 
         return result;
+    }
+    
+    public List<Reservation> productoReservadoCliente(Client cliente){
+        
     }
 }
