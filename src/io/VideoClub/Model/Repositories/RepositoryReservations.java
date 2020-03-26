@@ -5,6 +5,7 @@ import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -31,7 +32,12 @@ public class RepositoryReservations implements IRepositoryReservations {
 
     @Override
     public Set<Reservation> listAllReservations(Comparator c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Reservation> newList = null;
+        
+        Collections.sort(reservations, c);
+        newList = (Set<Reservation>) reservations;
+        
+        return newList;
     }
 
     @Override
