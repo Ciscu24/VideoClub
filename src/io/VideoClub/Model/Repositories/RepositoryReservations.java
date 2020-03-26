@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class RepositoryReservations implements IRepositoryReservations {
@@ -67,9 +68,9 @@ public class RepositoryReservations implements IRepositoryReservations {
     @Override
     public double getIncommings(LocalDate from) {
         double result = 0;
-        
-        for(Reservation r : reservations){
-            if(r.ini.isAfter(from)){
+
+        for (Reservation r : reservations) {
+            if (r.ini.isAfter(from)) {
                 result += r.pro.getPrize();
             }
         }
@@ -91,7 +92,13 @@ public class RepositoryReservations implements IRepositoryReservations {
 
     @Override
     public Map<IClient, Double> resumeAllIncomingsByClient() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<IClient, Double> newList = new TreeMap<>();
+
+        for (Reservation r : reservations) {
+            newList.put(r.cli, r.pro.getPrize());
+        }
+
+        return newList;
     }
 
     @Override
