@@ -95,8 +95,13 @@ public class RepositoryReservations implements IRepositoryReservations {
     }
 
     @Override
-    public double closeReservation() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double closeReservation(Reservation r) {
+        double result = 0;
+            if(r != null){
+                result = r.pro.getPrize();
+                r.status = Reservation.StatusReserve.FINISHED;
+            }   
+        return result;
     }
 
     @Override
