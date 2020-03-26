@@ -33,10 +33,10 @@ public class RepositoryReservations implements IRepositoryReservations {
     @Override
     public Set<Reservation> listAllReservations(Comparator c) {
         Set<Reservation> newList = null;
-        
+
         Collections.sort(reservations, c);
         newList = (Set<Reservation>) reservations;
-        
+
         return newList;
     }
 
@@ -58,7 +58,7 @@ public class RepositoryReservations implements IRepositoryReservations {
         double result = 0;
 
         for (Reservation r : reservations) {
-            result = r.pro.getPrize();
+            result += r.pro.getPrize();
         }
 
         return result;
@@ -71,7 +71,13 @@ public class RepositoryReservations implements IRepositoryReservations {
 
     @Override
     public double getIncommings(LocalDate from, LocalDate to) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double result = 0;
+
+        for (Reservation r : reservations) {
+
+        }
+
+        return result;
     }
 
     @Override
