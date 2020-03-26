@@ -66,7 +66,14 @@ public class RepositoryReservations implements IRepositoryReservations {
 
     @Override
     public double getIncommings(LocalDate from) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double result = 0;
+        
+        for(Reservation r : reservations){
+            if(r.ini.isAfter(from)){
+                result += r.pro.getPrize();
+            }
+        }
+        return result;
     }
 
     @Override
