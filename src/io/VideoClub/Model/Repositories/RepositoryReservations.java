@@ -104,26 +104,22 @@ public class RepositoryReservations implements IRepositoryReservations {
     @Override
     public double closeReservation(Reservation r) {
         double result = 0;
-            if(r != null){
-                result = r.pro.getPrize();
-                r.status = Reservation.StatusReserve.FINISHED;
-            }   
+        if (r != null) {
+            result = r.pro.getPrize();
+            r.status = Reservation.StatusReserve.FINISHED;
+        }
         return result;
     }
 
     @Override
     public Product isAvailableProduct(String name) {
         Product result = null;
-        Product aux = null;
-        Iterator<Product> i = products.iterator();
 
-        if (name != null) {
-            while (i.hasNext()) {
-                aux = i.next();
-                if (aux.getName().toLowerCase().equals(name.toLowerCase())
-                        && aux.getStatus().equals(Product.Status.AVAILABLE)) {
-                    result = aux;
-                }
+        for (Reservation r : reservations) {
+            if (name != null
+                    && r.pro.getName().toLowerCase().equals(name.toLowerCase())
+                    && r.pro.getStatus().equals(Product.Status.AVAILABLE)) {
+                result = r.pro;
             }
         }
 
