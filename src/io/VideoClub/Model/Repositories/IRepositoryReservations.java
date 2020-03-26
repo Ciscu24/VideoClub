@@ -23,5 +23,5 @@ public interface IRepositoryReservations {
     double getIncommings(LocalDate from, LocalDate to);
     Map<IClient,Double> resumeAllIncomingsByClient();
     
-    double closeReservation();  //-->> status finished  --> get prizetopay
+    double closeReservation(Reservation r);  //-->> status finished  --> get prizetopay
 }
