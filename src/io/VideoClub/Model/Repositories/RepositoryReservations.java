@@ -137,22 +137,15 @@ public class RepositoryReservations implements IRepositoryReservations {
         return result;
     }
 
-    //NO TERMINADO, PREGUNTAR CARLOS SOBRE LO DEL TIEMPO
     @Override
     public boolean returnedProduct(Product prod, IClient client) {
         boolean result = false;
-        Iterator<Product> iP = products.iterator();
-        Product auxP = null;
 
         if (prod != null && client != null) {
-            while (iP.hasNext()) {
-                auxP = iP.next();
-                for (int i = 0; i < reservations.size(); i++) {
-                    if (reservations.get(i).pro.equals(prod)
-                            && reservations.get(i).equals(client)) {
-                        reservations.get(i).status = Reservation.StatusReserve.FINISHED;
-                        result = true;
-                    }
+            for (Reservation r : reservations) {
+                if (r.pro.equals(prod) && r.cli.equals(client)) {
+                    r.status = Reservation.StatusReserve.FINISHED;
+                    result = true;
                 }
             }
         }
