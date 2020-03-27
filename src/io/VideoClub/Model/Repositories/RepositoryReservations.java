@@ -130,7 +130,8 @@ public class RepositoryReservations implements IRepositoryReservations {
     public boolean reserveProduct(Product prod, IClient client) {
         boolean result = false;
 
-        if (prod != null && client != null && isAvailableProduct(prod.getName()) != null) {
+        if (prod != null && client != null
+                && isAvailableProduct(prod.getName()) != null) {
             reservations.add(new Reservation(prod, client));
         }
 
@@ -143,7 +144,7 @@ public class RepositoryReservations implements IRepositoryReservations {
 
         if (prod != null && client != null) {
             for (Reservation r : reservations) {
-                if (r.pro.equals(prod) && r.cli.equals(client) 
+                if (r.pro.equals(prod) && r.cli.equals(client)
                         && r.status.equals(Reservation.StatusReserve.FINISHED)) {
                     result = true;
                 }
@@ -152,8 +153,18 @@ public class RepositoryReservations implements IRepositoryReservations {
 
         return result;
     }
-    
-    public List<Reservation> productoReservadoCliente(Client cliente){
-        
+
+    public List<Reservation> productoReservadoCliente(Client cliente) {
+        List<Reservation> newList = new ArrayList<>();
+
+        if (cliente != null) {
+            for (Reservation r : reservations) {
+                if (r.cli.equals(cliente) == true) {
+                    newList.add(r);
+                }
+            }
+        }
+
+        return newList;
     }
 }
