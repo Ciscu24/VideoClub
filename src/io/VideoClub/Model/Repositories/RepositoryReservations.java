@@ -142,7 +142,8 @@ public class RepositoryReservations implements IRepositoryReservations {
 
         if (prod != null && client != null) {
             for (Reservation r : reservations) {
-                if (r.pro.equals(prod) && r.cli.equals(client) && r.status.equals(Reservation.StatusReserve.FINISHED)) {
+                if (r.pro.equals(prod) && r.cli.equals(client) 
+                        && r.status.equals(Reservation.StatusReserve.FINISHED)) {
                     result = true;
                 }
             }
