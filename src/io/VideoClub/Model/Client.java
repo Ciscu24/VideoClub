@@ -21,26 +21,27 @@ public class Client implements IClient{
     private String Phone;
     private String User;
     private String password;
+    
+    private Client() {}
 
-    public Client(String ID, String Name,String Phone, LocalDateTime Time) {
-        this.ID = ID;
+    public Client(String Name,String Phone, LocalDateTime Time) {
+        this.ID = generateRandom16Chars();
         this.Name = Name;
         this.Time = Time;
         this.Phone = Phone;
         this.Time = LocalDateTime.now();
-        this.password=generateRandom16Chars();
     }
     
- 
-    public Client(String ID, String Name,String Phone, LocalDateTime Time, String User, String password) {
-        this.ID = ID;
+    public Client(String Name,String Phone, LocalDateTime Time, String User, String password) {
+        this.ID = generateRandom16Chars();
         this.Name = Name;
         this.Time = Time;
         this.Phone = Phone;
         this.Time = LocalDateTime.now();
         this.User = User;
-        this.password = generateRandom16Chars();
+        this.password = password;
     }
+    
     private String generateRandom16Chars(){
         return(String)UUID.randomUUID().toString().subSequence(0, 16);
     }
@@ -58,18 +59,8 @@ public class Client implements IClient{
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
+    }   
     
-    
-
-    private Client() {
-    }
-
-
     @Override
     public String getID() {
         return ID;
@@ -133,9 +124,7 @@ public class Client implements IClient{
 
     @Override
     public String toString() {
-        return "Client{" + "ID=" + ID + ", Name=" + Name + ", Time=" + Time + ", Phone=" + Phone + ", User=" + User + ", password=" + password + '}';
+        return "\n------ "+ID+" ------\nNombre: "+Name+"\nTime: "+Time+"\nTelefono: "+Phone+"\nUsuario: "+User+"\nContraseña: "+password;
     }
-    
-    
-    
+
 }

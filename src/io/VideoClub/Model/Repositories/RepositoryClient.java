@@ -31,13 +31,11 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
     }
     
     public boolean addClient(String Name,String Phone, String user, String password){
-        String ID = "Falta id";
-        Client c = new Client(ID, Name, Phone, LocalDateTime.now(), user, password);        
+        Client c = new Client(Name, Phone, LocalDateTime.now(), user, password);        
         return this.clientL.add(c);
     }
     
-    
-    
+    @Override
     public boolean removeClient(String ID){
         boolean result=false;
         for(int i=0;i<clientL.size();i++){
@@ -62,16 +60,17 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
         return result;
         
     }
+    
     public boolean searchUser(String c){
-    boolean result=false;
-    Iterator<Client> i = clientL.iterator();
-    if (c != null) {
-    while (i.hasNext() && !result) {
-    result = i.next().getUser().equals(c);
+        boolean result=false;
+        Iterator<Client> i = clientL.iterator();
+        if (c != null) {
+            while (i.hasNext() && !result) {
+                result = i.next().getUser().equals(c);
+            }
+        }
+        return result;
     }
-    }
-    return result;
-    } 
     
     public Client devolverCliente(String usuario){
     Client result=null;
@@ -127,7 +126,7 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
     public boolean createClient(String id, String name, String phone, LocalDateTime time) {
         boolean result=false;
         if (id!=null) {
-            Client NewClient = new Client(id, name, phone, time);
+            Client NewClient = new Client(name, phone, time);
             result = true;
         }
         return result;

@@ -11,6 +11,7 @@ import io.VideoClub.Model.Product.Status;
 import io.VideoClub.Model.Repositories.RepositoryClient;
 import io.VideoClub.Model.Repositories.RepositoryItems;
 import io.VideoClub.Model.Repositories.RepositoryProducts;
+import io.VideoClub.Model.Repositories.RepositoryReservations;
 
 import java.io.File;
 import java.util.List;
@@ -35,6 +36,7 @@ public class AppController {
     public RepositoryProducts products = new RepositoryProducts();
     public RepositoryItems items = new RepositoryItems();
     public RepositoryClient clients = new RepositoryClient();
+    public RepositoryReservations reservations = new RepositoryReservations();
 
     public AppController() {}
 
