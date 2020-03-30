@@ -205,7 +205,7 @@ public class RepositoryProducts implements IRepositoryProducts {
     public Set<Product> listAllByName(String name) {
         Set<Product> newList = new TreeSet<>();
         for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getName().equals(name)) {
+            if (products.get(i).getName().contains(name)) {
                 newList.add(products.get(i));
             }
         }

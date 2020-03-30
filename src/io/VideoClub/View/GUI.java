@@ -28,7 +28,7 @@ public class GUI {
     }
 
     public static void logo() {
-        System.out.println(" _______            _           _______            _       _______ ");
+        /*System.out.println(" _______            _           _______            _       _______ ");
         System.out.println("|   _   |          | |         |   _   |       ___| |___  |   _   |");
         System.out.println("|  |_|  |          | |         |  |_|  |      |___   ___|_|  |_|  |");
         System.out.println("|  _____|_____ ____| |___ _____|_____ /_   _ _____| |  ___|   ___/ ");
@@ -36,7 +36,14 @@ public class GUI {
         System.out.println("| |     | |_| | |__| | | | |_| | |_|  | |_| | |___| |  ___|  ___  |");
         System.out.println("| |     |_____|____|_| |_|_____|______|_____|___  | | |___|_|   | |");
         System.out.println("|_|                            |__________________|_|_______|   |_|");
-        System.out.println("");
+        System.out.println("");*/
+
+        System.out.println("  _____           _           ____            _            ");
+        System.out.println(" |  __ \\         | |         |  _ \\          | |           ");
+        System.out.println(" | |__) |__   ___| |__   ___ | |_) |_   _ ___| |_ ___ _ __ ");
+        System.out.println(" |  ___/ _ \\ / __| '_ \\ / _ \\|  _ <| | | / __| __/ _ \\ '__|");
+        System.out.println(" | |  | (_) | (__| | | | (_) | |_) | |_| \\__ \\ |_  __/ |   ");
+        System.out.println(" |_|   \\___/ \\___|_| |_|\\___/|____/ \\__,_|___/\\__\\___|_|   ");
     }
 
     public static void principal() {
@@ -523,7 +530,7 @@ public class GUI {
     public static void menu_lista() {
         int opcion = 0;
         do {
-            System.out.println("\n+-------------------+");
+            System.out.println("\n+---------------------+");
             System.out.println("|    Menu Listar      |");
             System.out.println("+---------------------+");
             System.out.println("| 1) Listar productos |");
