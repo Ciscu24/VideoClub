@@ -80,12 +80,12 @@ public class GUI {
                 break;
 
             case 3:
-                System.out.println("\n+--------------------------------------------------------------------------------------------+");
-                System.out.println("|                           Bienvenido al  Videoclub PochoBuster:                            |");
-                System.out.println("|            Donde puedes alquilar diferentes peliculas, juegos y otros productos.           |");
-                System.out.println("| Donde nuestro trabajadores Ciscu, Edu, Anto, Rafa y Miguel os atenderan de la mejor forma. |");
-                System.out.println("| No seas un pirata se mejor un Pocho, como nosotros, por eso van al BlockBuster pero Pocho. |");
-                System.out.println("+--------------------------------------------------------------------------------------------+");
+                System.out.println("\n+---------------------------------------------------------------------------------------------+");
+                System.out.println("|                           Bienvenido al  Videoclub PochoBuster:                             |");
+                System.out.println("|            Donde puedes alquilar diferentes peliculas, juegos y otros productos.            |");
+                System.out.println("| Donde nuestros trabajadores Ciscu, Edu, Anto, Rafa y Miguel os atenderan de la mejor forma. |");
+                System.out.println("|  No seas un pirata se mejor un Pocho, como nosotros, por eso ven al BlockBuster pero Pocho. |");
+                System.out.println("+---------------------------------------------------------------------------------------------+");
                 pulsarEnter();
                 break;
 
