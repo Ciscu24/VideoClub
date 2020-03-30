@@ -12,6 +12,7 @@ import io.VideoClub.Model.Product.Status;
 import io.VideoClub.Model.Reservation;
 import io.VideoClub.Model.Reservation.StatusReserve;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -24,12 +25,10 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     List<Product> products;
     RepositoryItems items;
-    List<Reservation> reservations;
 
     public RepositoryProducts() {
         products = new ArrayList<>();
         items = new RepositoryItems();
-        reservations = new ArrayList<>();
     }
 
     @Override
@@ -183,7 +182,10 @@ public class RepositoryProducts implements IRepositoryProducts {
 
     @Override
     public Set<Product> listAllProducts(Comparator c) {
-        Set<Product> newList = new TreeSet<>();
+        Set<Product> newList = null;
+
+        Collections.sort(products, c);
+        newList = (Set<Product>) products;
 
         return newList;
     }
@@ -203,7 +205,7 @@ public class RepositoryProducts implements IRepositoryProducts {
     public Set<Product> listAllByName(String name) {
         Set<Product> newList = new TreeSet<>();
         for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getName().equals(name)) {
+            if (products.get(i).getName().contains(name)) {
                 newList.add(products.get(i));
             }
         }
@@ -303,93 +305,59 @@ public class RepositoryProducts implements IRepositoryProducts {
         return newList;
     }
 
-    @Override
-    public Product isAvailableProduct(String name) {
-        Product result = null;
-        Product aux = null;
-        Iterator<Product> i = products.iterator();
-
-        if (name != null) {
-            while (i.hasNext()) {
-                aux = i.next();
-                if (aux.getName().toLowerCase().equals(name.toLowerCase())
-                        && aux.getStatus().equals(Status.AVAILABLE)) {
-                    result = aux;
-                }
+    public List<Product> listAllDifferentOther() {
+        List<Product> newList = new ArrayList<>();
+        for (Product p : products) {
+            if (p.getType().equals(ProductsTypes.Otros)) {
+                newList.add(p);
             }
         }
-
-        return result;
-    }
-
-    @Override
-    public boolean reserveProduct(Product prod, IClient client) {
-        boolean result = false;
-
-        if (prod != null && client != null && isAvailableProduct(prod.getName()) != null) {
-            reservations.add(new Reservation(prod, client));
-        }
-
-        return result;
+        return newList;
     }
 
     public boolean absoluteAddProduct(String name, String description, double prize, String key, Status status, ProductsTypes type) {
         boolean result = false;
         if (name == "") {
             name = "No Named Product";
-            Product p = new Product(name, description, prize, key, status, type);
-            products.add(p);
-            result = true;
         }
+        Product p = new Product(name, description, prize, key, status, type);
+        products.add(p);
+        result = true;
         return result;
     }
 
     public boolean absoluteAddFilm(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status) {
         boolean result = false;
-
+        if (name == "") {
+            name = "No Named Product";
+        }
         Film f = new Film(type, minAge, name, description, prize, key, status);
         products.add(f);
+        items.addItem(f);
 
         return result;
     }
 
     public boolean absoluteAddGame(GameCategory type, int minAge, String name, String description, double prize, String key, Status status) {
         boolean result = false;
-
+        if (name == "") {
+            name = "No Named Product";
+        }
         Game g = new Game(type, minAge, name, description, prize, key, status);
         products.add(g);
+        items.addItem(g);
 
         return result;
     }
 
     public boolean absoluteAddOther(String name, String description, double prize, String key, Status status) {
         boolean result = false;
-
+        if (name == "") {
+            name = "No Named Product";
+        }
         Other o = new Other(name, description, prize, key, status);
         products.add(o);
-
-        return result;
-    }
-
-    //NO TERMINADO, PREGUNTAR CARLOS SOBRE LO DEL TIEMPO
-    @Override
-    public boolean returnedProduct(Product prod, IClient client) {
-        boolean result = false;
-        Iterator<Product> iP = products.iterator();
-        Product auxP = null;
-
-        if (prod != null && client != null) {
-            while (iP.hasNext()) {
-                auxP = iP.next();
-                for (int i = 0; i < reservations.size(); i++) {
-                    if (reservations.get(i).pro.equals(prod)
-                            && reservations.get(i).equals(client)) {
-                        reservations.get(i).status = StatusReserve.FINISHED;
-                        result = true;
-                    }
-                }
-            }
-        }
+        items.addItem(o);
 
         return result;
     }

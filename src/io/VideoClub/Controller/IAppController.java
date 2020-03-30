@@ -37,14 +37,14 @@ public interface IAppController {
     Set<IClient> listAllClients(Comparator c);
     Set<IClient> listAllClientsWithReservationsNotFinished();*/
     
-    Set<Reservation> listAllReservations();
+    /*Set<Reservation> listAllReservations();
     Set<Reservation> listAllReservations(Comparator c);
     Set<Reservation> listAllReservations(Reservation.StatusReserve status);
     
     double getIncommings();
     double getIncommings(LocalDate from);
     double getIncommings(LocalDate from, LocalDate to);
-    Map<IClient,Double> resumeAllIncomingsByClient();
+    Map<IClient,Double> resumeAllIncomingsByClient();*/
     
     /*boolean createProduct(String name, String description,double prize);
     boolean createMovie(ProductsTypes type,String name, String description, MovieCategory cat,int minAge);
@@ -61,7 +61,7 @@ public interface IAppController {
     
     /*Product isAvailableProduct(String name);  //get product if yes
     boolean reserveProduct(Product prod,IClient client);*/
-    double closeReservation();  //-->> status finished  --> get prizetopay
+    //double closeReservation();  //-->> status finished  --> get prizetopay
     
     boolean loadCatalogFromDDBB();  //XML or JSON
     boolean loadClientsFromDDBB();

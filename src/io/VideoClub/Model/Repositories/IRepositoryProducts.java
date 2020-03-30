@@ -34,8 +34,4 @@ public interface IRepositoryProducts {
     boolean removeProduct(String name);
     
     boolean editProduct(String key, Product newP);
-    
-    Product isAvailableProduct(String name);  //get product if yes
-    boolean reserveProduct(Product prod,IClient client);
-    boolean returnedProduct(Product prod, IClient client);
 }
