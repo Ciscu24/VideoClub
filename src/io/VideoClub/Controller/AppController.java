@@ -6,6 +6,8 @@ import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Film;
 import io.VideoClub.Model.Game;
 import io.VideoClub.Model.Other;
+import io.VideoClub.Model.Client;
+import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Product.Status;
 import io.VideoClub.Model.Repositories.RepositoryClient;
@@ -14,6 +16,7 @@ import io.VideoClub.Model.Repositories.RepositoryProducts;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
@@ -52,7 +55,25 @@ public class AppController {
             doc.appendChild(raiz);
             //Ya está creado el XML
             List<Product> ListaProductos = products.listAllProductsNoDuplicates();
-
+            List<IClient> ListaClientes = (List<IClient>) clients.listAllClients();
+            
+            for (IClient Cliente:ListaClientes){
+                Element e=doc.createElement("Cliente");
+                
+                Element id=doc.createElement("ID");
+                id.appendChild(doc.createTextNode(Cliente.getID()));
+                
+                Element nombre = doc.createElement("Nombre");
+                nombre.appendChild(doc.createTextNode(Cliente.getName()));
+                
+                Element telefono = doc.createElement("Telefono");
+                telefono.appendChild(doc.createTextNode(Cliente.getPhone()));
+                e.appendChild(id);
+                e.appendChild(nombre);
+                e.appendChild(telefono);
+                
+                raiz.appendChild(e);
+            }    
             for (Product producto : ListaProductos) {
 
                 if (producto.getType() == ProductsTypes.Peliculas) {

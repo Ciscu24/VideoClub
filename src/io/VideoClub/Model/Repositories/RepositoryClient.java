@@ -120,7 +120,7 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
 
     @Override
     public Set<IClient> listAllClientsWithReservations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
