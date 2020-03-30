@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class RepositoryReservations implements IRepositoryReservations {
 
     @Override
     public Set<Reservation> listAllReservations() {
-        Set<Reservation> newList = new TreeSet<>();
+        Set<Reservation> newList = new HashSet<>();
         for (Reservation r : reservations) {
             newList.add(r);
         }
@@ -107,6 +108,7 @@ public class RepositoryReservations implements IRepositoryReservations {
         if (r != null) {
             result = r.pro.getPrize();
             r.status = Reservation.StatusReserve.FINISHED;
+            r.finished = LocalDate.now();
         }
         return result;
     }
@@ -130,10 +132,12 @@ public class RepositoryReservations implements IRepositoryReservations {
     public boolean reserveProduct(Product prod, IClient client) {
         boolean result = false;
 
-        if (prod != null && client != null
-                && isAvailableProduct(prod.getName()) != null) {
-            reservations.add(new Reservation(prod, client));
-        }
+        /*if (prod != null && client != null
+        && isAvailableProduct(prod.getName()) != null) {
+        reservations.add(new Reservation(prod, client));
+        }*/
+        
+        reservations.add(new Reservation(prod, client));
 
         return result;
     }
@@ -159,7 +163,7 @@ public class RepositoryReservations implements IRepositoryReservations {
 
         if (cliente != null) {
             for (Reservation r : reservations) {
-                if (r.cli.equals(cliente) == true) {
+                if (r.cli.equals(cliente) == true && (r.status.equals(r.status.PENDING) || r.status.equals(r.status.ACTIVE))) {
                     newList.add(r);
                 }
             }

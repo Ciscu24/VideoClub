@@ -15,7 +15,7 @@
 <Precio>20.0</Precio>
 <Edad>16</Edad>
 <Key>abb6e246-5a08-46</Key>
-<Status>RESERVED</Status>
+<Status>AVAILABLE</Status>
 <Tipo>Horror</Tipo>
 </Pelicula>
 <Juego>
@@ -33,5 +33,12 @@
 <Precio>10.0</Precio>
 <Key>8471aa43-390d-41</Key>
 <Status>AVAILABLE</Status>
+</Otro>
+<Otro>
+<Nombre>Azul</Nombre>
+<Descripcion>Colores J.Balvin</Descripcion>
+<Precio>5.0</Precio>
+<Key>642c4b5e-3ca0-47</Key>
+<Status>RESERVED</Status>
 </Otro>
 </ListaProductos>

@@ -183,10 +183,10 @@ public class RepositoryProducts implements IRepositoryProducts {
     @Override
     public Set<Product> listAllProducts(Comparator c) {
         Set<Product> newList = null;
-        
+
         Collections.sort(products, c);
         newList = (Set<Product>) products;
-        
+
         return newList;
     }
 
@@ -305,33 +305,43 @@ public class RepositoryProducts implements IRepositoryProducts {
         return newList;
     }
 
+    public List<Product> listAllDifferentOther() {
+        List<Product> newList = new ArrayList<>();
+        for (Product p : products) {
+            if (p.getType().equals(ProductsTypes.Otros)) {
+                newList.add(p);
+            }
+        }
+        return newList;
+    }
+
     public boolean absoluteAddProduct(String name, String description, double prize, String key, Status status, ProductsTypes type) {
         boolean result = false;
         if (name == "") {
-            name = "No Named Product";    
+            name = "No Named Product";
         }
-            Product p = new Product(name, description, prize, key, status, type);
-            products.add(p);
-            result = true;
+        Product p = new Product(name, description, prize, key, status, type);
+        products.add(p);
+        result = true;
         return result;
     }
 
     public boolean absoluteAddFilm(MovieCategory type, int minAge, String name, String description, double prize, String key, Status status) {
         boolean result = false;
         if (name == "") {
-            name = "No Named Product";    
+            name = "No Named Product";
         }
         Film f = new Film(type, minAge, name, description, prize, key, status);
         products.add(f);
         items.addItem(f);
-        
+
         return result;
     }
 
     public boolean absoluteAddGame(GameCategory type, int minAge, String name, String description, double prize, String key, Status status) {
         boolean result = false;
         if (name == "") {
-            name = "No Named Product";    
+            name = "No Named Product";
         }
         Game g = new Game(type, minAge, name, description, prize, key, status);
         products.add(g);
@@ -343,7 +353,7 @@ public class RepositoryProducts implements IRepositoryProducts {
     public boolean absoluteAddOther(String name, String description, double prize, String key, Status status) {
         boolean result = false;
         if (name == "") {
-            name = "No Named Product";    
+            name = "No Named Product";
         }
         Other o = new Other(name, description, prize, key, status);
         products.add(o);
@@ -351,5 +361,5 @@ public class RepositoryProducts implements IRepositoryProducts {
 
         return result;
     }
-    
+
 }

@@ -68,6 +68,9 @@ public class GUI {
 
     static void opciones_principal(int numero) {
         switch (numero) {
+            case 0:
+                System.out.println("Vuelva pronto al PochoBuster =)");
+                break;
             case 1:
                 Iniciar_sesion();
                 break;
@@ -77,7 +80,13 @@ public class GUI {
                 break;
 
             case 3:
-                System.out.println("Bienvenido al  Videoclub 'PochoBuster' ....");
+                System.out.println("\n+--------------------------------------------------------------------------------------------+");
+                System.out.println("|                           Bienvenido al  Videoclub PochoBuster:                            |");
+                System.out.println("|            Donde puedes alquilar diferentes peliculas, juegos y otros productos.           |");
+                System.out.println("| Donde nuestro trabajadores Ciscu, Edu, Anto, Rafa y Miguel os atenderan de la mejor forma. |");
+                System.out.println("| No seas un pirata se mejor un Pocho, como nosotros, por eso van al BlockBuster pero Pocho. |");
+                System.out.println("+--------------------------------------------------------------------------------------------+");
+                pulsarEnter();
                 break;
 
             case 4:
@@ -115,8 +124,7 @@ public class GUI {
             System.out.println("+---------------------+");
             System.out.println("| 1) Listar           |");
             System.out.println("| 2) Cuenta           |");
-            System.out.println("| 3) Reservar.        |");
-            System.out.println("| 4) Cancelar reserva |");
+            System.out.println("| 3) Reservar         |");
             System.out.println("| 0) Salir            |");
             System.out.println("+---------------------+");
 
@@ -145,9 +153,6 @@ public class GUI {
 
                     break;
 
-                case 4:
-
-                    break;
             }
         } while (opcion != 0);
 
@@ -157,17 +162,15 @@ public class GUI {
         System.out.println("\n+-------------------+");
         System.out.println("|    Registrarse    |");
         System.out.println("+-------------------+");
-        String correo = devolverString("Introduzca un correo: ");
+        String usuario = devolverString("Introduce tu usuario: ");
         String contrasena = devolverString("Introdce una contraseña: ");
-        if (correo != null && contrasena != null) {
+        if (usuario.equals("") && contrasena.equals("")) {
+            System.out.println("No se ha podido realizar el registro");
+        } else {
             String nombre = devolverString("Introduce tu nombre: ");
-            String usuario = devolverString("Introduce tu usuario: ");
             String telefono = devolverString("Introduce tu teléfono: ");
-
             Controller.clients.addClient(nombre, telefono, usuario, contrasena);
             System.out.println("Usuario creado");
-        } else {
-            System.out.println("No se ha podido realizar el registro");
         }
 
         pulsarEnter();
@@ -200,7 +203,8 @@ public class GUI {
             System.out.println("| 3) Quitar Producto  |");
             System.out.println("| 4) Editar Productos |");
             System.out.println("| 5) Disponibilidad   |");
-            System.out.println("| 6) Reservas         |");
+            System.out.println("| 6) Listar Reservas  |");
+            System.out.println("| 7) Ganancias        |");
             System.out.println("| 0) Salir            |");
             System.out.println("+---------------------+");
 
@@ -212,6 +216,7 @@ public class GUI {
                     Controller.toXML("productos.xml");
                     System.out.println("Base de datos guardada con exito");
                     break;
+
                 case 1:
                     List<Product> ListaProductos = Controller.products.listAllProductsNoDuplicates();
                     for (Product producto : ListaProductos) {
@@ -298,13 +303,18 @@ public class GUI {
 
                     }
                     break;
+
                 case 6:
                     Set<Reservation> reservas = Controller.reservations.listAllReservations();
-                    for(Reservation reserva : reservas){
+                    for (Reservation reserva : reservas) {
                         System.out.println(reserva);
                     }
+                    pulsarEnter();
                     break;
-                    
+
+                case 7:
+                    double Ganancias = Controller.reservations.getIncommings();
+                    System.out.println("El PochoBuster ha ganado un total de: "+Ganancias+" €");
             }
 
         } while (opcion != 0);
@@ -435,7 +445,7 @@ public class GUI {
             System.out.println(" 1) Editar nombre: " + cliente.getName());
             System.out.println(" 2) Editar telefono: " + cliente.getPhone());
             System.out.println(" 3) Editar contraseña: " + cliente.getPassword());
-            System.out.println(" 0) Guardar producto");
+            System.out.println(" 0) Guardar datos");
 
             opcion = devolverInt("Introduce una opcion: ");
 
@@ -529,57 +539,64 @@ public class GUI {
 
     public static void menu_lista() {
         int opcion = 0;
-        do {
-            System.out.println("\n+---------------------+");
-            System.out.println("|    Menu Listar      |");
-            System.out.println("+---------------------+");
-            System.out.println("| 1) Listar productos |");
-            System.out.println("| 2) Listar peliculas |");
-            System.out.println("| 3) Listar juegos    |");
-            System.out.println("| 0) Salir            |");
-            System.out.println("+---------------------+");
 
-            opcion = devolverInt("Introduce una opcion: ");
+        System.out.println("\n+---------------------+");
+        System.out.println("|    Menu Listar      |");
+        System.out.println("+---------------------+");
+        System.out.println("| 1) Listar productos |");
+        System.out.println("| 2) Listar peliculas |");
+        System.out.println("| 3) Listar juegos    |");
+        System.out.println("| 4) Listar otros     |");
+        System.out.println("| 0) Salir            |");
+        System.out.println("+---------------------+");
 
-            switch (opcion) {
-                case 1:
-                    Set<Product> ListaProductos = Controller.products.listAllProducts();
-                    for (Product producto : ListaProductos) {
-                        System.out.println(producto);
-                    }
-                    break;
+        opcion = devolverInt("Introduce una opcion: ");
 
-                case 2:
-                    List<Product> ListaPeliculas = Controller.products.listAllDifferentMovies();
-                    for (Product peliculas : ListaPeliculas) {
-                        System.out.println(peliculas);
-                    }
+        switch (opcion) {
+            case 1:
+                Set<Product> ListaProductos = Controller.products.listAllProducts();
+                for (Product producto : ListaProductos) {
+                    System.out.println(producto);
+                }
+                pulsarEnter();
+                break;
 
-                    break;
+            case 2:
+                List<Product> ListaPeliculas = Controller.products.listAllDifferentMovies();
+                for (Product peliculas : ListaPeliculas) {
+                    System.out.println(peliculas);
+                }
+                pulsarEnter();
+                break;
 
-                case 3:
-                    List<Product> ListaJuegos = Controller.products.listAllDifferentGames();
-                    for (Product juegos : ListaJuegos) {
-                        System.out.println(juegos);
-                    }
-                    break;
+            case 3:
+                List<Product> ListaJuegos = Controller.products.listAllDifferentGames();
+                for (Product juegos : ListaJuegos) {
+                    System.out.println(juegos);
+                }
+                pulsarEnter();
+                break;
 
-                case 4:
-
-                    break;
-            }
-        } while (opcion != 0);
+            case 4:
+                List<Product> ListaOtros = Controller.products.listAllDifferentOther();
+                for (Product otros : ListaOtros) {
+                    System.out.println(otros);
+                }
+                pulsarEnter();
+                break;
+        }
 
     }
 
     public static void menu_reservas(Client cliente) {
         int opcion = 0;
         do {
-            System.out.println("\n+---------------------+");
+            System.out.println("\n+-----------------------+");
             System.out.println("|     Menu Reservas     |");
             System.out.println("+-----------------------+");
             System.out.println("| 1) Listar productos   |");
             System.out.println("| 2) Reservar producto  |");
+            System.out.println("| 3) Devolver producto  |");
             System.out.println("| 0) Salir              |");
             System.out.println("+-----------------------+");
 
@@ -598,32 +615,31 @@ public class GUI {
                     int contador = 0;
                     Product prod = null;
                     String nombre = devolverString("Introduce el nombre de la pelicula a reservar: ");
-                    //Ciscu y los Cisquitos
                     Set<Product> ListaPeliculas = Controller.products.listAllByName(nombre);
-                    
+
                     if (ListaPeliculas != null) {
                         for (Product peliculas : ListaPeliculas) {
-                            if(peliculas.getStatus()== Product.Status.AVAILABLE){
+                            if (peliculas.getStatus() == Product.Status.AVAILABLE) {
                                 System.out.println(peliculas);
                                 prod = peliculas;
                                 contador++;
                             }
                         }
-                        if(contador == 0){
+                        if (contador == 0) {
                             System.out.println("Producto/s no disponibles");
                             pulsarEnter();
-                        }else{
+                        } else {
                             String resultado = devolverString("¿Desea reservar?(y/n): ");
-                            if(resultado.equals("y")){
+                            if (resultado.equals("y")) {
                                 Controller.reservations.reserveProduct(prod, cliente);
                                 prod.setStatus(Product.Status.RESERVED);
                                 Controller.products.editProduct(prod.getKey(), prod);
-                                
+
                                 System.out.println("Reserva realizada correctamente");
                                 pulsarEnter();
                             }
                         }
-                    }else {
+                    } else {
                         System.out.println("No hay coincidencias");
                         pulsarEnter();
                     }
@@ -631,15 +647,38 @@ public class GUI {
                     break;
 
                 case 3:
-                    List<Product> ListaJuegos = Controller.products.listAllDifferentGames();
-                    for (Product juegos : ListaJuegos) {
-                        System.out.println(juegos);
+                    List<Reservation> ListaReservas = Controller.reservations.productoReservadoCliente(cliente);
+                    if (ListaReservas.isEmpty()) {
+                        System.out.println("Usted no tiene reservas");
+
+                    } else {
+                        contador = 0;
+                        for (Reservation reserva : ListaReservas) {
+                            contador++;
+                            System.out.println("----------" + contador + "----------");
+                            System.out.println(reserva);
+                        }
+                        int respuesta = devolverInt("Introduce el numero de la reserva que quiera devolver: ");
+
+                        if (respuesta <= ListaReservas.size() && respuesta > 0) {
+                            Reservation reserva = ListaReservas.get(respuesta - 1);
+                            String resultado = devolverString("¿Quiere devolver " + reserva.pro.getName() + "?(y/n): ");
+                            if (resultado.equals("y")) {
+                                double dinero = Controller.reservations.closeReservation(reserva);
+                                prod = reserva.pro;
+                                prod.setStatus(Product.Status.AVAILABLE);
+                                Controller.products.editProduct(prod.getKey(), prod);
+                                System.out.println("Devolucion realizada correctamente usted tiene que abonar " + dinero + "€");
+                                pulsarEnter();
+                            } else {
+                                System.out.println("No ha devuelto el producto");
+                            }
+                        } else {
+                            System.out.println("Localizador incorrecto");
+                        }
                     }
                     break;
 
-                case 4:
-
-                    break;
             }
         } while (opcion != 0);
 
