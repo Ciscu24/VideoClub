@@ -34,7 +34,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class AppController {
+public class AppController implements IAppController{
 
     public RepositoryProducts products = new RepositoryProducts();
     public RepositoryItems items = new RepositoryItems();
@@ -43,7 +43,9 @@ public class AppController {
 
     public AppController() {}
 
-    public void toXML(String file) {
+    @Override
+    public boolean saveCatalogFromDDBB() {
+        boolean resultado = false;
         //validar si el archivo es .xml
         try {
             DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
@@ -56,25 +58,7 @@ public class AppController {
             doc.appendChild(raiz);
             //Ya está creado el XML
             List<Product> ListaProductos = products.listAllProductsNoDuplicates();
-            List<IClient> ListaClientes = (List<IClient>) clients.listAllClients();
             
-            for (IClient Cliente:ListaClientes){
-                Element e=doc.createElement("Cliente");
-                
-                Element id=doc.createElement("ID");
-                id.appendChild(doc.createTextNode(Cliente.getID()));
-                
-                Element nombre = doc.createElement("Nombre");
-                nombre.appendChild(doc.createTextNode(Cliente.getName()));
-                
-                Element telefono = doc.createElement("Telefono");
-                telefono.appendChild(doc.createTextNode(Cliente.getPhone()));
-                e.appendChild(id);
-                e.appendChild(nombre);
-                e.appendChild(telefono);
-                
-                raiz.appendChild(e);
-            }    
             for (Product producto : ListaProductos) {
 
                 if (producto.getType() == ProductsTypes.Peliculas) {
@@ -194,7 +178,8 @@ public class AppController {
             trans.setOutputProperty("{http://xml.apache.org/xlst}indent-amount", "4");
 
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File(file));
+            StreamResult result = new StreamResult(new File("productos.xml"));
+            resultado = true;
             trans.transform(source, result);
 
         } catch (ParserConfigurationException ex) {
@@ -204,10 +189,14 @@ public class AppController {
         } catch (TransformerException ex) {
             System.out.println(ex);
         }
+        
+        return resultado;
 
     }
 
-    public void cargaBBDD() {
+    @Override
+    public boolean loadCatalogFromDDBB() {
+        boolean resultado = false;
         File file = new File("productos.xml");
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -295,8 +284,143 @@ public class AppController {
                     products.absoluteAddOther(nombre, descripcion, precio, key, status);
                 }
             }
+            
+            resultado = true;
         } catch (Exception e) {
             System.out.println(e);
         }
+        
+        return resultado;
+    }
+    
+    @Override
+    public boolean saveClientsFromDDBB() {
+        boolean resultado = false;
+        //validar si el archivo es .xml
+        try {
+            DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
+
+            DocumentBuilder build = dFact.newDocumentBuilder();
+            Document doc = build.newDocument();
+            //Tenemos el contenedor del documento, hay que crear nodos.
+            Element raiz = doc.createElement("ListaClientes");
+            // <--- Insertar todos los contactos
+            doc.appendChild(raiz);
+            //Ya está creado el XML
+            Set<Client> ListaClientes = clients.listAllClientsTrue();
+            
+            for (Client Cliente:ListaClientes){
+                Element c=doc.createElement("Cliente");
+                
+                Element id=doc.createElement("ID");
+                id.appendChild(doc.createTextNode(Cliente.getID()));
+                
+                Element nombre = doc.createElement("Nombre");
+                nombre.appendChild(doc.createTextNode(Cliente.getName()));
+                
+                Element telefono = doc.createElement("Telefono");
+                telefono.appendChild(doc.createTextNode(Cliente.getPhone()));
+                
+                Element usuario = doc.createElement("Usuario");
+                usuario.appendChild(doc.createTextNode(Cliente.getUser()));
+                
+                Element contrasena = doc.createElement("Contrasena");
+                contrasena.appendChild(doc.createTextNode(Cliente.getPassword()));
+                
+                c.appendChild(id);
+                c.appendChild(nombre);
+                c.appendChild(telefono);
+                c.appendChild(usuario);
+                c.appendChild(contrasena);
+                
+                raiz.appendChild(c);
+            }
+
+            //Guardar XML en disco duro.
+            TransformerFactory tFact = TransformerFactory.newInstance();
+
+            Transformer trans = tFact.newTransformer();
+            // <---- OPCIONES DEL ARCHIVO
+            trans.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            trans.setOutputProperty(OutputKeys.INDENT, "yes");
+            trans.setOutputProperty("{http://xml.apache.org/xlst}indent-amount", "4");
+
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File("clientes.xml"));
+            resultado = true;
+            trans.transform(source, result);
+
+        } catch (ParserConfigurationException ex) {
+            System.out.println(ex);
+        } catch (TransformerConfigurationException ex) {
+            System.out.println(ex);
+        } catch (TransformerException ex) {
+            System.out.println(ex);
+        }
+        
+        return resultado;
+    }
+
+
+    @Override
+    public boolean loadClientsFromDDBB() {
+        boolean resultado = false;
+        File file = new File("clientes.xml");
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("ListaClientes");
+            System.out.println("Número de Clientes: " + nList.getLength());
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    String id = eElement.getElementsByTagName("ID").item(0).getTextContent();
+                    String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    String telefono = eElement.getElementsByTagName("Telefono").item(0).getTextContent();
+                    String usuario = eElement.getElementsByTagName("Usuario").item(0).getTextContent();
+                    String contrasena = eElement.getElementsByTagName("Contrasena").item(0).getTextContent();
+
+                    clients.addClient(id, nombre, telefono, usuario, contrasena);
+                }
+            }
+            resultado = true;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return resultado;
+    }
+
+    @Override
+    public boolean loadReservationsFromDDBB() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveReservationsFromDDBB() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveAllDDBB() {
+        boolean resultado = false;
+        if(saveCatalogFromDDBB() && saveClientsFromDDBB()){
+            resultado = true;
+        }
+        return resultado;
+    }
+    
+    @Override
+    public boolean loadAllDDBB() {
+        boolean resultado = false;
+        if(loadCatalogFromDDBB() && loadClientsFromDDBB()){
+            resultado = true;
+        }
+        return resultado;
     }
 }

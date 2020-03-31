@@ -41,6 +41,15 @@ public class Client implements IClient{
         this.User = User;
         this.password = password;
     }
+
+    public Client(String ID, String Name, String Phone, String User, String password) {
+        this.ID = ID;
+        this.Name = Name;
+        this.Time = LocalDateTime.now();
+        this.Phone = Phone;
+        this.User = User;
+        this.password = password;
+    }
     
     private String generateRandom16Chars(){
         return(String)UUID.randomUUID().toString().subSequence(0, 16);
@@ -95,6 +104,8 @@ public class Client implements IClient{
     public void setPhone(String p) {
         this.Phone=p;
     }
+    
+    
 
     @Override
     public boolean equals(Object obj) {

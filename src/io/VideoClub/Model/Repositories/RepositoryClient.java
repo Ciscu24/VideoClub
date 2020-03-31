@@ -13,6 +13,7 @@ import io.VideoClub.Model.Client;
 import io.VideoClub.Model.IClient;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 /**
@@ -144,6 +145,20 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
             }
         }
         return result;
+    }
+    
+    
+    public Set<Client> listAllClientsTrue() {
+        Set<Client> list = new HashSet<>();
+        for (Client C : clientL) {
+            list.add(C);
+        }
+        return list;
+    }
+    
+    public boolean addClient(String ID, String Name,String Phone, String user, String password){
+        Client c = new Client(ID, Name, Phone, user, password);        
+        return this.clientL.add(c);
     }
     
 }

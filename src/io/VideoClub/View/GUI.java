@@ -1,20 +1,18 @@
 package io.VideoClub.View;
 
-import com.sun.glass.ui.SystemClipboard;
 import io.VideoClub.Controller.AppController;
 import io.VideoClub.Model.Client;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
-import io.VideoClub.Model.Film; //NNoo
+import io.VideoClub.Model.Film;
 import io.VideoClub.Model.Game;
+import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeMap;
 
 public class GUI {
 
@@ -22,9 +20,10 @@ public class GUI {
 
     public static void main(String[] args) {
         logo();
-        Controller.cargaBBDD();
+        Controller.loadAllDDBB();
         //MenuEmpleados();
         principal();
+        Controller.saveAllDDBB();
     }
 
     public static void logo() {
@@ -205,18 +204,13 @@ public class GUI {
             System.out.println("| 5) Disponibilidad   |");
             System.out.println("| 6) Listar Reservas  |");
             System.out.println("| 7) Ganancias        |");
+            System.out.println("| 8) Listar Clientes  |");
             System.out.println("| 0) Salir            |");
             System.out.println("+---------------------+");
 
             opcion = devolverInt("Introduce una opcion: ");
 
             switch (opcion) {
-                case 0:
-                    System.out.println("Guardando base de datos");
-                    Controller.toXML("productos.xml");
-                    System.out.println("Base de datos guardada con exito");
-                    break;
-
                 case 1:
                     List<Product> ListaProductos = Controller.products.listAllProductsNoDuplicates();
                     for (Product producto : ListaProductos) {
@@ -315,6 +309,14 @@ public class GUI {
                 case 7:
                     double Ganancias = Controller.reservations.getIncommings();
                     System.out.println("El PochoBuster ha ganado un total de: "+Ganancias+" €");
+                    break;
+                    
+                case 8:
+                    Set<Client> clientes = Controller.clients.listAllClientsTrue();
+                    for (Client cliente : clientes) {
+                        System.out.println(cliente);
+                    }
+                    break;
             }
 
         } while (opcion != 0);
