@@ -423,27 +423,89 @@ public class AppController implements IAppController{
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     String keyProduct = eElement.getElementsByTagName("keyproduct").item(0).getTextContent();
-                    Product producto = products.searchByKey(keyProduct);
-                    String usuarioCliente = eElement.getElementsByTagName("usuariocliente").item(0).getTextContent();
-                    Client cliente = clients.devolverCliente(usuarioCliente);
-                    String fecha = eElement.getElementsByTagName("fechaini").item(0).getTextContent();
-                    LocalDate fechaIni = LocalDate.parse(fecha);
-                    fecha = eElement.getElementsByTagName("fechafin").item(0).getTextContent();
-                    LocalDate fechaFin = LocalDate.parse(fecha);
-                    fecha = eElement.getElementsByTagName("finalizado").item(0).getTextContent();
-                    LocalDate finalizado = LocalDate.parse(fecha);
+                    if(products.searchByKey(keyProduct) != null){
+                        Product producto = products.searchByKey(keyProduct);
+                        String usuarioCliente = eElement.getElementsByTagName("usuariocliente").item(0).getTextContent();
+                        if(clients.devolverCliente(usuarioCliente) != null){
+                            Client cliente = clients.devolverCliente(usuarioCliente);
+                            String fecha = eElement.getElementsByTagName("fechaini").item(0).getTextContent();
+                            LocalDate fechaIni = LocalDate.parse(fecha);
+                            fecha = eElement.getElementsByTagName("fechafin").item(0).getTextContent();
+                            LocalDate fechaFin = LocalDate.parse(fecha);
+                            fecha = eElement.getElementsByTagName("finalizado").item(0).getTextContent();
+                            LocalDate finalizado = LocalDate.parse(fecha);
+
+                            StatusReserve status = StatusReserve.ACTIVE;
+                            if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("FINISHED")) {
+                                status = StatusReserve.FINISHED;
+                            } else if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("PENDING")) {
+                                status = StatusReserve.PENDING;
+                            }
+
+                            reservations.reservations.add(new Reservation(producto, cliente, fechaIni, fechaFin, finalizado, status));
+                        }else{
+                            Client cliente = new Client("Desconocido", "Desconocido", LocalDateTime.now());
+                            String fecha = eElement.getElementsByTagName("fechaini").item(0).getTextContent();
+                            LocalDate fechaIni = LocalDate.parse(fecha);
+                            fecha = eElement.getElementsByTagName("fechafin").item(0).getTextContent();
+                            LocalDate fechaFin = LocalDate.parse(fecha);
+                            fecha = eElement.getElementsByTagName("finalizado").item(0).getTextContent();
+                            LocalDate finalizado = LocalDate.parse(fecha);
+
+                            StatusReserve status = StatusReserve.ACTIVE;
+                            if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("FINISHED")) {
+                                status = StatusReserve.FINISHED;
+                            } else if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("PENDING")) {
+                                status = StatusReserve.PENDING;
+                            }
+
+                            reservations.reservations.add(new Reservation(producto, cliente, fechaIni, fechaFin, finalizado, status));
+                        }
+                        
+                        
+                    }else{
+                        Product producto = new Product("Desconocido", "Desconocida", 0, ProductsTypes.Otros);
+                        String usuarioCliente = eElement.getElementsByTagName("usuariocliente").item(0).getTextContent();
+                        if(clients.devolverCliente(usuarioCliente) != null){
+                            Client cliente = clients.devolverCliente(usuarioCliente);
+                            String fecha = eElement.getElementsByTagName("fechaini").item(0).getTextContent();
+                            LocalDate fechaIni = LocalDate.parse(fecha);
+                            fecha = eElement.getElementsByTagName("fechafin").item(0).getTextContent();
+                            LocalDate fechaFin = LocalDate.parse(fecha);
+                            fecha = eElement.getElementsByTagName("finalizado").item(0).getTextContent();
+                            LocalDate finalizado = LocalDate.parse(fecha);
+
+                            StatusReserve status = StatusReserve.ACTIVE;
+                            if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("FINISHED")) {
+                                status = StatusReserve.FINISHED;
+                            } else if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("PENDING")) {
+                                status = StatusReserve.PENDING;
+                            }
+
+                            reservations.reservations.add(new Reservation(producto, cliente, fechaIni, fechaFin, finalizado, status));
+                        }else{
+                            Client cliente = new Client("Desconocido", "Desconocido", LocalDateTime.now());
+                            String fecha = eElement.getElementsByTagName("fechaini").item(0).getTextContent();
+                            LocalDate fechaIni = LocalDate.parse(fecha);
+                            fecha = eElement.getElementsByTagName("fechafin").item(0).getTextContent();
+                            LocalDate fechaFin = LocalDate.parse(fecha);
+                            fecha = eElement.getElementsByTagName("finalizado").item(0).getTextContent();
+                            LocalDate finalizado = LocalDate.parse(fecha);
+
+                            StatusReserve status = StatusReserve.ACTIVE;
+                            if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("FINISHED")) {
+                                status = StatusReserve.FINISHED;
+                            } else if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("PENDING")) {
+                                status = StatusReserve.PENDING;
+                            }
+
+                            reservations.reservations.add(new Reservation(producto, cliente, fechaIni, fechaFin, finalizado, status));
+                        }
                     
-                    StatusReserve status = StatusReserve.ACTIVE;
-                    if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("FINISHED")) {
-                        status = StatusReserve.FINISHED;
-                    } else if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("PENDING")) {
-                        status = StatusReserve.PENDING;
                     }
-                    
-                    reservations.reservations.add(new Reservation(producto, cliente, fechaIni, fechaFin, finalizado, status));
                 }
             }
-            resultado = true;
+                resultado = true;
         } catch (Exception e) {
             System.out.println(e);
         }
