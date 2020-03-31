@@ -3,7 +3,6 @@ package io.VideoClub.Model.Repositories;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
-import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
 import java.util.Comparator;
 import java.util.List;

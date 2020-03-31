@@ -7,7 +7,6 @@ import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Film;
 import io.VideoClub.Model.Game;
-import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
 import java.util.List;
@@ -17,14 +16,6 @@ import java.util.Set;
 public class GUI {
 
     static AppController Controller = new AppController();
-
-    public static void main(String[] args) {
-        logo();
-        Controller.loadAllDDBB();
-        //MenuEmpleados();
-        principal();
-        Controller.saveAllDDBB();
-    }
 
     public static void logo() {
         /*System.out.println(" _______            _           _______            _       _______ ");
@@ -46,7 +37,13 @@ public class GUI {
     }
 
     public static void principal() {
-
+        logo();
+        
+        if(Controller.loadAllDDBB()){
+            System.out.println("\nBase de datos cargada correctamente");
+        }else{
+            System.out.println("La base de datos no esta cargada");
+        }
         int numero;
 
         do {
@@ -68,6 +65,11 @@ public class GUI {
     static void opciones_principal(int numero) {
         switch (numero) {
             case 0:
+                if(Controller.saveAllDDBB()){
+                    System.out.println("Base de datos guardada correctamente");
+                }else{
+                    System.out.println("La base de datos no se ha guardado");
+                }
                 System.out.println("Vuelva pronto al PochoBuster =)");
                 break;
             case 1:
@@ -309,6 +311,7 @@ public class GUI {
                 case 7:
                     double Ganancias = Controller.reservations.getIncommings();
                     System.out.println("El PochoBuster ha ganado un total de: "+Ganancias+" €");
+                    pulsarEnter();
                     break;
                     
                 case 8:
@@ -316,6 +319,7 @@ public class GUI {
                     for (Client cliente : clientes) {
                         System.out.println(cliente);
                     }
+                    pulsarEnter();
                     break;
             }
 
@@ -660,6 +664,7 @@ public class GUI {
                             System.out.println("----------" + contador + "----------");
                             System.out.println(reserva);
                         }
+                        System.out.println("");
                         int respuesta = devolverInt("Introduce el numero de la reserva que quiera devolver: ");
 
                         if (respuesta <= ListaReservas.size() && respuesta > 0) {

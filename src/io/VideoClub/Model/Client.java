@@ -32,7 +32,7 @@ public class Client implements IClient{
         this.Time = LocalDateTime.now();
     }
     
-    public Client(String Name,String Phone, LocalDateTime Time, String User, String password) {
+    public Client(String Name, String Phone, LocalDateTime Time, String User, String password) {
         this.ID = generateRandom16Chars();
         this.Name = Name;
         this.Time = Time;
@@ -42,10 +42,10 @@ public class Client implements IClient{
         this.password = password;
     }
 
-    public Client(String ID, String Name, String Phone, String User, String password) {
+    public Client(String ID, String Name, LocalDateTime Time, String Phone, String User, String password) {
         this.ID = ID;
         this.Name = Name;
-        this.Time = LocalDateTime.now();
+        this.Time = Time;
         this.Phone = Phone;
         this.User = User;
         this.password = password;

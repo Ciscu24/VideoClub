@@ -29,6 +29,15 @@ public class Reservation implements Comparable<Reservation>{
         }
         status=StatusReserve.ACTIVE;
     }
+
+    public Reservation(Product pro, IClient cli, LocalDate ini, LocalDate end, LocalDate finished, StatusReserve status) {
+        this.pro = pro;
+        this.cli = cli;
+        this.ini = ini;
+        this.end = end;
+        this.finished = finished;
+        this.status = status;
+    }
     
     public boolean equals(Object o){
         boolean result=false;

@@ -7,15 +7,18 @@ import io.VideoClub.Model.Film;
 import io.VideoClub.Model.Game;
 import io.VideoClub.Model.Other;
 import io.VideoClub.Model.Client;
-import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Product.Status;
 import io.VideoClub.Model.Repositories.RepositoryClient;
 import io.VideoClub.Model.Repositories.RepositoryItems;
 import io.VideoClub.Model.Repositories.RepositoryProducts;
 import io.VideoClub.Model.Repositories.RepositoryReservations;
+import io.VideoClub.Model.Reservation;
+import io.VideoClub.Model.Reservation.StatusReserve;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -206,7 +209,7 @@ public class AppController implements IAppController{
             doc.getDocumentElement().normalize();
 
             NodeList nList = doc.getElementsByTagName("Pelicula");
-            System.out.println("Número de Peliculas: " + nList.getLength());
+            //System.out.println("Número de Peliculas: " + nList.getLength());
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -236,7 +239,7 @@ public class AppController implements IAppController{
             }
 
             nList = doc.getElementsByTagName("Juego");
-            System.out.println("Número de Juegos: " + nList.getLength());
+            //System.out.println("Número de Juegos: " + nList.getLength());
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
 
@@ -265,7 +268,7 @@ public class AppController implements IAppController{
             }
 
             nList = doc.getElementsByTagName("Otro");
-            System.out.println("Número de Otros: " + nList.getLength());
+            //System.out.println("Número de Otros: " + nList.getLength());
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
 
@@ -318,6 +321,9 @@ public class AppController implements IAppController{
                 Element nombre = doc.createElement("Nombre");
                 nombre.appendChild(doc.createTextNode(Cliente.getName()));
                 
+                Element time = doc.createElement("Time");
+                time.appendChild(doc.createTextNode(Cliente.getTime().toString()));
+                
                 Element telefono = doc.createElement("Telefono");
                 telefono.appendChild(doc.createTextNode(Cliente.getPhone()));
                 
@@ -329,6 +335,7 @@ public class AppController implements IAppController{
                 
                 c.appendChild(id);
                 c.appendChild(nombre);
+                c.appendChild(time);
                 c.appendChild(telefono);
                 c.appendChild(usuario);
                 c.appendChild(contrasena);
@@ -374,18 +381,66 @@ public class AppController implements IAppController{
             doc.getDocumentElement().normalize();
 
             NodeList nList = doc.getElementsByTagName("ListaClientes");
-            System.out.println("Número de Clientes: " + nList.getLength());
+            //System.out.println("Número de Clientes: " + nList.getLength());
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     String id = eElement.getElementsByTagName("ID").item(0).getTextContent();
                     String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    String tiempo = eElement.getElementsByTagName("Time").item(0).getTextContent();
+                    LocalDateTime time = LocalDateTime.parse(tiempo);
                     String telefono = eElement.getElementsByTagName("Telefono").item(0).getTextContent();
                     String usuario = eElement.getElementsByTagName("Usuario").item(0).getTextContent();
                     String contrasena = eElement.getElementsByTagName("Contrasena").item(0).getTextContent();
+                    
+                    clients.addClient(id, nombre, time, telefono, usuario, contrasena);
+                }
+            }
+            resultado = true;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return resultado;
+    }
+    
+    @Override
+    public boolean loadReservationsFromDDBB() {
+        boolean resultado = false;
+        File file = new File("reservas.xml");
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
 
-                    clients.addClient(id, nombre, telefono, usuario, contrasena);
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("ListaReservas");
+            //System.out.println("Número de Reservas: " + nList.getLength());
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    String keyProduct = eElement.getElementsByTagName("keyproduct").item(0).getTextContent();
+                    Product producto = products.searchByKey(keyProduct);
+                    String usuarioCliente = eElement.getElementsByTagName("usuariocliente").item(0).getTextContent();
+                    Client cliente = clients.devolverCliente(usuarioCliente);
+                    String fecha = eElement.getElementsByTagName("fechaini").item(0).getTextContent();
+                    LocalDate fechaIni = LocalDate.parse(fecha);
+                    fecha = eElement.getElementsByTagName("fechafin").item(0).getTextContent();
+                    LocalDate fechaFin = LocalDate.parse(fecha);
+                    fecha = eElement.getElementsByTagName("finalizado").item(0).getTextContent();
+                    LocalDate finalizado = LocalDate.parse(fecha);
+                    
+                    StatusReserve status = StatusReserve.ACTIVE;
+                    if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("FINISHED")) {
+                        status = StatusReserve.FINISHED;
+                    } else if (eElement.getElementsByTagName("status").item(0).getTextContent().equals("PENDING")) {
+                        status = StatusReserve.PENDING;
+                    }
+                    
+                    reservations.reservations.add(new Reservation(producto, cliente, fechaIni, fechaFin, finalizado, status));
                 }
             }
             resultado = true;
@@ -396,20 +451,84 @@ public class AppController implements IAppController{
         return resultado;
     }
 
-    @Override
-    public boolean loadReservationsFromDDBB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
+    @Override 
     public boolean saveReservationsFromDDBB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resultado = false;
+        //validar si el archivo es .xml
+        try {
+            DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
+
+            DocumentBuilder build = dFact.newDocumentBuilder();
+            Document doc = build.newDocument();
+            //Tenemos el contenedor del documento, hay que crear nodos.
+            Element raiz = doc.createElement("ListaReservas");
+            // <--- Insertar todos los contactos
+            doc.appendChild(raiz);
+            //Ya está creado el XML
+            Set<Reservation> ListaReservas = reservations.listAllReservations();
+            
+            for (Reservation reserva:ListaReservas){
+                Element r=doc.createElement("Reserva");
+                
+                Element keyProduct=doc.createElement("keyproduct");
+                keyProduct.appendChild(doc.createTextNode(reserva.pro.getKey()));
+                
+                Element usuarioCliente = doc.createElement("usuariocliente");
+                Client cliente = (Client)reserva.cli;
+                usuarioCliente.appendChild(doc.createTextNode(cliente.getUser()));
+                
+                Element fechaIni = doc.createElement("fechaini");
+                fechaIni.appendChild(doc.createTextNode(reserva.ini.toString()));
+                
+                Element fechaFin = doc.createElement("fechafin");
+                fechaFin.appendChild(doc.createTextNode(reserva.end.toString()));
+                
+                Element finalizado = doc.createElement("finalizado");
+                finalizado.appendChild(doc.createTextNode(reserva.finished.toString()));
+                
+                Element status = doc.createElement("status");
+                status.appendChild(doc.createTextNode(reserva.status.toString()));
+                
+                r.appendChild(keyProduct);
+                r.appendChild(usuarioCliente);
+                r.appendChild(fechaIni);
+                r.appendChild(fechaFin);
+                r.appendChild(finalizado);
+                r.appendChild(status);
+                
+                raiz.appendChild(r);
+            }
+
+            //Guardar XML en disco duro.
+            TransformerFactory tFact = TransformerFactory.newInstance();
+
+            Transformer trans = tFact.newTransformer();
+            // <---- OPCIONES DEL ARCHIVO
+            trans.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            trans.setOutputProperty(OutputKeys.INDENT, "yes");
+            trans.setOutputProperty("{http://xml.apache.org/xlst}indent-amount", "4");
+
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File("reservas.xml"));
+            resultado = true;
+            trans.transform(source, result);
+
+        } catch (ParserConfigurationException ex) {
+            System.out.println(ex);
+        } catch (TransformerConfigurationException ex) {
+            System.out.println(ex);
+        } catch (TransformerException ex) {
+            System.out.println(ex);
+        }
+        
+        return resultado;
     }
 
     @Override
     public boolean saveAllDDBB() {
         boolean resultado = false;
-        if(saveCatalogFromDDBB() && saveClientsFromDDBB()){
+        
+        if(saveCatalogFromDDBB() && saveClientsFromDDBB() && saveReservationsFromDDBB()){
             resultado = true;
         }
         return resultado;
@@ -418,7 +537,8 @@ public class AppController implements IAppController{
     @Override
     public boolean loadAllDDBB() {
         boolean resultado = false;
-        if(loadCatalogFromDDBB() && loadClientsFromDDBB()){
+        
+        if(loadCatalogFromDDBB() && loadClientsFromDDBB() && loadReservationsFromDDBB()){
             resultado = true;
         }
         return resultado;

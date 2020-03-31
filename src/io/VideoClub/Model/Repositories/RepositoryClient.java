@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package io.VideoClub.Model.Repositories;
-import io.VideoClub.Model.Client;
-import io.VideoClub.Model.Client;
+
 import java.util.Comparator;
 import java.util.List;
-import java.util.Iterator ;
+import java.util.Iterator;
 import io.VideoClub.Model.Client;
 import io.VideoClub.Model.IClient;
 import java.time.LocalDateTime;
@@ -16,54 +10,58 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+
 /**
  *
  * @author migue
  */
-public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
+public class RepositoryClient implements Comparator<Client>, IRepositoryClient {
+
     private List<Client> clientL;
-    
-    public RepositoryClient(){
-        clientL=new ArrayList<>();
+
+    public RepositoryClient() {
+        clientL = new ArrayList<>();
     }
 
-    public boolean addClient(Client c){
+    public boolean addClient(Client c) {
         return this.clientL.add(c);
     }
-    
-    public boolean addClient(String Name,String Phone, String user, String password){
-        Client c = new Client(Name, Phone, LocalDateTime.now(), user, password);        
+
+    public boolean addClient(String Name, String Phone, String user, String password) {
+        Client c = new Client(Name, Phone, LocalDateTime.now(), user, password);
         return this.clientL.add(c);
     }
-    
+
     @Override
-    public boolean removeClient(String ID){
-        boolean result=false;
-        for(int i=0;i<clientL.size();i++){
-            if(clientL.get(i).getID().equals(ID)){
+    public boolean removeClient(String ID) {
+        boolean result = false;
+        for (int i = 0; i < clientL.size(); i++) {
+            if (clientL.get(i).getID().equals(ID)) {
                 clientL.remove(i--);
-                result=true;
+                result = true;
             }
         }
-     return result;
+        return result;
     }
-    public boolean removeClient(Client c){
+
+    public boolean removeClient(Client c) {
         return this.clientL.contains(c);
     }
-    public boolean searchpassword(String psw){
-        boolean result=false;
-            Iterator<Client> i = clientL.iterator();
-                if (psw != null) {
+
+    public boolean searchpassword(String psw) {
+        boolean result = false;
+        Iterator<Client> i = clientL.iterator();
+        if (psw != null) {
             while (i.hasNext() && !result) {
                 result = i.next().getPassword().equals(psw);
             }
         }
         return result;
-        
+
     }
-    
-    public boolean searchUser(String c){
-        boolean result=false;
+
+    public boolean searchUser(String c) {
+        boolean result = false;
         Iterator<Client> i = clientL.iterator();
         if (c != null) {
             while (i.hasNext() && !result) {
@@ -72,23 +70,23 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
         }
         return result;
     }
-    
-    public Client devolverCliente(String usuario){
-    Client result=null;
-    boolean valid = false;
-    for(int i=0; i<clientL.size() && !valid; i++){
-        if(clientL.get(i).getUser().equals(usuario)){
-            result = clientL.get(i);
-            valid = true;
+
+    public Client devolverCliente(String usuario) {
+        Client result = null;
+        boolean valid = false;
+        for (int i = 0; i < clientL.size() && !valid; i++) {
+            if (clientL.get(i).getUser().equals(usuario)) {
+                result = clientL.get(i);
+                valid = true;
+            }
         }
+        return result;
     }
-    return result;
-    } 
-    
-    public String showClient(){
-        String result="";
-        for(Client c:clientL){
-            result+=c;
+
+    public String showClient() {
+        String result = "";
+        for (Client c : clientL) {
+            result += c;
         }
         return result;
     }
@@ -113,9 +111,9 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
 
     @Override
     public Set<IClient> listAllClients(Comparator c) {
-      Set<IClient> list = new TreeSet<>();
-      list.addAll(clientL);
-      return list;
+        Set<IClient> list = new TreeSet<>();
+        list.addAll(clientL);
+        return list;
     }
 
     @Override
@@ -125,8 +123,8 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
 
     @Override
     public boolean createClient(String id, String name, String phone, LocalDateTime time) {
-        boolean result=false;
-        if (id!=null) {
+        boolean result = false;
+        if (id != null) {
             Client NewClient = new Client(name, phone, time);
             result = true;
         }
@@ -135,9 +133,9 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
 
     @Override
     public boolean editClient(IClient c) {
-                boolean result = false;
-        if (c !=null) {
-            for (int i=0;i<clientL.size()&&!result;i++) {
+        boolean result = false;
+        if (c != null) {
+            for (int i = 0; i < clientL.size() && !result; i++) {
                 if (clientL.get(i).equals(c)) {
                     clientL.set(i, (Client) c);
                     result = true;
@@ -146,8 +144,7 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
         }
         return result;
     }
-    
-    
+
     public Set<Client> listAllClientsTrue() {
         Set<Client> list = new HashSet<>();
         for (Client C : clientL) {
@@ -155,10 +152,10 @@ public class RepositoryClient implements Comparator<Client>, IRepositoryClient{
         }
         return list;
     }
-    
-    public boolean addClient(String ID, String Name,String Phone, String user, String password){
-        Client c = new Client(ID, Name, Phone, user, password);        
+
+    public boolean addClient(String ID, String Name, LocalDateTime Time, String Phone, String user, String password) {
+        Client c = new Client(ID, Name, Time, Phone, user, password);
         return this.clientL.add(c);
     }
-    
+
 }

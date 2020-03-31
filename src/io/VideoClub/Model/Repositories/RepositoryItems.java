@@ -1,7 +1,6 @@
 package io.VideoClub.Model.Repositories;
 
 import io.VideoClub.Model.Item;
-import io.VideoClub.Model.Product;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
