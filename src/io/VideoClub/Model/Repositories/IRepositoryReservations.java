@@ -10,7 +10,6 @@ import java.util.Set;
 
 public interface IRepositoryReservations {
     
-    Product isAvailableProduct(String name);  //get product if yes
     boolean reserveProduct(Product prod,IClient client);
     boolean returnedProduct(Product prod, IClient client);
     
@@ -23,5 +22,6 @@ public interface IRepositoryReservations {
     double getIncommings(LocalDate from, LocalDate to);
     Map<IClient,Double> resumeAllIncomingsByClient();
     
+    Product isAvailableProduct(String name);
     double closeReservation(Reservation r);  //-->> status finished  --> get prizetopay
 }

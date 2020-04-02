@@ -63,7 +63,14 @@ public class Reservation implements Comparable<Reservation>{
 
     @Override
     public String toString() {
-        return "Reservation{" + "pro=" + pro.getName() + ", statusPro=" + pro.getStatus() + ", cli=" + cli.getName() + ", ini=" + ini + ", end=" + end + ", finished=" + finished + ", status=" + status + '}';
+        return "----------RESERVA----------" + 
+                "\nNombre del producto: " + pro.getName() + 
+                "\nEstado del producto: " + pro.getStatus() + 
+                "\nCliente: " + cli.getName() + 
+                "\nFecha de inicio: " + ini + 
+                "\nFecha de finalización: " + end + 
+                "\nFinalización (?):" + finished + 
+                "\nEstado de la reserva:" + status;
     }
     
     
