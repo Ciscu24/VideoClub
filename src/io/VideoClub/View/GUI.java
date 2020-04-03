@@ -662,7 +662,7 @@ public class GUI {
                         contador = 0;
                         for (Reservation reserva : ListaReservas) {
                             contador++;
-                            System.out.println("-------------" + contador + "-------------");
+                            System.out.println("-----------------" + contador + "-----------------");
                             System.out.println(reserva);
                         }
                         System.out.println("");

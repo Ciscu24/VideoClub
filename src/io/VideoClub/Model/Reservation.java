@@ -63,13 +63,13 @@ public class Reservation implements Comparable<Reservation>{
 
     @Override
     public String toString() {
-        return "----------RESERVA----------" + 
+        return "--------------RESERVA--------------" + 
                 "\nNombre del producto: " + pro.getName() + 
                 "\nEstado del producto: " + pro.getStatus() + 
                 "\nCliente: " + cli.getName() + 
-                "\nFecha de inicio: " + ini + 
-                "\nFecha de finalización: " + end + 
-                "\nFinalización (?):" + finished + 
+                "\nFecha de inicio de la reserva: " + ini + 
+                "\nFecha de finalización de la reserva: " + end + 
+                "\nEntrega del prodcuto:" + finished + 
                 "\nEstado de la reserva:" + status +
                 "\n";
     }
