@@ -181,7 +181,7 @@ public class AppController implements IAppController{
             trans.setOutputProperty("{http://xml.apache.org/xlst}indent-amount", "4");
 
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("productos.xml"));
+            StreamResult result = new StreamResult(new File(IAppController.catalogDDBB)); 
             resultado = true;
             trans.transform(source, result);
 
@@ -200,7 +200,7 @@ public class AppController implements IAppController{
     @Override
     public boolean loadCatalogFromDDBB() {
         boolean resultado = false;
-        File file = new File("productos.xml");
+        File file = new File(IAppController.catalogDDBB);
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -353,7 +353,7 @@ public class AppController implements IAppController{
             trans.setOutputProperty("{http://xml.apache.org/xlst}indent-amount", "4");
 
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("clientes.xml"));
+            StreamResult result = new StreamResult(new File(IAppController.clientsDDBB));
             resultado = true;
             trans.transform(source, result);
 
@@ -372,7 +372,7 @@ public class AppController implements IAppController{
     @Override
     public boolean loadClientsFromDDBB() {
         boolean resultado = false;
-        File file = new File("clientes.xml");
+        File file = new File(IAppController.clientsDDBB);
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -408,7 +408,7 @@ public class AppController implements IAppController{
     @Override
     public boolean loadReservationsFromDDBB() {
         boolean resultado = false;
-        File file = new File("reservas.xml");
+        File file = new File(IAppController.reservationsDDBB);
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -571,7 +571,7 @@ public class AppController implements IAppController{
             trans.setOutputProperty("{http://xml.apache.org/xlst}indent-amount", "4");
 
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("reservas.xml"));
+            StreamResult result = new StreamResult(new File(IAppController.reservationsDDBB));
             resultado = true;
             trans.transform(source, result);
 
