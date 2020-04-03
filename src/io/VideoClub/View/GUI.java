@@ -103,7 +103,7 @@ public class GUI {
         System.out.println("|   Iniciar Sesion  |");
         System.out.println("+-------------------+");
         String usuario = devolverString("Introduce tu usuario: ");
-        String contrasena = devolverString("Introduce tu Contraseña: ");
+        String contrasena = devolverString("Introduce tu contraseña: ");
         if (usuario != null && contrasena != null) {
             if (Controller.clients.searchUser(usuario) && Controller.clients.searchpassword(contrasena)) {
                 System.out.println("Inicio de sesion correcto");
@@ -303,7 +303,7 @@ public class GUI {
                 case 6:
                     Set<Reservation> reservas = Controller.reservations.listAllReservations();
                     for (Reservation reserva : reservas) {
-                        System.out.println(reserva);
+                        System.out.println(reserva.toString());
                     }
                     pulsarEnter();
                     break;

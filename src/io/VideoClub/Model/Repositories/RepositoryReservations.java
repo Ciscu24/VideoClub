@@ -131,13 +131,10 @@ public class RepositoryReservations implements IRepositoryReservations {
     @Override
     public boolean reserveProduct(Product prod, IClient client) {
         boolean result = false;
-
-        /*if (prod != null && client != null
-        && isAvailableProduct(prod.getName()) != null) {
-        reservations.add(new Reservation(prod, client));
-        }*/
         
-        reservations.add(new Reservation(prod, client));
+        if(reservations.add(new Reservation(prod, client))){
+            result = true;
+        }
 
         return result;
     }
