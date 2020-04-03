@@ -70,7 +70,8 @@ public class Reservation implements Comparable<Reservation>{
                 "\nFecha de inicio: " + ini + 
                 "\nFecha de finalización: " + end + 
                 "\nFinalización (?):" + finished + 
-                "\nEstado de la reserva:" + status;
+                "\nEstado de la reserva:" + status +
+                "\n";
     }
     
     

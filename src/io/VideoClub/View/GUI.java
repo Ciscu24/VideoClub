@@ -181,8 +181,8 @@ public class GUI {
         System.out.println("\n+-------------------------------+");
         System.out.println("|    Inicio sesion empleados    |");
         System.out.println("+-------------------------------+");
-        String usuario = devolverString("Introduzca su Usuario: ");
-        String contrasena = devolverString("Introduzca su Contraseña: ");
+        String usuario = devolverString("Introduzca su usuario: ");
+        String contrasena = devolverString("Introduzca su contraseña: ");
         if (usuario.equals("programacion24") && contrasena.equals("12345")) {
             System.out.println("Usuario logeado correctamente");
             pulsarEnter();
@@ -656,12 +656,13 @@ public class GUI {
                     List<Reservation> ListaReservas = Controller.reservations.productoReservadoCliente(cliente);
                     if (ListaReservas.isEmpty()) {
                         System.out.println("Usted no tiene reservas");
+                        pulsarEnter();
 
                     } else {
                         contador = 0;
                         for (Reservation reserva : ListaReservas) {
                             contador++;
-                            System.out.println("----------" + contador + "----------");
+                            System.out.println("-------------" + contador + "-------------");
                             System.out.println(reserva);
                         }
                         System.out.println("");
@@ -682,6 +683,7 @@ public class GUI {
                             }
                         } else {
                             System.out.println("Localizador incorrecto");
+                            pulsarEnter();
                         }
                     }
                     break;
