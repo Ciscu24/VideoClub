@@ -64,7 +64,7 @@ public class Product extends Item implements Cloneable{
         if(o!=null){
             if(o instanceof Product){
                 Product other=(Product)o;
-                if(other.key.equals(other.key)){
+                if(this.key.equals(other.key)){
                     result=true;
                 }
             }
